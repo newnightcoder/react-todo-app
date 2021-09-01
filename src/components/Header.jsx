@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import BtnDrawer from "./BtnDrawer";
-import styled from "styled-components";
-import DateAndTime from "./DateAndTime";
-import img from "../img/header.gif";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
+import React, { useState } from "react";
+import styled from "styled-components";
+import img from "../img/header.gif";
+import BtnDrawer from "./BtnDrawer";
+import DateAndTime from "./DateAndTime";
 
 const AppHeader = styled.div`
   grid-row: 1;
@@ -192,7 +192,7 @@ const Header = ({ deleteMsg, filterTodos, clear, dark, darkToggle }) => {
   return (
     <AppHeader dark={dark}>
       <TitleWrapper>
-        <Title>things.</Title>
+        <Title>Things...</Title>
         <Subtitle>Let's get things done!</Subtitle>
       </TitleWrapper>
       <DarkModeBtn onClick={darkToggle}>
