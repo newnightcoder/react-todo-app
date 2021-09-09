@@ -1,14 +1,13 @@
-import React from "react";
-import styled, { css } from "styled-components";
-import { makeStyles } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
+import { makeStyles } from "@material-ui/core/styles";
 import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
 import DeleteIcon from "@material-ui/icons/Delete";
-import { useTransition, animated } from "react-spring";
+import React from "react";
+import { animated, useTransition } from "react-spring";
+import styled, { css } from "styled-components";
 
 const ListContainer = styled.section`
   width: 400px;
-  /* height: 100%; */
   grid-row: 2;
   display: grid;
   grid-template-rows: 8vh 1fr;
@@ -58,7 +57,7 @@ const Header = styled.div`
   position: fixed;
   top: 23vh;
   /* grid-row: 1; */
-  z-index: 2;
+  // z-index: 2;
   box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.2);
   transition: background-color 500ms;
   /* overflow-y: hidden; */
@@ -81,7 +80,7 @@ const ListCounter = styled.div`
   padding-top: 0.5vh;
   text-align: center;
   color: dimgray;
-  font-style: italic;
+  font-style: normal;
   font-size: 1rem;
   ${({ dark }) => dark && `color:rgb(200, 200, 200)`};
   &::after {
@@ -259,7 +258,7 @@ const List = ({ todos, checkItem, deleteItem, todosToDisplay, dark }) => {
   return (
     <ListContainer dark={dark}>
       {" "}
-      <ListHeader dark={dark} todos={todos} todosToDisplay={todosToDisplay} />
+      {/* <ListHeader dark={dark} todos={todos} todosToDisplay={todosToDisplay} /> */}
       <TodoList dark={dark}>
         {transition.map(({ item, props, key }) => (
           <StyledTodo

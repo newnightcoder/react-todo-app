@@ -1,35 +1,29 @@
-import Brightness4Icon from "@material-ui/icons/Brightness4";
 import React, { useState } from "react";
 import styled from "styled-components";
-import img from "../img/header.gif";
+import img from "../img/mountains/4.jpg";
 import BtnDrawer from "./BtnDrawer";
 import DateAndTime from "./DateAndTime";
 
+// const HeaderImg = styled.div`
+//   background: url(${img}) no-repeat center/cover;
+//   height: 100%;
+//   width: 100%;
+//   border: 2px solid red;
+// `;
+
 const AppHeader = styled.div`
   grid-row: 1;
-  background: url(${img}) no-repeat center/cover;
+  background: linear-gradient(rgb(70, 82, 157, 0.65), rgb(70, 82, 157, 0.65)),
+    url(${img}) no-repeat center/cover;
+  // mix-blend-mode: ;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   justify-content: space-between;
   position: relative;
   white-space: nowrap;
-  height: 21vh;
   width: 400px;
-  &::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin-top: 2vh;
-    height: 15vh;
-    width: 120px;
-    z-index: 8;
-    background-color: #81d4fa;
-    transform: translateX(100%);
-    transition: background-color 500ms;
-    ${({ dark }) => dark && `background-color:#616161`};
-  }
+  overflow: hidden !important;
   @media (max-width: 1023px) and (orientation: portrait) {
     width: 100%;
     &::after {
@@ -38,8 +32,7 @@ const AppHeader = styled.div`
   }
   @media (max-width: 1023px) and (orientation: landscape) {
     width: 100%;
-    /* height: 28vh; */
-    padding: 3vh 0 0 1vw;
+    padding: 0 0 0 1vw;
     &::after {
       display: none;
     }
@@ -54,7 +47,7 @@ const DarkModeBtn = styled.button`
   outline: none;
   border: none;
   position: absolute;
-  bottom: 1vh;
+  bottom: 2vh;
   right: 25px;
   z-index: 1000;
   display: flex;
@@ -93,17 +86,16 @@ const TitleWrapper = styled.div`
 const Title = styled.h1`
   color: white;
   font-size: 3rem;
-  font-weight: light;
+  font-weight: 400;
 `;
 const Subtitle = styled.p`
   color: white;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 400;
   padding-top: 0.5vh;
 `;
 
 const HamburgerWrapper = styled.div`
-  /* border: 1px solid white; */
   width: 40px;
   height: 40px;
   padding: 0;
@@ -111,15 +103,9 @@ const HamburgerWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  /* position: absolute;
-  top: 2vh;
-  right: 2vh; */
+
   &:hover {
     cursor: pointer;
-    transform: scale(1.1);
-  }
-  @media (max-width: 1023px) and (orientation: landscape) {
-    /* margin-top: 2vh; */
   }
 `;
 
@@ -131,30 +117,11 @@ const HamburgerBtn = styled.button`
   background-color: transparent;
   outline: none;
   border: none;
-  /* flex-direction: column; */
   align-items: center;
   justify-content: center;
   position: absolute;
   top: 3vh;
   right: 2vh;
-
-  /* margin-top: 2vh;
-  height: 60px;
-  width: 60px;
-  position: absolute;
-  right: 0; */
-  /* background-color: transparent; */
-  /* display: flex;
-  justify-content: space-around;
-  align-items: center;
-  flex-direction: column;
-  outline: none;
-  border: none;
-  border-radius: 5px;
-  padding: 0;
-  opacity: 1;
-  cursor: pointer;
-  transition: opacity 200ms; */
 `;
 const HamburgerLine = styled.div`
   width: 100%;
@@ -192,12 +159,12 @@ const Header = ({ deleteMsg, filterTodos, clear, dark, darkToggle }) => {
   return (
     <AppHeader dark={dark}>
       <TitleWrapper>
-        <Title>Things...</Title>
+        <Title>Things</Title>
         <Subtitle>Let's get things done!</Subtitle>
       </TitleWrapper>
-      <DarkModeBtn onClick={darkToggle}>
+      {/* <DarkModeBtn onClick={darkToggle}>
         <Brightness4Icon style={{ color: "white", fontSize: "large" }} />
-      </DarkModeBtn>
+      </DarkModeBtn> */}
       <Hamburger openDrawer={openDrawer} drawerToggle={drawerToggle} />
       <BtnDrawer
         drawerToggle={drawerToggle}

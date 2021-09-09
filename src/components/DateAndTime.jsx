@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
 import moment from "moment";
 import "moment/locale/fr";
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
 
 const DateTime = styled.div`
   /* border: 1px solid red; */
   width: 100%;
   height: 3vh;
   font-size: 0.75rem;
-  font-weight: bold;
-  color: rgba(255, 255, 255, 0.7);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.75);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   position: absolute;
-  bottom: 0.5vh;
+  bottom: 2vh;
   /* padding-left: 1vw; */
   animation: appear 1000ms forwards;
   @keyframes appear {

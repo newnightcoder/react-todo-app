@@ -1,8 +1,7 @@
-import React, { useState } from "react";
-import styled, { css } from "styled-components";
 import { withStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
-import IconButton from "@material-ui/core/IconButton";
+import React, { useState } from "react";
+import styled, { css } from "styled-components";
 // import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 
 const TodoForm = styled.form`
@@ -34,25 +33,6 @@ const TodoForm = styled.form`
     /* position: fixed;
     bottom: 0; */
     padding: 4vh 0 1.5vh 0;
-  }
-`;
-
-const BtnWrapper = styled.div`
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid rgba(200, 200, 200);
-  background-color: transparent;
-  z-index: 100;
-  ${({ dark }) => dark && `border:1px solid rgba(200, 200, 200)`};
-
-  &:hover {
-    transform: scale(1.1);
-    border-color: deepskyblue;
-    ${({ dark }) => dark && `border:1px solid #f8bbd0`};
   }
 `;
 
@@ -118,36 +98,7 @@ const Form = ({ addItem, dark }) => {
     setNewTodo("");
   };
 
-  return (
-    <TodoForm dark={dark} onSubmit={handleAdd}>
-      <CustomTextField
-        dark={dark}
-        autoComplete="off"
-        id="outlined-basic"
-        variant="outlined"
-        label="Type something you have to do..."
-        rowsMax={4}
-        value={newTodo}
-        onChange={handleInput}
-        style={{
-          width: "75%",
-          paddingBottom: "-1vh",
-          marginRight: ".5vw",
-        }}
-      />
-      <IconButton type="submit" size="small">
-        <BtnWrapper dark={dark}>
-          {/* <AddCircleOutlineIcon
-            fontSize="large"
-            style={{ height: "50px", color: "rgb(200, 200, 200)" }}
-          /> */}
-          <span role="img" aria-label="test de">
-            🚀
-          </span>
-        </BtnWrapper>
-      </IconButton>
-    </TodoForm>
-  );
+  return <></>;
 };
 
 export default Form;

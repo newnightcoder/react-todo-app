@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import Footer from "./components/Footer.jsx";
 import Header from "./components/Header.jsx";
 import List from "./components/List.jsx";
-import Form from "./components/Form.jsx";
-import styled from "styled-components";
 
 const AppWrapper = styled.div`
   margin: 0;
@@ -15,7 +15,7 @@ const AppWrapper = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  background-color: #81d4fa;
+  background-color: #d6e9f8; //moondust silver
   transition: background-color 500ms;
   ${({ dark }) => dark && `background-color:#616161`};
 
@@ -28,7 +28,7 @@ const Container = styled.div`
   height: 96%;
   width: 400px;
   display: grid;
-  grid-template-rows: 21vh 1fr 100px;
+  grid-template-rows: 30vh 1fr 80px;
   box-shadow: -10px 0px 5px rgba(0, 0, 0, 0.2);
   position: relative;
   margin: 0;
@@ -120,7 +120,8 @@ const App = () => {
           checkItem={checkItem}
           deleteItem={deleteItem}
         />
-        <Form addItem={addItem} dark={dark} darkToggle={toggleDarkMode} />
+        {/* <Form addItem={addItem} dark={dark} darkToggle={toggleDarkMode} /> */}
+        <Footer dark={dark} />
       </Container>
     </AppWrapper>
   );

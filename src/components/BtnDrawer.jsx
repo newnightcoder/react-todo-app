@@ -1,6 +1,6 @@
+import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
-import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 
 const theme = {
   black: {
@@ -16,21 +16,17 @@ const theme = {
 };
 
 const DrawerWrapper = styled.div`
-  margin-top: 2vh;
-  width: 150px;
-  height: 15vh;
+  width: 35%;
+  min-width: 150px;
+  height: 100%;
   display: grid;
-  grid-template-columns: 30px 120px;
   position: relative;
-  /* @media (max-width: 1023px) and (prientation:portrait){
-    margin-top: 0;
-  } */
+  border: 2px solid yellow;
   @media (max-width: 1023px) and (orientation: landscape) {
-    margin-top: 0;
   }
 `;
 
-const CloseDrawer = styled.button`
+const CloseDrawerBtn = styled.button`
   grid-column: 1;
   width: 25px;
   height: 25px;
@@ -50,6 +46,7 @@ const CloseDrawer = styled.button`
   transition: opacity 500ms;
   transition-delay: 850ms;
   color: lightgray;
+  z-index: 100;
   &:hover {
     cursor: pointer;
   }
@@ -57,8 +54,9 @@ const CloseDrawer = styled.button`
 
 const BtnGroup = styled.div`
   grid-column: 2;
-  width: 120px;
-  height: 15vh;
+  width: 35%;
+  min-width: 150px;
+  height: 30vh;
   padding: 0;
   display: flex;
   flex-direction: column;
@@ -68,6 +66,7 @@ const BtnGroup = styled.div`
   right: 0;
   transform: translateX(100%);
   transition: transform 850ms ease-out;
+  border: 2px solid black;
   @media (min-width: 768px) and (orientation: portrait) {
     width: 20vw;
   }
@@ -129,7 +128,7 @@ const BtnDrawer = ({ filterTodos, clear, deleteMsg, show, drawerToggle }) => {
 
   return (
     <DrawerWrapper>
-      <CloseDrawer
+      <CloseDrawerBtn
         onClick={drawerToggle}
         style={{
           opacity: show ? "1" : "0",
@@ -137,17 +136,17 @@ const BtnDrawer = ({ filterTodos, clear, deleteMsg, show, drawerToggle }) => {
         }}
       >
         <HighlightOffIcon />
-      </CloseDrawer>
+      </CloseDrawerBtn>
       <BtnGroup
         style={{
           transform: show ? "translateX(0)" : "translate(100%)",
         }}
-        active={active}
-        filterTodos={filterTodos}
-        clear={clear}
-        show={show}
+        // active={active}
+        // filterTodos={filterTodos}
+        // clear={clear}
+        // show={show}
       >
-        <BtnToggle
+        {/* <BtnToggle
           active={active === types[0]}
           onClick={() => {
             setActive(types[0]);
@@ -185,7 +184,7 @@ const BtnDrawer = ({ filterTodos, clear, deleteMsg, show, drawerToggle }) => {
           }}
         >
           {types[3]}
-        </BtnToggle>
+        </BtnToggle> */}
       </BtnGroup>
     </DrawerWrapper>
   );
