@@ -1,4 +1,3 @@
-import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
 
@@ -21,32 +20,29 @@ const DrawerWrapper = styled.div`
   height: 100%;
   display: grid;
   position: relative;
-  border: 2px solid yellow;
   @media (max-width: 1023px) and (orientation: landscape) {
   }
 `;
 
 const CloseDrawerBtn = styled.button`
-  grid-column: 1;
-  width: 25px;
-  height: 25px;
+  width: 35px;
+  height: 35px;
   font-size: 13px;
   background-color: transparent;
-  align-self: center;
-  margin-right: 10px;
   padding: 0;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: row;
   opacity: 0;
   outline: none;
   border: none;
-  transition: opacity 500ms;
-  transition-delay: 850ms;
-  color: lightgray;
+  font-size: 2rem;
+  color: white;
   z-index: 100;
+  position: absolute;
+  top: 2.5vh;
+  right: 2vh;
   &:hover {
     cursor: pointer;
   }
@@ -65,8 +61,8 @@ const BtnGroup = styled.div`
   top: 0;
   right: 0;
   transform: translateX(100%);
-  transition: transform 850ms ease-out;
-  border: 2px solid black;
+  transition: transform 350ms ease-out;
+  background: rgba(0, 0, 0, 0.25);
   @media (min-width: 768px) and (orientation: portrait) {
     width: 20vw;
   }
@@ -132,10 +128,10 @@ const BtnDrawer = ({ filterTodos, clear, deleteMsg, show, drawerToggle }) => {
         onClick={drawerToggle}
         style={{
           opacity: show ? "1" : "0",
-          transitionDelay: show ? "850ms" : "0ms",
+          transitionDelay: show ? "350ms" : "0ms",
         }}
       >
-        <HighlightOffIcon />
+        {/* <HighlightOffIcon /> */}x
       </CloseDrawerBtn>
       <BtnGroup
         style={{

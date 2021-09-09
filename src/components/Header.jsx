@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import img from "../img/mountains/4.jpg";
+import img from "../img/mountains/7.jpg";
 import BtnDrawer from "./BtnDrawer";
 import DateAndTime from "./DateAndTime";
 
@@ -13,7 +13,9 @@ import DateAndTime from "./DateAndTime";
 
 const AppHeader = styled.div`
   grid-row: 1;
-  background: linear-gradient(rgb(70, 82, 157, 0.65), rgb(70, 82, 157, 0.65)),
+  width: 400px;
+  padding-left: 1.75vw;
+  background: linear-gradient(rgb(63, 65, 255, 0.3), rgb(63, 65, 255, 0.3)),
     url(${img}) no-repeat center/cover;
   // mix-blend-mode: ;
   display: flex;
@@ -22,8 +24,16 @@ const AppHeader = styled.div`
   justify-content: space-between;
   position: relative;
   white-space: nowrap;
-  width: 400px;
   overflow: hidden !important;
+  &::after {
+    content: "";
+    width: calc(65% - (1.75vw / 2));
+    height: 4px;
+    background: linear-gradient(to right, rgba(63, 65, 255, 0.6), #44d7ff);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
   @media (max-width: 1023px) and (orientation: portrait) {
     width: 100%;
     &::after {
@@ -61,11 +71,11 @@ const DarkModeBtn = styled.button`
 const TitleWrapper = styled.div`
   height: 15vh;
   width: 50vw;
-  padding: 1vh 0 0 1vw;
+  padding-top: 1vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: left;
+  align-items: flex-start;
   animation: intro 1000ms forwards;
   @keyframes intro {
     0% {
@@ -86,18 +96,18 @@ const TitleWrapper = styled.div`
 const Title = styled.h1`
   color: white;
   font-size: 3rem;
-  font-weight: 400;
+  font-weight: 300;
 `;
 const Subtitle = styled.p`
   color: white;
   font-size: 1rem;
   font-weight: 400;
-  padding-top: 0.5vh;
+  padding: 0.75vh 5px;
 `;
 
 const HamburgerWrapper = styled.div`
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   padding: 0;
   display: flex;
   flex-direction: column;
@@ -120,12 +130,12 @@ const HamburgerBtn = styled.button`
   align-items: center;
   justify-content: center;
   position: absolute;
-  top: 3vh;
+  top: 2.5vh;
   right: 2vh;
 `;
 const HamburgerLine = styled.div`
   width: 100%;
-  height: 4px;
+  height: 3px;
   background-color: white;
   padding: 0;
   margin: 0;
@@ -137,7 +147,7 @@ const Hamburger = ({ drawerToggle, openDrawer }) => {
       <HamburgerWrapper
         style={{
           opacity: openDrawer ? "0" : "1",
-          transitionDelay: openDrawer ? "0ms" : "800ms",
+          transitionDelay: openDrawer ? "0ms" : "300ms",
           zIndex: openDrawer ? "0" : "8",
         }}
       >
@@ -157,7 +167,7 @@ const Header = ({ deleteMsg, filterTodos, clear, dark, darkToggle }) => {
   };
 
   return (
-    <AppHeader dark={dark}>
+    <AppHeader dark={dark} openDrawer={openDrawer}>
       <TitleWrapper>
         <Title>Things</Title>
         <Subtitle>Let's get things done!</Subtitle>
