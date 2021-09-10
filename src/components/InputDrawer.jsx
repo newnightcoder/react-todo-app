@@ -1,5 +1,11 @@
+import "date-fns";
+import DateFnsUtils from "@date-io/date-fns";
 import { TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import {
+  KeyboardDatePicker,
+  MuiPickersUtilsProvider,
+} from "@material-ui/pickers";
 import React, { useState } from "react";
 import { ChevronLeft, Sliders } from "react-bootstrap-icons";
 import styled from "styled-components";
@@ -97,26 +103,28 @@ const useStyles = makeStyles({
   },
 });
 
+// today's date for datepicker default value
+const curr = new Date();
+curr.setDate(curr.getDate());
+const today = curr.toISOString().substr(0, 10);
+
 const FormDrawer = ({ isOpen, toggleDrawer, addItem }) => {
   const [category, setCategory] = useState("");
   const [newTodo, setNewTodo] = useState("");
-  const [when, setWhen] = useState("");
-
+  const [selectedDate, setSelectedDate] = useState(today);
   const [isSubmitBtn, setIsSubmitBtn] = useState(false);
 
   console.log("closebtn status", isSubmitBtn);
 
   const handleTodoInput = (e) => {
     setNewTodo(e.currentTarget.value);
-    console.log(e.currentTarget.value);
   };
   const handleCategoryInput = (e) => {
     setCategory(e.currentTarget.value);
     console.log(e.currentTarget.value);
   };
-  const handleWhenInput = (e) => {
-    setWhen(e.currentTarget.value);
-    console.log(e.currentTarget.value);
+  const handleWhenInput = (date) => {
+    setSelectedDate(date.toISOString().substr(0, 10));
   };
 
   const handleAddTodo = (e) => {
@@ -126,7 +134,7 @@ const FormDrawer = ({ isOpen, toggleDrawer, addItem }) => {
     const todo = {
       category,
       task: newTodo,
-      when,
+      selectedDate,
       id: Date.now(),
       done: false,
     };
@@ -163,45 +171,51 @@ const FormDrawer = ({ isOpen, toggleDrawer, addItem }) => {
         </Btn>
       </Header>
       <FormWrapper>
-        <form
-          className={classes.group}
-          noValidate
-          autoComplete="off"
-          onSubmit={handleAddTodo}
-        >
-          <TextField
-            className={classes.root}
-            select
-            children={("a", "c", "c")}
-            label="Category"
-            value=""
-            onChange={handleCategoryInput}
-          />
-          <TextField
-            className={classes.root}
-            id="outlined-basic"
-            label="Your thing to do"
-            variant="outlined"
-            value={newTodo}
-            onChange={handleTodoInput}
-          />
-          <TextField
-            className={classes.root}
-            id="outlined-basic"
-            label="When"
-            variant="outlined"
-            onChange={handleWhenInput}
-          />
-          <SubmitBtn
-            type="submit"
-            onClick={() => {
-              handleCloseBtn();
-              toggleDrawer();
-            }}
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <form
+            className={classes.group}
+            noValidate
+            autoComplete="off"
+            onSubmit={handleAddTodo}
           >
-            add your thing
-          </SubmitBtn>
-        </form>
+            <TextField
+              className={classes.root}
+              select
+              children={("a", "c", "c")}
+              label="Category"
+              value=""
+              onChange={handleCategoryInput}
+            />
+            <TextField
+              className={classes.root}
+              id="outlined-basic"
+              label="Your thing to do"
+              variant="outlined"
+              value={newTodo}
+              onChange={handleTodoInput}
+            />
+            <KeyboardDatePicker
+              margin="normal"
+              id="date-picker-dialog"
+              label="Date picker dialog"
+              format="dd/MM/yyyy"
+              value={selectedDate}
+              onChange={handleWhenInput}
+              KeyboardButtonProps={{
+                "aria-label": "change date",
+              }}
+            />
+            <SubmitBtn
+              type="submit"
+              onClick={() => {
+                handleCloseBtn();
+                toggleDrawer();
+              }}
+            >
+              add your thing
+            </SubmitBtn>
+          </form>
+        </MuiPickersUtilsProvider>
       </FormWrapper>
     </DrawerContainer>
   );
