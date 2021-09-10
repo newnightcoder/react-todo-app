@@ -15,9 +15,10 @@ const AppHeader = styled.div`
   grid-row: 1;
   width: 400px;
   padding-left: 1.75vw;
-  background: linear-gradient(rgb(63, 65, 255, 0.3), rgb(63, 65, 255, 0.3)),
+  background: black;
+  background: linear-gradient(rgba(50, 45, 255, 0.25), rgba(50, 45, 255, 0.25)),
     url(${img}) no-repeat center/cover;
-  // mix-blend-mode: ;
+  // filter: brightness(0.75);
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -28,8 +29,9 @@ const AppHeader = styled.div`
   &::after {
     content: "";
     width: calc(65% - (1.75vw / 2));
+    width: 100%;
     height: 4px;
-    background: linear-gradient(to right, rgba(63, 65, 255, 0.6), #44d7ff);
+    background: linear-gradient(to right, rgba(10, 0, 255, 0.6), deepskyblue);
     position: absolute;
     bottom: 0;
     left: 0;
@@ -77,6 +79,7 @@ const TitleWrapper = styled.div`
   justify-content: center;
   align-items: flex-start;
   animation: intro 1000ms forwards;
+  z-index: 100;
   @keyframes intro {
     0% {
       opacity: 0;
@@ -96,7 +99,7 @@ const TitleWrapper = styled.div`
 const Title = styled.h1`
   color: white;
   font-size: 3rem;
-  font-weight: 300;
+  font-weight: 400;
 `;
 const Subtitle = styled.p`
   color: white;
@@ -107,11 +110,11 @@ const Subtitle = styled.p`
 
 const HamburgerWrapper = styled.div`
   width: 30px;
-  height: 30px;
+  height: 25px;
   padding: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-around;
 
   &:hover {
@@ -121,12 +124,11 @@ const HamburgerWrapper = styled.div`
 
 const HamburgerBtn = styled.button`
   width: 50px;
-  height: 50px;
+  height: 40px;
   padding: 0;
   display: flex;
   background-color: transparent;
   outline: none;
-  border: none;
   align-items: center;
   justify-content: center;
   position: absolute;
@@ -135,7 +137,7 @@ const HamburgerBtn = styled.button`
 `;
 const HamburgerLine = styled.div`
   width: 100%;
-  height: 3px;
+  height: 2px;
   background-color: white;
   padding: 0;
   margin: 0;
@@ -152,7 +154,7 @@ const Hamburger = ({ drawerToggle, openDrawer }) => {
         }}
       >
         <HamburgerLine />
-        <HamburgerLine />
+        <HamburgerLine style={{ width: "80%" }} />
         <HamburgerLine />
       </HamburgerWrapper>
     </HamburgerBtn>
