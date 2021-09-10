@@ -13,6 +13,8 @@ import DateAndTime from "./DateAndTime";
 
 const AppHeader = styled.div`
   grid-row: 1;
+  height: 25vh;
+  max-height: 350px;
   width: 400px;
   padding-left: 1.75vw;
   background: black;
@@ -129,6 +131,7 @@ const HamburgerBtn = styled.button`
   display: flex;
   background-color: transparent;
   outline: none;
+  border-width: 0;
   align-items: center;
   justify-content: center;
   position: absolute;

@@ -1,6 +1,6 @@
 import { TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import React from "react";
+import React, { useState } from "react";
 import { ChevronLeft, Sliders } from "react-bootstrap-icons";
 import styled from "styled-components";
 
@@ -12,11 +12,13 @@ const DrawerContainer = styled.div`
   grid-template-rows: 5vh 1fr 5vh;
   background-color: #46529d;
   color: white;
-  // transform: translateX(100%);
+  transform: translateX(100%);
   position: absolute;
   top: 0;
   right: 0;
   z-index: 110;
+  transition: transform 150ms ease-in;
+  // ${({ isOpen }) => isOpen && `transform:translateX(0)`}
 `;
 
 const Header = styled.div`
@@ -32,6 +34,16 @@ const Title = styled.h1`
   font-weight: 400;
 `;
 
+const Btn = styled.button`
+  border-width: 0;
+  outline: none;
+  padding: 5px;
+  background-color: transparent;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
 const FormWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -39,17 +51,6 @@ const FormWrapper = styled.div`
   justify-content: center;
   // border: 1px solid white;
 `;
-
-// const ActualForm = styled(FormGroup)`
-//   height: 60%;
-//   width: 100%;
-//   display: flex;
-//   flexdirection: column;
-//   color: white;
-
-//   margin: 25px 0;
-//   border: 1px solid white;
-// `;
 
 const SubmitBtn = styled.button`
   width: 100%;
@@ -96,38 +97,110 @@ const useStyles = makeStyles({
   },
 });
 
-const FormDrawer = () => {
+const FormDrawer = ({ isOpen, toggleDrawer, addItem }) => {
+  const [category, setCategory] = useState("");
+  const [newTodo, setNewTodo] = useState("");
+  const [when, setWhen] = useState("");
+
+  const [isSubmitBtn, setIsSubmitBtn] = useState(false);
+
+  console.log("closebtn status", isSubmitBtn);
+
+  const handleTodoInput = (e) => {
+    setNewTodo(e.currentTarget.value);
+    console.log(e.currentTarget.value);
+  };
+  const handleCategoryInput = (e) => {
+    setCategory(e.currentTarget.value);
+    console.log(e.currentTarget.value);
+  };
+  const handleWhenInput = (e) => {
+    setWhen(e.currentTarget.value);
+    console.log(e.currentTarget.value);
+  };
+
+  const handleAddTodo = (e) => {
+    e.preventDefault();
+    if (newTodo.trim().length === 0) return;
+
+    const todo = {
+      category,
+      task: newTodo,
+      when,
+      id: Date.now(),
+      done: false,
+    };
+    addItem(todo);
+    setNewTodo("");
+  };
+
+  const handleCloseBtn = () => {
+    setIsSubmitBtn(!isSubmitBtn);
+    if (!isOpen) {
+      setIsSubmitBtn(false);
+    }
+  };
   const classes = useStyles();
 
   return (
-    <DrawerContainer>
+    <DrawerContainer
+      style={{
+        transformOrigin: isSubmitBtn ? "center" : "right",
+        transform: isOpen
+          ? "translateX(0)"
+          : isSubmitBtn
+          ? "scale(0)"
+          : "translateX(100%)",
+      }}
+    >
       <Header>
-        <ChevronLeft color="deepskyblue" size={24} />
+        <Btn onClick={toggleDrawer}>
+          <ChevronLeft color="deepskyblue" size={24} />
+        </Btn>
         <Title>Add new thing</Title>
-        <Sliders color="deepskyblue" size={24} />
+        <Btn>
+          <Sliders color="deepskyblue" size={24} />
+        </Btn>
       </Header>
       <FormWrapper>
-        <form className={classes.group} noValidate autoComplete="off">
+        <form
+          className={classes.group}
+          noValidate
+          autoComplete="off"
+          onSubmit={handleAddTodo}
+        >
           <TextField
             className={classes.root}
             select
             children={("a", "c", "c")}
             label="Category"
             value=""
+            onChange={handleCategoryInput}
           />
           <TextField
             className={classes.root}
             id="outlined-basic"
             label="Your thing to do"
             variant="outlined"
+            value={newTodo}
+            onChange={handleTodoInput}
           />
           <TextField
             className={classes.root}
             id="outlined-basic"
             label="When"
             variant="outlined"
+            onChange={handleWhenInput}
           />
-          <SubmitBtn>add your thing</SubmitBtn>
+          <SubmitBtn
+            type="submit"
+            onClick={() => {
+              handleCloseBtn();
+              toggleDrawer();
+            }}
+          >
+            add your thing
+          </SubmitBtn>
         </form>
       </FormWrapper>
     </DrawerContainer>
