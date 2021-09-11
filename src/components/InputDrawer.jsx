@@ -1,11 +1,11 @@
-import "date-fns";
 import DateFnsUtils from "@date-io/date-fns";
-import { TextField } from "@material-ui/core";
+import { MenuItem, TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   KeyboardDatePicker,
   MuiPickersUtilsProvider,
 } from "@material-ui/pickers";
+import "date-fns";
 import React, { useState } from "react";
 import { ChevronLeft, Sliders } from "react-bootstrap-icons";
 import styled from "styled-components";
@@ -18,7 +18,7 @@ const DrawerContainer = styled.div`
   grid-template-rows: 5vh 1fr 5vh;
   background-color: #46529d;
   color: white;
-  transform: translateX(100%);
+  // transform: translateX(100%);
   position: absolute;
   top: 0;
   right: 0;
@@ -90,9 +90,14 @@ const useStyles = makeStyles({
 
     "& .MuiInputBase-input": {
       padding: "15px 0",
-      color: "white",
+      color: "white !important",
     },
-
+    // "& .MuiInputLabel-outlined": {
+    //   transform: "translate(0, 20px)",
+    // },
+    // "& .MuiInputLabel-outlined.MuiInputLabel-shrink": {
+    //   transform: "translate(14px, -6px) scale(0.75)",
+    // },
     "& .MuiOutlinedInput-root.Mui-focused, .MuiOutlinedInput-notchedOutline": {
       borderColor: "white",
       borderTop: "none",
@@ -102,6 +107,15 @@ const useStyles = makeStyles({
     },
   },
 });
+
+const selectOptions = [
+  { value: "personal" },
+  { value: "business" },
+  { value: "health" },
+  { value: "groceries" },
+  { value: "shopping" },
+  { value: "project" },
+];
 
 // today's date for datepicker default value
 const curr = new Date();
@@ -119,10 +133,12 @@ const FormDrawer = ({ isOpen, toggleDrawer, addItem }) => {
   const handleTodoInput = (e) => {
     setNewTodo(e.currentTarget.value);
   };
+
   const handleCategoryInput = (e) => {
-    setCategory(e.currentTarget.value);
-    console.log(e.currentTarget.value);
+    setCategory(e.target.value);
+    console.log("select value", e.target.value);
   };
+
   const handleWhenInput = (date) => {
     setSelectedDate(date.toISOString().substr(0, 10));
   };
@@ -140,6 +156,8 @@ const FormDrawer = ({ isOpen, toggleDrawer, addItem }) => {
     };
     addItem(todo);
     setNewTodo("");
+    setSelectedDate(today);
+    setCategory("");
   };
 
   const handleCloseBtn = () => {
@@ -178,14 +196,22 @@ const FormDrawer = ({ isOpen, toggleDrawer, addItem }) => {
             autoComplete="off"
             onSubmit={handleAddTodo}
           >
+            {/* <InputLabel id="demo-simple-select-label">Category</InputLabel> */}
             <TextField
-              className={classes.root}
+              // className={classes.root}
               select
-              children={("a", "c", "c")}
+              native="false"
               label="Category"
-              value=""
+              id="standard-select"
+              value={category}
               onChange={handleCategoryInput}
-            />
+            >
+              {selectOptions.map((option, i) => (
+                <MenuItem key={i} value={option.value}>
+                  {option.value}
+                </MenuItem>
+              ))}
+            </TextField>
             <TextField
               className={classes.root}
               id="outlined-basic"
@@ -197,9 +223,10 @@ const FormDrawer = ({ isOpen, toggleDrawer, addItem }) => {
             <KeyboardDatePicker
               margin="normal"
               id="date-picker-dialog"
-              label="Date picker dialog"
+              label="When?"
               format="dd/MM/yyyy"
               value={selectedDate}
+              placeholder="When"
               onChange={handleWhenInput}
               KeyboardButtonProps={{
                 "aria-label": "change date",

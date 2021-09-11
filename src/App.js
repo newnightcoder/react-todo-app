@@ -163,7 +163,6 @@ const App = () => {
         <PlusBtn dark={dark} onClick={toggleDrawer}>
           <Plus style={{ pointerEvents: "none" }} />
         </PlusBtn>
-        {/* <Form addItem={addItem} dark={dark} darkToggle={toggleDarkMode} /> */}
         <Footer dark={dark} />
         <FormDrawer
           isOpen={isOpen}

@@ -18,7 +18,7 @@ const AppHeader = styled.div`
   width: 400px;
   padding-left: 1.75vw;
   background: black;
-  background: linear-gradient(rgba(50, 45, 255, 0.25), rgba(50, 45, 255, 0.25)),
+  background: linear-gradient(rgba(70, 82, 157, 0.7), rgba(70, 82, 157, 0.7)),
     url(${img}) no-repeat center/cover;
   // filter: brightness(0.75);
   display: flex;
@@ -33,7 +33,7 @@ const AppHeader = styled.div`
     width: calc(65% - (1.75vw / 2));
     width: 100%;
     height: 4px;
-    background: linear-gradient(to right, rgba(10, 0, 255, 0.6), deepskyblue);
+    background: linear-gradient(to right, blueviolet, deepskyblue 60%);
     position: absolute;
     bottom: 0;
     left: 0;
