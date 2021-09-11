@@ -1,4 +1,14 @@
 import DateFnsUtils from "@date-io/date-fns";
+import {
+  faBriefcase,
+  faLightbulb,
+  faNotesMedical,
+  faPen,
+  faShoppingCart,
+  faStore,
+  faUserCircle,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { MenuItem, TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import {
@@ -16,6 +26,7 @@ const DrawerContainer = styled.div`
   padding: 20px 30px;
   display: grid;
   grid-template-rows: 5vh 1fr 5vh;
+  grid-gap: 20px;
   background-color: #46529d;
   color: white;
   // transform: translateX(100%);
@@ -23,7 +34,7 @@ const DrawerContainer = styled.div`
   top: 0;
   right: 0;
   z-index: 110;
-  transition: transform 150ms ease-in;
+  transition: transform 150ms ease-out;
   // ${({ isOpen }) => isOpen && `transform:translateX(0)`}
 `;
 
@@ -50,7 +61,20 @@ const Btn = styled.button`
   }
 `;
 
+const IconContainer = styled.div`
+  transform: translateY(-30px);
+  height: 65px;
+  width: 65px;
+  border-radius: 50%;
+  border: 1px solid lightgray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+`;
+
 const FormWrapper = styled.div`
+  grid-row: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -124,6 +148,10 @@ const today = curr.toISOString().substr(0, 10);
 
 const FormDrawer = ({ isOpen, toggleDrawer, addItem }) => {
   const [category, setCategory] = useState("");
+  const [icon, setIcon] = useState(faPen);
+  // useState(
+  //   <FontAwesomeIcon icon={faPen} style={{ fontSize: "1.85rem" }} />
+  // );
   const [newTodo, setNewTodo] = useState("");
   const [selectedDate, setSelectedDate] = useState(today);
   const [isSubmitBtn, setIsSubmitBtn] = useState(false);
@@ -136,6 +164,30 @@ const FormDrawer = ({ isOpen, toggleDrawer, addItem }) => {
 
   const handleCategoryInput = (e) => {
     setCategory(e.target.value);
+    switch (e.target.value) {
+      case "personal":
+        setIcon(faUserCircle);
+        console.log("icon", icon);
+        break;
+      case "business":
+        setIcon(faBriefcase);
+        break;
+      case "health":
+        setIcon(faNotesMedical);
+        break;
+      case "groceries":
+        setIcon(faShoppingCart);
+        break;
+      case "shopping":
+        setIcon(faStore);
+        break;
+      case "project":
+        setIcon(faLightbulb);
+        break;
+      default:
+        setIcon(faPen);
+        break;
+    }
     console.log("select value", e.target.value);
   };
 
@@ -149,6 +201,7 @@ const FormDrawer = ({ isOpen, toggleDrawer, addItem }) => {
 
     const todo = {
       category,
+      icon,
       task: newTodo,
       selectedDate,
       id: Date.now(),
@@ -161,10 +214,10 @@ const FormDrawer = ({ isOpen, toggleDrawer, addItem }) => {
   };
 
   const handleCloseBtn = () => {
-    setIsSubmitBtn(!isSubmitBtn);
-    if (!isOpen) {
+    setIsSubmitBtn(true);
+    setTimeout(() => {
       setIsSubmitBtn(false);
-    }
+    }, 300);
   };
   const classes = useStyles();
 
@@ -189,6 +242,9 @@ const FormDrawer = ({ isOpen, toggleDrawer, addItem }) => {
         </Btn>
       </Header>
       <FormWrapper>
+        <IconContainer>
+          <FontAwesomeIcon icon={icon} />
+        </IconContainer>
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <form
             className={classes.group}
@@ -196,7 +252,6 @@ const FormDrawer = ({ isOpen, toggleDrawer, addItem }) => {
             autoComplete="off"
             onSubmit={handleAddTodo}
           >
-            {/* <InputLabel id="demo-simple-select-label">Category</InputLabel> */}
             <TextField
               // className={classes.root}
               select

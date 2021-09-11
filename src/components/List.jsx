@@ -1,3 +1,4 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import IconButton from "@material-ui/core/IconButton";
 import { makeStyles } from "@material-ui/core/styles";
 import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
@@ -134,7 +135,7 @@ const List = ({ todos, checkItem, deleteItem, todosToDisplay, dark }) => {
     <ListContainer>
       <Header>inbox</Header>
       <TodoList>
-        {transition.map(({ item, props, key }) => (
+        {transition.map(({ item, props }) => (
           <StyledTodo
             key={item.id}
             style={{
@@ -146,7 +147,8 @@ const List = ({ todos, checkItem, deleteItem, todosToDisplay, dark }) => {
               backgroundColor: item.done ? "" : null,
             }}
           >
-            {item.task}
+            <FontAwesomeIcon icon={item.icon} /> <>{item.task}</>{" "}
+            <>{item.selectedDate}</>
             <div style={btnWrapper}>
               <IconButton
                 className={classes.root}
