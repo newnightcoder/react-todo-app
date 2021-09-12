@@ -6,12 +6,16 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import React from "react";
 import { animated, useTransition } from "react-spring";
 import styled, { css } from "styled-components";
+import "./list.scss";
+
+const flexCenter =
+  "display: flex; align-items: center; justify-content: center;";
 
 const ListContainer = styled.section`
   width: 400px;
   grid-row: 2;
   display: grid;
-  grid-template-rows: 8vh 1fr;
+  grid-template-rows: 6vh 1fr;
   background-color: white;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -46,6 +50,8 @@ const ListContainer = styled.section`
 
 const Header = styled.div`
   grid-row: 1;
+  height: 6vh;
+  width: inherit;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -53,7 +59,10 @@ const Header = styled.div`
   font-weight: 500;
   color: gray;
   text-transform: uppercase;
+  background-color: white;
   padding: 5px 20px;
+  position: fixed;
+  z-index: 50;
 `;
 
 const TodoList = styled.ul`
@@ -84,7 +93,6 @@ const StyledTodo = styled(animated.li)`
   font-size: 1rem;
   background-color: white;
   border-bottom: 1px solid lightgray;
-  border-radius: 2px;
   // box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.14),
   //   0 2px 1px -1px rgba(0, 0, 0, 0.12), 0 1px 3px 0 rgba(0, 0, 0, 0.2);
   padding: 0.5em 0 0.5em 1em;
@@ -98,20 +106,45 @@ const StyledTodo = styled(animated.li)`
       color: rgb(200, 200, 200);
     `}
 `;
-const btnWrapper = {
-  width: "100px",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  marginRight: "0",
-  // border: "1px solid yellow",
-};
+const BtnWrapper = styled.div`
+  ${flexCenter};
+  width: 100px;
+  position: absolute;
+  right: 0;
+  transform: translateX(150%);
+  // border: 1px solid yellow;
+`;
+
+const IconCatContainer = styled.div`
+  ${flexCenter};
+  height: 55px;
+  width: 55px;
+  border-radius: 50%;
+  font-size: 1.25rem;
+  border: 1px solid lightgray;
+`;
 
 const useStyles = makeStyles({
   root: {
     padding: "10px",
   },
 });
+
+const formatDate = ((date) => {
+  const curr = new Date();
+  curr.setDate(curr.getDate());
+  const today = curr.toISOString().substr(0, 10);
+
+  // switch (date) {
+  //   case today:
+  //     return "yesterday";
+  //     break;
+
+  //   default:
+  //     return date;
+  //     break;
+  // }
+})();
 
 const List = ({ todos, checkItem, deleteItem, todosToDisplay, dark }) => {
   let filteredTodos = [];
@@ -147,9 +180,16 @@ const List = ({ todos, checkItem, deleteItem, todosToDisplay, dark }) => {
               backgroundColor: item.done ? "" : null,
             }}
           >
-            <FontAwesomeIcon icon={item.icon} /> <>{item.task}</>{" "}
-            <>{item.selectedDate}</>
-            <div style={btnWrapper}>
+            <IconCatContainer>
+              <FontAwesomeIcon
+                icon={item.icon}
+                className="gradient"
+                // background: "linear-gradient(#9c47fc, #356ad2)",
+              />
+            </IconCatContainer>
+            <div>{item.task}</div>
+            <div>{item.selectedDate}</div>
+            <BtnWrapper>
               <IconButton
                 className={classes.root}
                 size="medium"
@@ -179,7 +219,7 @@ const List = ({ todos, checkItem, deleteItem, todosToDisplay, dark }) => {
                   icon="trash"
                 />
               </IconButton>
-            </div>
+            </BtnWrapper>
           </StyledTodo>
         ))}
       </TodoList>

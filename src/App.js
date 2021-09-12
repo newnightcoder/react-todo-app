@@ -53,15 +53,15 @@ const Container = styled.div`
 `;
 
 const PlusBtn = styled.button`
-  width: 50px;
-  height: 50px;
+  width: 55px;
+  height: 55px;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 50;
   position: absolute;
   right: 25px;
-  bottom: 35px;
+  bottom: 50px;
   background-color: #2ebaee;
   background-color: deepskyblue;
   color: rgb(253, 253, 253);
@@ -163,7 +163,7 @@ const App = () => {
         <PlusBtn dark={dark} onClick={toggleDrawer}>
           <Plus style={{ pointerEvents: "none" }} />
         </PlusBtn>
-        <Footer dark={dark} />
+        <Footer dark={dark} todos={todos} />
         <FormDrawer
           isOpen={isOpen}
           toggleDrawer={toggleDrawer}

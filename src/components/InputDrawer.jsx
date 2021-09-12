@@ -70,7 +70,7 @@ const IconContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 3rem;
+  font-size: 2rem;
 `;
 
 const FormWrapper = styled.div`
@@ -129,12 +129,18 @@ const useStyles = makeStyles({
       borderRight: "none",
       borderRadius: "0",
     },
+    "& .MuiList-root": {
+      backgroundColor: "red",
+    },
+    "& li": {
+      fontSize: 12,
+    },
   },
 });
 
 const selectOptions = [
   { value: "personal" },
-  { value: "business" },
+  { value: "work" },
   { value: "health" },
   { value: "groceries" },
   { value: "shopping" },
@@ -149,9 +155,6 @@ const today = curr.toISOString().substr(0, 10);
 const FormDrawer = ({ isOpen, toggleDrawer, addItem }) => {
   const [category, setCategory] = useState("");
   const [icon, setIcon] = useState(faPen);
-  // useState(
-  //   <FontAwesomeIcon icon={faPen} style={{ fontSize: "1.85rem" }} />
-  // );
   const [newTodo, setNewTodo] = useState("");
   const [selectedDate, setSelectedDate] = useState(today);
   const [isSubmitBtn, setIsSubmitBtn] = useState(false);
@@ -167,9 +170,8 @@ const FormDrawer = ({ isOpen, toggleDrawer, addItem }) => {
     switch (e.target.value) {
       case "personal":
         setIcon(faUserCircle);
-        console.log("icon", icon);
         break;
-      case "business":
+      case "work":
         setIcon(faBriefcase);
         break;
       case "health":
@@ -188,7 +190,6 @@ const FormDrawer = ({ isOpen, toggleDrawer, addItem }) => {
         setIcon(faPen);
         break;
     }
-    console.log("select value", e.target.value);
   };
 
   const handleWhenInput = (date) => {
@@ -253,7 +254,7 @@ const FormDrawer = ({ isOpen, toggleDrawer, addItem }) => {
             onSubmit={handleAddTodo}
           >
             <TextField
-              // className={classes.root}
+              className={classes.root}
               select
               native="false"
               label="Category"
@@ -276,6 +277,7 @@ const FormDrawer = ({ isOpen, toggleDrawer, addItem }) => {
               onChange={handleTodoInput}
             />
             <KeyboardDatePicker
+              className={classes.root}
               margin="normal"
               id="date-picker-dialog"
               label="When?"
