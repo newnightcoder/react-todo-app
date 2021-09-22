@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Plus } from "react-bootstrap-icons";
 import styled from "styled-components";
-import Footer from "./components/Footer";
-import Header from "./components/Header";
-import FormDrawer from "./components/InputDrawer";
-import List from "./components/List";
+import { Footer, FormDrawer, Header, List } from "./components/index";
 
 const AppWrapper = styled.div`
   margin: 0;
@@ -68,7 +65,8 @@ const PlusBtn = styled.button`
   font-size: 2.5rem;
   border-radius: 50%;
   border-width: 0px !important;
-  outline: 0;
+  outline: 0;import FormDrawer from './components/FormDrawer/FormDrawer';
+
   // font-weight: 600;
   // filter: drop-shadow(5px 5px 5px #2ebaee);
 

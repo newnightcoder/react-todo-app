@@ -1,16 +1,5 @@
 import DateFnsUtils from "@date-io/date-fns";
-import {
-  faBriefcase,
-  faLightbulb,
-  faNotesMedical,
-  faPen,
-  faShoppingCart,
-  faStore,
-  faUserCircle,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { MenuItem, TextField } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
 import {
   KeyboardDatePicker,
   MuiPickersUtilsProvider,
@@ -18,134 +7,17 @@ import {
 import "date-fns";
 import React, { useState } from "react";
 import { ChevronLeft, Sliders } from "react-bootstrap-icons";
-import styled from "styled-components";
-
-const DrawerContainer = styled.div`
-  height: 100%;
-  width: inherit;
-  padding: 20px 30px;
-  display: grid;
-  grid-template-rows: 5vh 1fr 5vh;
-  grid-gap: 20px;
-  background-color: #46529d;
-  color: white;
-  // transform: translateX(100%);
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 110;
-  transition: transform 150ms ease-out;
-  // ${({ isOpen }) => isOpen && `transform:translateX(0)`}
-`;
-
-const Header = styled.div`
-  grid-row: 1;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 5px;
-`;
-
-const Title = styled.h1`
-  font-size: 1.25rem;
-  font-weight: 400;
-`;
-
-const Btn = styled.button`
-  border-width: 0;
-  outline: none;
-  padding: 5px;
-  background-color: transparent;
-  &:hover {
-    cursor: pointer;
-  }
-`;
-
-const IconContainer = styled.div`
-  transform: translateY(-30px);
-  height: 65px;
-  width: 65px;
-  border-radius: 50%;
-  border: 1px solid lightgray;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2rem;
-`;
-
-const FormWrapper = styled.div`
-  grid-row: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  // border: 1px solid white;
-`;
-
-const SubmitBtn = styled.button`
-  width: 100%;
-  padding: 15px 0;
-  outline: none;
-  border: none;
-  background-color: deepskyblue;
-  color: white;
-  font-weight: 600;
-  text-transform: uppercase;
-  border-radius: 3px;
-  margin-top: 25px;
-  &:hover {
-    cursor: pointer;
-  }
-`;
-
-const useStyles = makeStyles({
-  group: {
-    height: "70%",
-    width: "100%",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-evenly",
-    color: "white",
-  },
-  root: {
-    "& .MuiFormLabel-root": {
-      color: "white",
-    },
-
-    "& .MuiInputBase-input": {
-      padding: "15px 0",
-      color: "white !important",
-    },
-    // "& .MuiInputLabel-outlined": {
-    //   transform: "translate(0, 20px)",
-    // },
-    // "& .MuiInputLabel-outlined.MuiInputLabel-shrink": {
-    //   transform: "translate(14px, -6px) scale(0.75)",
-    // },
-    "& .MuiOutlinedInput-root.Mui-focused, .MuiOutlinedInput-notchedOutline": {
-      borderColor: "white",
-      borderTop: "none",
-      borderLeft: "none",
-      borderRight: "none",
-      borderRadius: "0",
-    },
-    "& .MuiList-root": {
-      backgroundColor: "red",
-    },
-    "& li": {
-      fontSize: 12,
-    },
-  },
-});
-
-const selectOptions = [
-  { value: "personal" },
-  { value: "work" },
-  { value: "health" },
-  { value: "groceries" },
-  { value: "shopping" },
-  { value: "project" },
-];
+import { imgHandler } from "./imgHandler";
+import {
+  Btn,
+  DrawerContainer,
+  FormWrapper,
+  Header,
+  IconContainer,
+  SubmitBtn,
+  Title,
+  useStyles,
+} from "./styles";
 
 // today's date for datepicker default value
 const curr = new Date();
@@ -154,46 +26,53 @@ const today = curr.toISOString().substr(0, 10);
 
 const FormDrawer = ({ isOpen, toggleDrawer, addItem }) => {
   const [category, setCategory] = useState("");
-  const [icon, setIcon] = useState(faPen);
+  const [icon, setIcon] = useState("pen");
   const [newTodo, setNewTodo] = useState("");
   const [selectedDate, setSelectedDate] = useState(today);
   const [isSubmitBtn, setIsSubmitBtn] = useState(false);
 
-  console.log("closebtn status", isSubmitBtn);
+  const selectOptions = [
+    { value: "personal" },
+    { value: "work" },
+    { value: "health" },
+    { value: "groceries" },
+    { value: "shopping" },
+    { value: "project" },
+  ];
 
   const handleTodoInput = (e) => {
     setNewTodo(e.currentTarget.value);
+  };
+
+  const handleWhenInput = (date) => {
+    setSelectedDate(date.toISOString().substr(0, 10));
   };
 
   const handleCategoryInput = (e) => {
     setCategory(e.target.value);
     switch (e.target.value) {
       case "personal":
-        setIcon(faUserCircle);
+        setIcon("personal");
         break;
       case "work":
-        setIcon(faBriefcase);
+        setIcon("work");
         break;
       case "health":
-        setIcon(faNotesMedical);
+        setIcon("health");
         break;
       case "groceries":
-        setIcon(faShoppingCart);
+        setIcon("groceries");
         break;
       case "shopping":
-        setIcon(faStore);
+        setIcon("shopping");
         break;
       case "project":
-        setIcon(faLightbulb);
+        setIcon("project");
         break;
       default:
-        setIcon(faPen);
+        setIcon("pen");
         break;
     }
-  };
-
-  const handleWhenInput = (date) => {
-    setSelectedDate(date.toISOString().substr(0, 10));
   };
 
   const handleAddTodo = (e) => {
@@ -220,6 +99,7 @@ const FormDrawer = ({ isOpen, toggleDrawer, addItem }) => {
       setIsSubmitBtn(false);
     }, 300);
   };
+
   const classes = useStyles();
 
   return (
@@ -243,9 +123,7 @@ const FormDrawer = ({ isOpen, toggleDrawer, addItem }) => {
         </Btn>
       </Header>
       <FormWrapper>
-        <IconContainer>
-          <FontAwesomeIcon icon={icon} />
-        </IconContainer>
+        <IconContainer>{imgHandler(icon)}</IconContainer>
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <form
             className={classes.group}

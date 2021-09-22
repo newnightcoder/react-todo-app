@@ -1,6 +1,4 @@
-import React, { useState } from "react";
 import styled, { css } from "styled-components";
-
 const theme = {
   black: {
     default: "rgba(100,100,100,.8)",
@@ -101,7 +99,6 @@ const Btn = styled.button`
     border-left: ${(props) => theme[props.theme].active};
   }
 `;
-Btn.defaultProps = { theme: "black" };
 
 const BtnToggle = styled(Btn)`
   ${({ active }) =>
@@ -117,73 +114,6 @@ const BtnToggle = styled(Btn)`
     `}
 `;
 
-const types = ["show all", "to do", "done", "delete all"];
+Btn.defaultProps = { theme: "black" };
 
-const BtnDrawer = ({ filterTodos, clear, deleteMsg, show, drawerToggle }) => {
-  const [active, setActive] = useState("");
-
-  return (
-    <DrawerWrapper>
-      <CloseDrawerBtn
-        onClick={drawerToggle}
-        style={{
-          opacity: show ? "1" : "0",
-          transitionDelay: show ? "350ms" : "0ms",
-        }}
-      >
-        {/* <HighlightOffIcon /> */}x
-      </CloseDrawerBtn>
-      <BtnGroup
-        style={{
-          transform: show ? "translateX(0)" : "translate(100%)",
-        }}
-        // active={active}
-        // filterTodos={filterTodos}
-        // clear={clear}
-        // show={show}
-      >
-        {/* <BtnToggle
-          active={active === types[0]}
-          onClick={() => {
-            setActive(types[0]);
-            filterTodos("all");
-          }}
-        >
-          {types[0]}
-        </BtnToggle>
-        <BtnToggle
-          active={active === types[1]}
-          onClick={() => {
-            setActive(types[1]);
-            filterTodos("to-do");
-          }}
-        >
-          {types[1]}
-        </BtnToggle>
-        <BtnToggle
-          active={active === types[2]}
-          onClick={() => {
-            setActive(types[2]);
-            filterTodos("done");
-          }}
-        >
-          {types[2]}
-        </BtnToggle>
-        <BtnToggle
-          theme="danger"
-          active={active === types[3]}
-          onClick={() => {
-            clear();
-            deleteMsg("delete");
-            setActive("");
-            setTimeout(() => filterTodos("all"), 2000);
-          }}
-        >
-          {types[3]}
-        </BtnToggle> */}
-      </BtnGroup>
-    </DrawerWrapper>
-  );
-};
-
-export default BtnDrawer;
+export { DrawerWrapper, CloseDrawerBtn, BtnGroup, Btn, BtnToggle };

@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 
 const AppFooter = styled.footer`
@@ -54,30 +53,4 @@ const Mention = styled.div`
   transform: translateX(50%);
 `;
 
-const Footer = ({ todos, dark }) => {
-  const todosDone = todos.filter((todo) => todo.done).length;
-
-  return (
-    <AppFooter>
-      {todos.length !== 0 && (
-        <CounterWrapper>
-          <Counter>
-            total things <CounterBadge>{todos.length}</CounterBadge>
-          </Counter>
-          <Counter>
-            things done
-            <CounterBadge>{todosDone}</CounterBadge>
-          </Counter>
-        </CounterWrapper>
-      )}
-      {/* <Mention>
-      Built with React by Nightcoder{" "}
-      <span role="img" aria-label="sunglasses emoji">
-        😎{" "}
-      </span>
-    </Mention> */}
-    </AppFooter>
-  );
-};
-
-export default Footer;
+export { AppFooter, Counter, CounterWrapper, CounterBadge, Mention };
