@@ -32,49 +32,19 @@ const Container = styled.div`
   overflow: hidden;
   // transform: translateX(-100%);
 
-  @media (max-width: 1023px) and (orientation: portrait) {
+  @media (max-width: 996px) {
     position: fixed;
     bottom: 0;
     width: 100%;
     height: 100%;
+    max-height: none;
   }
-  @media (max-width: 1023px) and (orientation: landscape) {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    height: 100%;
-  }
+  // @media (max-width: 1023px) and (orientation: landscape) {
+  //   position: fixed;
+  //   bottom: 0;
+  //   width: 100%;
+  //   height: 100%;
+  // }
 `;
 
-const PlusBtn = styled.button`
-  width: 55px;
-  height: 55px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 50;
-  position: absolute;
-  right: 25px;
-  bottom: 50px;
-  background-color: #2ebaee;
-  background-color: deepskyblue;
-  color: rgb(253, 253, 253);
-  font-size: 2.5rem;
-  border-radius: 50%;
-  border-width: 0px !important;
-  outline: 0;import FormDrawer from './components/FormDrawer/FormDrawer';
-
-  // font-weight: 600;
-  // filter: drop-shadow(5px 5px 5px #2ebaee);
-
-  transition: transform 250ms;
-  ${({ dark }) => dark && `border:1px solid rgba(200, 200, 200)`};
-
-  &:hover {
-    cursor: pointer;
-    // transform: scale(1.05);
-    ${({ dark }) => dark && `border:1px solid #f8bbd0`};
-  }
-`;
-
-export { AppWrapper, Container, PlusBtn };
+export { AppWrapper, Container };

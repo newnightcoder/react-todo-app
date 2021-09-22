@@ -12,7 +12,7 @@ const Footer = ({ todos, dark }) => {
             total things <CounterBadge>{todos.length}</CounterBadge>
           </Counter>
           <Counter>
-            things done
+            done
             <CounterBadge>{todosDone}</CounterBadge>
           </Counter>
         </CounterWrapper>

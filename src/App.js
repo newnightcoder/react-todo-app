@@ -1,21 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Plus } from "react-bootstrap-icons";
-import { AppWrapper, Container, PlusBtn } from "./AppStyles";
+import { AppWrapper, Container } from "./AppStyles";
 import { Footer, FormDrawer, Header, List } from "./components/index";
 
 const App = () => {
   const [todos, setTodos] = useState([]);
+  const [isTodo, setIsTodo] = useState(null);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const [todosToDisplay, setTodosToDisplay] = useState("all");
   const [dark, setDarkMode] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-
-  const toggleDarkMode = () => {
-    setDarkMode((dark) => !dark);
-  };
-
-  const toggleDrawer = () => {
-    setIsOpen((isOpen) => !isOpen);
-  };
 
   useEffect(() => {
     const storedList = JSON.parse(localStorage.getItem("List-Storage")) || [];
@@ -26,11 +20,32 @@ const App = () => {
     localStorage.setItem("List-Storage", JSON.stringify(todos));
   });
 
+  const toggleDarkMode = () => {
+    setDarkMode((dark) => !dark);
+  };
+
+  const toggleDrawer = () => {
+    setIsOpen((isOpen) => !isOpen);
+  };
+
   const addItem = (todo) => {
     const addedTodo = [...todos];
     addedTodo.unshift(todo);
     setTodos(addedTodo);
   };
+
+  const toggleTodoMenu = (id) => {
+    const things = [...todos];
+    let stop;
+    things.forEach((thing) => {
+      if (thing.id === id) {
+        setIsTodo(id);
+        setIsMenuOpen((isMenuOpen) => !isMenuOpen);
+      }
+    });
+  };
+
+  const editItem = () => {};
 
   const checkItem = (blabla) => {
     const checkTodos = [...todos];
@@ -54,7 +69,6 @@ const App = () => {
 
   const handleDeleteMsg = (string) => {
     setTodosToDisplay(string);
-    // setInterval(() => setTodosToDisplay("all"), 1000);
   };
 
   const clearList = () => {
@@ -78,12 +92,15 @@ const App = () => {
           dark={dark}
           todos={todos}
           todosToDisplay={todosToDisplay}
+          editItem={editItem}
           checkItem={checkItem}
           deleteItem={deleteItem}
+          toggleDrawer={toggleDrawer}
+          isTodo={isTodo}
+          isMenuOpen={isMenuOpen}
+          toggleTodoMenu={toggleTodoMenu}
         />
-        <PlusBtn dark={dark} onClick={toggleDrawer}>
-          <Plus style={{ pointerEvents: "none" }} />
-        </PlusBtn>
+
         <Footer dark={dark} todos={todos} />
         <FormDrawer
           isOpen={isOpen}

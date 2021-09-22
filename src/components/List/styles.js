@@ -1,4 +1,3 @@
-import { makeStyles } from "@material-ui/core/styles";
 import { animated } from "react-spring";
 import styled, { css } from "styled-components";
 
@@ -57,6 +56,9 @@ const Header = styled.div`
   padding: 5px 20px;
   position: fixed;
   z-index: 50;
+  @media screen and (min-width: 996px) {
+    width: 400px;
+  }
 `;
 
 const TodoList = styled.ul`
@@ -87,26 +89,17 @@ const StyledTodo = styled(animated.li)`
   font-size: 1rem;
   background-color: white;
   border-bottom: 1px solid rgba(155, 155, 155, 0.2);
-  // box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.14),
-  //   0 2px 1px -1px rgba(0, 0, 0, 0.12), 0 1px 3px 0 rgba(0, 0, 0, 0.2);
   padding: 0.5em 0 0.5em 1em;
   margin: 0 auto;
   position: relative;
-  transition: text-decoration 500ms, color 500ms;
+  overflow: hidden;
+  // transition: text-decoration 500ms, color 500ms;
   ${({ dark }) =>
     dark &&
     css`
       background-color: #333333;
       color: rgb(200, 200, 200);
     `}
-`;
-const BtnWrapper = styled.div`
-  ${flexCenter};
-  width: 100px;
-  position: absolute;
-  right: 0;
-  transform: translateX(150%);
-  // border: 1px solid yellow;
 `;
 
 const IconCatContainer = styled.div`
@@ -118,18 +111,42 @@ const IconCatContainer = styled.div`
   border: 2px solid lightgray;
 `;
 
-const useStyles = makeStyles({
-  root: {
-    padding: "10px",
-  },
-});
+const PlusBtn = styled.button`
+  width: 55px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  position: absolute;
+  right: 25px;
+  bottom: 50px;
+  background-color: #2ebaee;
+  background-color: deepskyblue;
+  color: rgb(253, 253, 253);
+  font-size: 2.5rem;
+  border-radius: 50%;
+  border-width: 0px !important;
+  outline: 0;import FormDrawer from './components/FormDrawer/FormDrawer';
+
+  // font-weight: 600;
+  // filter: drop-shadow(5px 5px 5px #2ebaee);
+
+  transition: transform 250ms;
+  ${({ dark }) => dark && `border:1px solid rgba(200, 200, 200)`};
+
+  &:hover {
+    cursor: pointer;
+    // transform: scale(1.05);
+    ${({ dark }) => dark && `border:1px solid #f8bbd0`};
+  }
+`;
 
 export {
   ListContainer,
   Header,
   TodoList,
   StyledTodo,
-  BtnWrapper,
   IconCatContainer,
-  useStyles,
+  PlusBtn,
 };

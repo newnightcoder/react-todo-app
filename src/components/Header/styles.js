@@ -20,7 +20,6 @@ const AppHeader = styled.div`
   overflow: hidden !important;
   &::after {
     content: "";
-    width: calc(65% - (1.75vw / 2));
     width: 100%;
     height: 4px;
     background: linear-gradient(to right, blueviolet, deepskyblue 60%);
@@ -28,19 +27,19 @@ const AppHeader = styled.div`
     bottom: 0;
     left: 0;
   }
-  @media (max-width: 1023px) and (orientation: portrait) {
+  @media (max-width: 996px) {
     width: 100%;
     &::after {
-      display: none;
+      width: 100vw;
     }
   }
-  @media (max-width: 1023px) and (orientation: landscape) {
-    width: 100%;
-    padding: 0 0 0 1vw;
-    &::after {
-      display: none;
-    }
-  }
+  // @media (max-width: 1023px) and (orientation: landscape) {
+  //   width: 100%;
+  //   padding: 0 0 0 1vw;
+  //   &::after {
+  //     display: none;
+  //   }
+  // }
 `;
 
 const DarkModeBtn = styled.button`

@@ -1,18 +1,17 @@
-import IconButton from "@material-ui/core/IconButton";
-import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
-import DeleteIcon from "@material-ui/icons/Delete";
+import { IconButton } from "@material-ui/core";
 import React from "react";
+import { Plus, ThreeDotsVertical } from "react-bootstrap-icons";
 import { useTransition } from "react-spring";
 import { imgHandler } from "./imgHandler";
 import {
-  BtnWrapper,
   Header,
   IconCatContainer,
   ListContainer,
+  PlusBtn,
   StyledTodo,
   TodoList,
-  useStyles,
 } from "./styles";
+import TodoMenu from "./TodoMenu/TodoMenu";
 
 // const formatDate = (date) => {
 //   const curr = new Date();
@@ -28,15 +27,27 @@ import {
 //   }
 // };
 
-const List = ({ todos, checkItem, deleteItem, todosToDisplay, dark }) => {
+const List = ({
+  todos,
+  editItem,
+  checkItem,
+  deleteItem,
+  todosToDisplay,
+  toggleDrawer,
+  dark,
+  toggleTodoMenu,
+  isTodo,
+  isMenuOpen,
+}) => {
   let filteredTodos = [];
   if (todosToDisplay === "all") {
     filteredTodos = todos;
-  } else if (todosToDisplay === "done") {
-    filteredTodos = todos.filter((todo) => todo.done);
-  } else if (todosToDisplay === "to-do") {
-    filteredTodos = todos.filter((todo) => !todo.done);
   }
+  // } else if (todosToDisplay === "done") {
+  //   filteredTodos = todos.filter((todo) => todo.done);
+  // } else if (todosToDisplay === "to-do") {
+  //   filteredTodos = todos.filter((todo) => !todo.done);
+  // }
 
   const transition = useTransition(filteredTodos, (todo) => todo.id, {
     from: { opacity: 0, transform: "scale(0)" },
@@ -44,11 +55,9 @@ const List = ({ todos, checkItem, deleteItem, todosToDisplay, dark }) => {
     leave: { opacity: 0, transform: "scale(0)" },
   });
 
-  const classes = useStyles();
-
   return (
     <ListContainer>
-      <Header>inbox </Header>
+      <Header>inbox</Header>
 
       <TodoList>
         {transition.map(({ item, props }) => (
@@ -66,40 +75,25 @@ const List = ({ todos, checkItem, deleteItem, todosToDisplay, dark }) => {
             <IconCatContainer>{imgHandler(item.icon)}</IconCatContainer>
             <div>{item.task}</div>
             <div>{item.selectedDate}</div>
-            <BtnWrapper>
-              <IconButton
-                className={classes.root}
-                size="medium"
-                onClick={() => checkItem(item.id)}
-              >
-                <CheckCircleOutlineIcon
-                  variant="outlined"
-                  style={{
-                    cursor: "pointer",
-                    color: item.done ? "lightgray" : "",
-                    // color: dark ? "rgb(200,200,200)" : "dimgray",
-                  }}
-                  icon="check"
-                  type="checkbox"
-                />{" "}
-              </IconButton>
-              <IconButton
-                className={classes.root}
-                size="medium"
-                onClick={() => deleteItem(item.id)}
-              >
-                <DeleteIcon
-                  style={{
-                    cursor: "pointer",
-                    color: dark ? "rgb(200,200,200)" : "dimgray",
-                  }}
-                  icon="trash"
-                />
-              </IconButton>
-            </BtnWrapper>
+            <IconButton size="small" onClick={() => toggleTodoMenu(item.id)}>
+              <ThreeDotsVertical style={{ cursor: "pointer" }} />
+            </IconButton>
+
+            <TodoMenu
+              item={item}
+              editItem={editItem}
+              checkItem={checkItem}
+              deleteItem={deleteItem}
+              toggle={toggleTodoMenu}
+              isOpen={isMenuOpen}
+              isTodo={isTodo}
+            />
           </StyledTodo>
         ))}
       </TodoList>
+      <PlusBtn dark={dark} onClick={toggleDrawer}>
+        <Plus style={{ pointerEvents: "none" }} />
+      </PlusBtn>
     </ListContainer>
   );
 };
