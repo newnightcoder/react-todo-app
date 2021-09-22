@@ -5,18 +5,17 @@ const AppFooter = styled.footer`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: flex-start;
-  padding: 0 20px 15px;
+  justify-content: center;
   font-size: 0.7rem;
   background-color: rgb(253, 253, 253);
   color: gray;
   position: relative;
-  border-top: 1px solid grey;
+  border-top: 1px solid rgba(155, 155, 155, 0.1);
 `;
 
 const CounterWrapper = styled.div`
   width: 65%;
-  height: 90%;
+  height: 75%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -25,7 +24,7 @@ const CounterWrapper = styled.div`
   font-weight: 500;
   color: gray;
   text-transform: uppercase;
-  // border: 1px solid yellow;
+  padding-left: 18px;
 `;
 
 const Counter = styled.div`

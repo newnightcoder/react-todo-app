@@ -3,6 +3,7 @@ import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
 import DeleteIcon from "@material-ui/icons/Delete";
 import React from "react";
 import { useTransition } from "react-spring";
+import { imgHandler } from "./imgHandler";
 import {
   BtnWrapper,
   Header,
@@ -13,20 +14,19 @@ import {
   useStyles,
 } from "./styles";
 
-const formatDate = ((date) => {
-  const curr = new Date();
-  curr.setDate(curr.getDate());
-  const today = curr.toISOString().substr(0, 10);
-
-  // switch (date) {
-  //   case today:
-  //     return "yesterday";
-  //     break;
-  //   default:
-  //     return date;
-  //     break;
-  // }
-})();
+// const formatDate = (date) => {
+//   const curr = new Date();
+//   curr.setDate(curr.getDate());
+//   const today = curr.toISOString().substr(0, 10);
+//   switch (date) {
+//     case today:
+//       return "yesterday";
+//       break;
+//     default:
+//       return date;
+//       break;
+//   }
+// };
 
 const List = ({ todos, checkItem, deleteItem, todosToDisplay, dark }) => {
   let filteredTodos = [];
@@ -63,7 +63,7 @@ const List = ({ todos, checkItem, deleteItem, todosToDisplay, dark }) => {
               backgroundColor: item.done ? "" : null,
             }}
           >
-            <IconCatContainer></IconCatContainer>
+            <IconCatContainer>{imgHandler(item.icon)}</IconCatContainer>
             <div>{item.task}</div>
             <div>{item.selectedDate}</div>
             <BtnWrapper>

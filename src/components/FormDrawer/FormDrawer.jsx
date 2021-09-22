@@ -80,7 +80,6 @@ const FormDrawer = ({ isOpen, toggleDrawer, addItem }) => {
     if (newTodo.trim().length === 0) return;
 
     const todo = {
-      category,
       icon,
       task: newTodo,
       selectedDate,
