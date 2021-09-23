@@ -76,6 +76,7 @@ const App = () => {
       if (todo.id === id) todo.done = !todo.done;
     });
     setTodos(todosCopy);
+    closeTodoMenu(id);
   };
 
   const deleteItem = (id) => {

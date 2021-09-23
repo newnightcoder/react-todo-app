@@ -73,7 +73,11 @@ const List = ({
               backgroundColor: item.done ? "" : null,
             }}
           >
-            <IconCatContainer>{imgHandler(item.icon)}</IconCatContainer>
+            <IconCatContainer
+              style={{ borderWidth: item.done ? "1px" : "2px" }}
+            >
+              {imgHandler(item.icon, item.done)}
+            </IconCatContainer>
             <div>{item.task}</div>
             <div>{item.selectedDate}</div>
             <IconButton size="small" onClick={() => openTodoMenu(item.id)}>
