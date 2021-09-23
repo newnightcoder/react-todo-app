@@ -29,6 +29,7 @@ const FormDrawer = ({ isOpen, toggleDrawer, addItem, todoEdit, editItem }) => {
   const [newTodo, setNewTodo] = useState("");
   const [selectedDate, setSelectedDate] = useState(today);
   const [isSubmitBtn, setIsSubmitBtn] = useState(false);
+  const [id, SetId] = useState(undefined);
 
   useEffect(() => {
     if (todoEdit !== null) {
@@ -36,6 +37,7 @@ const FormDrawer = ({ isOpen, toggleDrawer, addItem, todoEdit, editItem }) => {
       setCategory(todoEdit.icon);
       setNewTodo(todoEdit.task);
       setSelectedDate(todoEdit.selectedDate);
+      SetId(todoEdit.id);
     }
   }, [todoEdit]);
 
@@ -85,6 +87,8 @@ const FormDrawer = ({ isOpen, toggleDrawer, addItem, todoEdit, editItem }) => {
 
   const handleAddTodo = (e) => {
     e.preventDefault();
+    if (id !== undefined) return;
+
     if (newTodo.trim().length === 0) return;
     if (todoEdit !== null) return;
 
@@ -106,15 +110,23 @@ const FormDrawer = ({ isOpen, toggleDrawer, addItem, todoEdit, editItem }) => {
 
   const handleEditTodo = (e) => {
     e.preventDefault();
-    if (todoEdit === null) return;
+    if (id === undefined) return;
     const todo = {
       icon,
       task: newTodo,
       selectedDate,
-      id: Date.now(),
+      id,
       done: false,
     };
-    editItem(todoEdit.id, todo);
+    console.log("edited todo!", todo);
+    editItem(id, todo);
+    setNewTodo("");
+    SetId(undefined);
+    setSelectedDate(today);
+    setCategory("");
+    setTimeout(() => {
+      setIcon("");
+    }, 400);
   };
 
   const handleCloseBtn = () => {
@@ -141,7 +153,7 @@ const FormDrawer = ({ isOpen, toggleDrawer, addItem, todoEdit, editItem }) => {
         <Btn onClick={toggleDrawer}>
           <ChevronLeft color="deepskyblue" size={24} />
         </Btn>
-        <Title>{todoEdit === null ? "Add new thing" : "Edit your thing"}</Title>
+        <Title>{id === undefined ? "Add new thing" : "Edit your thing"}</Title>
         <Btn>
           <Sliders color="deepskyblue" size={24} />
         </Btn>
@@ -201,7 +213,7 @@ const FormDrawer = ({ isOpen, toggleDrawer, addItem, todoEdit, editItem }) => {
                 toggleDrawer();
               }}
             >
-              {todoEdit !== null ? "edit" : "add your thing"}
+              {id !== undefined ? "edit" : "add your thing"}
             </SubmitBtn>
           </form>
         </MuiPickersUtilsProvider>

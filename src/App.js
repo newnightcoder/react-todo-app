@@ -56,15 +56,10 @@ const App = () => {
 
   const editItem = (id, editedTodo) => {
     const todosCopy = [...todos];
-    let same;
-    for (let i = 0; i <= todosCopy.length; i++) {
-      if (todosCopy[i].id === id) {
-        same = i;
-        return;
-      }
-    }
-    todosCopy[same] = editedTodo;
-    setTodos(todosCopy);
+    const editedTodos = todosCopy.map((todo) =>
+      todo.id !== id ? todo : editedTodo
+    );
+    setTodos(editedTodos);
   };
 
   const checkItem = (id) => {
