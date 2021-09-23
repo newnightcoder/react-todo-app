@@ -1,4 +1,4 @@
-import moment from "moment";
+import format from "date-fns/format";
 import "moment/locale/fr";
 import React, { useEffect, useState } from "react";
 import { DateTime, Time, Today } from "./styles";
@@ -14,12 +14,16 @@ const DateAndTime = () => {
     setClock(new Date().toJSON());
   };
 
-  const today = moment().locale("en").format("dddd, MMMM Do");
+  // const year = new Date().getFullYear();
+  // const month = new Date().getMonth();
+  // const day = new Date().getDate();
+  let today;
 
   return (
     <DateTime>
       <Today>
-        {today} -<Time> {moment(clock).locale("fr").format("LT")}</Time>
+        {format(new Date(Date.now()), "EEEE, MMM do")} -
+        <Time> {format(Date.now(), "HH:m")}</Time>
       </Today>
     </DateTime>
   );

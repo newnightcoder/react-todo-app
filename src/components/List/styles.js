@@ -92,7 +92,7 @@ const StyledTodo = styled(animated.li)`
   font-size: 1rem;
   background-color: white;
   border-bottom: 1px solid rgba(155, 155, 155, 0.2);
-  padding: 0.5em 0 0.5em 1em;
+  padding: 0.5em 0 0.5em 0;
   margin: 0 auto;
   position: relative;
   overflow: hidden;
@@ -111,7 +111,19 @@ const IconCatContainer = styled.div`
   width: 55px;
   border-radius: 50%;
   font-size: 1.25rem;
+  margin-right: 15px;
   border: 2px solid lightgray;
+`;
+
+const TaskContainer = styled.div`
+  width: 15ch;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  white-space: wrap;
+  margin-right: 15px;
 `;
 
 const PlusBtn = styled.button`
@@ -147,6 +159,7 @@ export {
   Header,
   TodoList,
   StyledTodo,
+  TaskContainer,
   IconCatContainer,
   PlusBtn,
 };

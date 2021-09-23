@@ -21,10 +21,12 @@ const DrawerContainer = styled.div`
 
 const Header = styled.div`
   grid-row: 1;
+  width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   padding: 5px;
+  position: relative;
 `;
 
 const Title = styled.h1`
@@ -40,6 +42,9 @@ const Btn = styled.button`
   &:hover {
     cursor: pointer;
   }
+  position: absolute;
+  left: 0;
+  top: 0;
 `;
 
 const IconContainer = styled.div`

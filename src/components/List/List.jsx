@@ -2,6 +2,7 @@ import { IconButton } from "@material-ui/core";
 import React from "react";
 import { Plus, ThreeDotsVertical } from "react-bootstrap-icons";
 import { useTransition } from "react-spring";
+import { formatTime } from "./formatTime";
 import { imgHandler } from "./imgHandler";
 import {
   Header,
@@ -9,6 +10,7 @@ import {
   ListContainer,
   PlusBtn,
   StyledTodo,
+  TaskContainer,
   TodoList,
 } from "./styles";
 import TodoMenu from "./TodoMenu/TodoMenu";
@@ -78,8 +80,14 @@ const List = ({
             >
               {imgHandler(item.icon, item.done)}
             </IconCatContainer>
-            <div>{item.task}</div>
-            <div>{item.selectedDate}</div>
+            <TaskContainer>{item.task}</TaskContainer>
+            <div>
+              {formatTime(30)}
+              {/* {formatDistanceToNowStrict(new Date(2021, 9, 15), {
+                addSuffix: true,
+                locale: en,
+              })} */}
+            </div>
             <IconButton size="small" onClick={() => openTodoMenu(item.id)}>
               <ThreeDotsVertical style={{ cursor: "pointer" }} />
             </IconButton>
@@ -97,7 +105,12 @@ const List = ({
           </StyledTodo>
         ))}
       </TodoList>
-      <PlusBtn dark={dark} onClick={toggleFormDrawer}>
+      <PlusBtn
+        dark={dark}
+        onClick={() => {
+          toggleFormDrawer();
+        }}
+      >
         <Plus style={{ pointerEvents: "none" }} />
       </PlusBtn>
     </ListContainer>

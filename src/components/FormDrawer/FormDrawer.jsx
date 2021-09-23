@@ -6,7 +6,7 @@ import {
 } from "@material-ui/pickers";
 import "date-fns";
 import React, { useEffect, useState } from "react";
-import { ChevronLeft, Sliders } from "react-bootstrap-icons";
+import { ChevronLeft } from "react-bootstrap-icons";
 import { imgHandler } from "./imgHandler";
 import {
   Btn,
@@ -44,6 +44,14 @@ const FormDrawer = ({
       setNewTodo(todoEdit.task);
       setSelectedDate(todoEdit.selectedDate);
       SetId(todoEdit.id);
+    } else {
+      setTimeout(() => {
+        setIcon("");
+        setCategory("");
+        setNewTodo("");
+        setSelectedDate(today);
+        SetId(undefined);
+      }, 1000);
     }
   }, [todoEdit]);
 
@@ -114,6 +122,16 @@ const FormDrawer = ({
     }, 400);
   };
 
+  const resetForm = () => {
+    setNewTodo("");
+    SetId(undefined);
+    setSelectedDate(today);
+    setCategory("");
+    setTimeout(() => {
+      setIcon("");
+    }, 400);
+  };
+
   const handleEditTodo = (e) => {
     e.preventDefault();
     if (id === undefined) return;
@@ -126,13 +144,7 @@ const FormDrawer = ({
     };
     console.log("edited todo!", todo);
     editItem(id, todo);
-    setNewTodo("");
-    SetId(undefined);
-    setSelectedDate(today);
-    setCategory("");
-    setTimeout(() => {
-      setIcon("");
-    }, 400);
+    resetForm();
   };
 
   const handleCloseBtn = () => {
@@ -160,9 +172,6 @@ const FormDrawer = ({
           <ChevronLeft color="deepskyblue" size={24} />
         </Btn>
         <Title>{id === undefined ? "Add new thing" : "Edit your thing"}</Title>
-        <Btn>
-          <Sliders color="deepskyblue" size={24} />
-        </Btn>
       </Header>
       <FormWrapper>
         <IconContainer>{imgHandler(icon)}</IconContainer>

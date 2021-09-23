@@ -48,6 +48,7 @@ const App = () => {
     if (item) {
       setIsTodo(id * -1);
     }
+    setTodoEdit(null);
     setTimeout(() => {
       setIsTodo(null);
     }, 300);
