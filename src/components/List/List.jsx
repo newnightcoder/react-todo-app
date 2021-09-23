@@ -33,9 +33,10 @@ const List = ({
   checkItem,
   deleteItem,
   todosToDisplay,
-  toggleDrawer,
+  toggleFormDrawer,
   dark,
-  toggleTodoMenu,
+  openTodoMenu,
+  closeTodoMenu,
   isTodo,
   isMenuOpen,
 }) => {
@@ -75,7 +76,7 @@ const List = ({
             <IconCatContainer>{imgHandler(item.icon)}</IconCatContainer>
             <div>{item.task}</div>
             <div>{item.selectedDate}</div>
-            <IconButton size="small" onClick={() => toggleTodoMenu(item.id)}>
+            <IconButton size="small" onClick={() => openTodoMenu(item.id)}>
               <ThreeDotsVertical style={{ cursor: "pointer" }} />
             </IconButton>
 
@@ -84,14 +85,15 @@ const List = ({
               selectEditTodo={selectEditTodo}
               checkItem={checkItem}
               deleteItem={deleteItem}
-              toggle={toggleTodoMenu}
+              open={openTodoMenu}
+              close={closeTodoMenu}
               isOpen={isMenuOpen}
               isTodo={isTodo}
             />
           </StyledTodo>
         ))}
       </TodoList>
-      <PlusBtn dark={dark} onClick={toggleDrawer}>
+      <PlusBtn dark={dark} onClick={toggleFormDrawer}>
         <Plus style={{ pointerEvents: "none" }} />
       </PlusBtn>
     </ListContainer>

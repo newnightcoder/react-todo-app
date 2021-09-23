@@ -23,7 +23,13 @@ const curr = new Date();
 curr.setDate(curr.getDate());
 const today = curr.toISOString().substr(0, 10);
 
-const FormDrawer = ({ isOpen, toggleDrawer, addItem, todoEdit, editItem }) => {
+const FormDrawer = ({
+  isOpen,
+  toggleFormDrawer,
+  addItem,
+  todoEdit,
+  editItem,
+}) => {
   const [category, setCategory] = useState("");
   const [icon, setIcon] = useState("");
   const [newTodo, setNewTodo] = useState("");
@@ -105,7 +111,7 @@ const FormDrawer = ({ isOpen, toggleDrawer, addItem, todoEdit, editItem }) => {
     setCategory("");
     setTimeout(() => {
       setIcon("");
-    }, 300);
+    }, 400);
   };
 
   const handleEditTodo = (e) => {
@@ -150,7 +156,7 @@ const FormDrawer = ({ isOpen, toggleDrawer, addItem, todoEdit, editItem }) => {
       }}
     >
       <Header>
-        <Btn onClick={toggleDrawer}>
+        <Btn onClick={toggleFormDrawer}>
           <ChevronLeft color="deepskyblue" size={24} />
         </Btn>
         <Title>{id === undefined ? "Add new thing" : "Edit your thing"}</Title>
@@ -210,7 +216,7 @@ const FormDrawer = ({ isOpen, toggleDrawer, addItem, todoEdit, editItem }) => {
               type="submit"
               onClick={() => {
                 handleCloseBtn();
-                toggleDrawer();
+                toggleFormDrawer();
               }}
             >
               {id !== undefined ? "edit" : "add your thing"}

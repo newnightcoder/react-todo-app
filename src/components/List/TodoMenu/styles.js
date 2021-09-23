@@ -13,7 +13,6 @@ const TodoMenuWrapper = styled.div`
   color: white;
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
-  // transform: translateY(100%);
   opacity: 0;
   transition: transform 250ms;
 `;

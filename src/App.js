@@ -7,7 +7,6 @@ const App = () => {
   const [isTodo, setIsTodo] = useState(null);
   const [isMenuOpen, setIsMenuOpen] = useState(null);
   const [todoEdit, setTodoEdit] = useState(null);
-
   const [todosToDisplay, setTodosToDisplay] = useState("all");
   const [dark, setDarkMode] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -25,7 +24,7 @@ const App = () => {
     setDarkMode((dark) => !dark);
   };
 
-  const toggleDrawer = () => {
+  const toggleFormDrawer = () => {
     setIsOpen((isOpen) => !isOpen);
     setTodoEdit(null);
   };
@@ -36,14 +35,22 @@ const App = () => {
     setTodos(todosCopy);
   };
 
-  const toggleTodoMenu = (id) => {
+  const openTodoMenu = (id) => {
     const todosCopy = [...todos];
     const item = todosCopy.find((todo) => todo.id === id);
-    let isOpen = false;
     if (item) {
       setIsTodo(id);
-      isOpen = true;
     }
+  };
+  const closeTodoMenu = (id) => {
+    const todosCopy = [...todos];
+    const item = todosCopy.find((todo) => todo.id === id);
+    if (item) {
+      setIsTodo(id * -1);
+    }
+    setTimeout(() => {
+      setIsTodo(null);
+    }, 300);
   };
 
   const selectEditTodo = (id) => {
@@ -60,6 +67,7 @@ const App = () => {
       todo.id !== id ? todo : editedTodo
     );
     setTodos(editedTodos);
+    setIsTodo(null);
   };
 
   const checkItem = (id) => {
@@ -110,10 +118,11 @@ const App = () => {
           selectEditTodo={selectEditTodo}
           checkItem={checkItem}
           deleteItem={deleteItem}
-          toggleDrawer={toggleDrawer}
+          toggleFormDrawer={toggleFormDrawer}
           isTodo={isTodo}
           isMenuOpen={isMenuOpen}
-          toggleTodoMenu={toggleTodoMenu}
+          openTodoMenu={openTodoMenu}
+          closeTodoMenu={closeTodoMenu}
         />
 
         <Footer dark={dark} todos={todos} />
@@ -121,7 +130,7 @@ const App = () => {
           editItem={editItem}
           isOpen={isOpen}
           todoEdit={todoEdit}
-          toggleDrawer={toggleDrawer}
+          toggleFormDrawer={toggleFormDrawer}
           addItem={addItem}
         />
       </Container>
