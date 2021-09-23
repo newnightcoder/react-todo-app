@@ -8,7 +8,6 @@ const AppWrapper = styled.div`
   position: relative;
   overflow: hidden;
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: center;
   background-color: #d6e9f8; //moondust silver
@@ -25,7 +24,7 @@ const Container = styled.div`
   max-height: 800px;
   width: 400px;
   display: grid;
-  grid-template-rows: min-content 1fr 80px;
+  grid-template-rows: max-content 1fr 120px;
   box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.5);
   position: relative;
   margin: 0;
@@ -35,7 +34,7 @@ const Container = styled.div`
   @media (max-width: 996px) {
     position: fixed;
     bottom: 0;
-    width: 100%;
+    width: 100vw;
     height: 100%;
     max-height: none;
   }

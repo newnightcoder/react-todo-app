@@ -7,15 +7,17 @@ const flexCenter =
 const ListContainer = styled.section`
   width: 400px;
   grid-row: 2;
+  margin: 0;
   display: grid;
-  grid-template-rows: 6vh 1fr;
-  background-color: white;
+  grid-template-rows: min-content 1fr;
   overflow-y: scroll;
   overflow-x: hidden;
-  scrollbar-width: thick;
+  padding-top: 30px;
+  background-color: white;
   transition: background-color 500ms;
+  scrollbar-width: thick;
   &::-webkit-scrollbar {
-    width: 0.5vw;
+    width: 0.15vw;
     background-color: white;
     ${({ dark }) => dark && `background-color:rgba(100, 100, 100, 0.2)`};
   }
@@ -24,16 +26,13 @@ const ListContainer = styled.section`
     background-color: deepskyblue;
     ${({ dark }) => dark && `background-color:#f8bbd0`};
   }
-  @media (max-width: 1023px) and (orientation: portrait) {
-    width: 100%;
-    /* height: 100vh; */
-    padding-bottom: 150px;
+  @media (max-width: 1023px) {
+    width: 100vw;
   }
-  @media (max-width: 1023px) and (orientation: landscape) {
-    width: 100%;
-    /* height: 100vh; */
-    padding-bottom: 150px;
-  }
+  // @media (max-width: 1023px) and (orientation: landscape) {
+  //   width: 100%;
+  //   padding-bottom: 25px;
+  // }
   ${({ dark }) =>
     dark &&
     css`
@@ -55,7 +54,8 @@ const Header = styled.div`
   background-color: white;
   padding: 5px 20px;
   position: fixed;
-  z-index: 50;
+  top: 24.9vh;
+  z-index: 20;
   @media screen and (min-width: 996px) {
     width: 400px;
   }
@@ -66,15 +66,18 @@ const TodoList = styled.ul`
   list-style-type: none;
   background-color: white;
   padding: 2vh 0 150px 0;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  width: 100%;
   ${({ dark }) =>
     dark &&
     css`
       background-color: lightgray;
     `}
   transition: background-color 500ms;
-  @media (max-width: 1023px) and (orientation: portrait) {
-    padding-bottom: 150px;
-  }
+  // @media (max-width: 1023px) and (orientation: portrait) {
+  //   padding-bottom: 50px;
+  // }
 `;
 
 const StyledTodo = styled(animated.li)`
@@ -128,13 +131,10 @@ const PlusBtn = styled.button`
   border-radius: 50%;
   border-width: 0px !important;
   outline: 0;import FormDrawer from './components/FormDrawer/FormDrawer';
-
   // font-weight: 600;
   // filter: drop-shadow(5px 5px 5px #2ebaee);
-
   transition: transform 250ms;
   ${({ dark }) => dark && `border:1px solid rgba(200, 200, 200)`};
-
   &:hover {
     cursor: pointer;
     // transform: scale(1.05);

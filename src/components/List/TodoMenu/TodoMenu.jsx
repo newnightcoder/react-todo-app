@@ -17,7 +17,7 @@ const TodoMenu = ({
   item,
   checkItem,
   deleteItem,
-  editItem,
+  selectEditTodo,
   toggle,
   isOpen,
   isTodo,
@@ -26,8 +26,8 @@ const TodoMenu = ({
   return (
     <TodoMenuWrapper
       style={{
-        transform:
-          isOpen && isTodo === item.id ? "translateY(0)" : "translateY(100%)",
+        transform: isTodo === item.id ? "translateY(0)" : "translateY(100%)",
+        opacity: isTodo === item.id ? 1 : 0,
       }}
     >
       <MenuItem>
@@ -49,7 +49,7 @@ const TodoMenu = ({
         <IconButton
           className={classes.root}
           size="medium"
-          onClick={() => editItem(item.id)}
+          onClick={() => selectEditTodo(item.id)}
         >
           <CreateIcon style={{ color: "white" }} />
         </IconButton>

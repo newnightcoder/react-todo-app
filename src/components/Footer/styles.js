@@ -10,12 +10,13 @@ const AppFooter = styled.footer`
   background-color: rgb(253, 253, 253);
   color: gray;
   position: relative;
-  border-top: 1px solid rgba(155, 155, 155, 0.1);
+  border-top: 2px solid lightgray;
+  // border-top: 1px solid rgba(155, 155, 155, 0.5);
 `;
 
 const CounterWrapper = styled.div`
   width: 65%;
-  height: 75%;
+  height: 50%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;

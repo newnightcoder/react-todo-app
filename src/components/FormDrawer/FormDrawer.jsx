@@ -5,7 +5,7 @@ import {
   MuiPickersUtilsProvider,
 } from "@material-ui/pickers";
 import "date-fns";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ChevronLeft, Sliders } from "react-bootstrap-icons";
 import { imgHandler } from "./imgHandler";
 import {
@@ -18,18 +18,26 @@ import {
   Title,
   useStyles,
 } from "./styles";
-
 // today's date for datepicker default value
 const curr = new Date();
 curr.setDate(curr.getDate());
 const today = curr.toISOString().substr(0, 10);
 
-const FormDrawer = ({ isOpen, toggleDrawer, addItem }) => {
+const FormDrawer = ({ isOpen, toggleDrawer, addItem, todoEdit, editItem }) => {
   const [category, setCategory] = useState("");
-  const [icon, setIcon] = useState("pen");
+  const [icon, setIcon] = useState("");
   const [newTodo, setNewTodo] = useState("");
   const [selectedDate, setSelectedDate] = useState(today);
   const [isSubmitBtn, setIsSubmitBtn] = useState(false);
+
+  useEffect(() => {
+    if (todoEdit !== null) {
+      setIcon(todoEdit.icon);
+      setCategory(todoEdit.icon);
+      setNewTodo(todoEdit.task);
+      setSelectedDate(todoEdit.selectedDate);
+    }
+  }, [todoEdit]);
 
   const selectOptions = [
     { value: "personal" },
@@ -78,6 +86,7 @@ const FormDrawer = ({ isOpen, toggleDrawer, addItem }) => {
   const handleAddTodo = (e) => {
     e.preventDefault();
     if (newTodo.trim().length === 0) return;
+    if (todoEdit !== null) return;
 
     const todo = {
       icon,
@@ -90,6 +99,22 @@ const FormDrawer = ({ isOpen, toggleDrawer, addItem }) => {
     setNewTodo("");
     setSelectedDate(today);
     setCategory("");
+    setTimeout(() => {
+      setIcon("");
+    }, 300);
+  };
+
+  const handleEditTodo = (e) => {
+    e.preventDefault();
+    if (todoEdit === null) return;
+    const todo = {
+      icon,
+      task: newTodo,
+      selectedDate,
+      id: Date.now(),
+      done: false,
+    };
+    editItem(todoEdit.id, todo);
   };
 
   const handleCloseBtn = () => {
@@ -116,7 +141,7 @@ const FormDrawer = ({ isOpen, toggleDrawer, addItem }) => {
         <Btn onClick={toggleDrawer}>
           <ChevronLeft color="deepskyblue" size={24} />
         </Btn>
-        <Title>Add new thing</Title>
+        <Title>{todoEdit === null ? "Add new thing" : "Edit your thing"}</Title>
         <Btn>
           <Sliders color="deepskyblue" size={24} />
         </Btn>
@@ -128,7 +153,10 @@ const FormDrawer = ({ isOpen, toggleDrawer, addItem }) => {
             className={classes.group}
             noValidate
             autoComplete="off"
-            onSubmit={handleAddTodo}
+            onSubmit={(e) => {
+              handleAddTodo(e);
+              handleEditTodo(e);
+            }}
           >
             <TextField
               className={classes.root}
@@ -173,7 +201,7 @@ const FormDrawer = ({ isOpen, toggleDrawer, addItem }) => {
                 toggleDrawer();
               }}
             >
-              add your thing
+              {todoEdit !== null ? "edit" : "add your thing"}
             </SubmitBtn>
           </form>
         </MuiPickersUtilsProvider>

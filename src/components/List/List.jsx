@@ -29,7 +29,7 @@ import TodoMenu from "./TodoMenu/TodoMenu";
 
 const List = ({
   todos,
-  editItem,
+  selectEditTodo,
   checkItem,
   deleteItem,
   todosToDisplay,
@@ -81,7 +81,7 @@ const List = ({
 
             <TodoMenu
               item={item}
-              editItem={editItem}
+              selectEditTodo={selectEditTodo}
               checkItem={checkItem}
               deleteItem={deleteItem}
               toggle={toggleTodoMenu}

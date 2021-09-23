@@ -7,10 +7,6 @@ const AppHeader = styled.div`
   max-height: 350px;
   width: 400px;
   padding-left: 1.75vw;
-  background: black;
-  background: linear-gradient(rgba(70, 82, 157, 0.7), rgba(70, 82, 157, 0.7)),
-    url(${img}) no-repeat center/cover;
-  // filter: brightness(0.75);
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -18,6 +14,10 @@ const AppHeader = styled.div`
   position: relative;
   white-space: nowrap;
   overflow: hidden !important;
+  z-index: 50;
+  background: deepskyblue;
+  // background: linear-gradient(rgba(70, 82, 157, 0.7), rgba(70, 82, 157, 0.7)),
+  //   url(${img}) no-repeat center/cover;
   &::after {
     content: "";
     width: 100%;
