@@ -10,11 +10,10 @@ const DrawerContainer = styled.div`
   grid-gap: 20px;
   background-color: #46529d;
   color: white;
-  // transform: translateX(100%);
   position: absolute;
   top: 0;
   right: 0;
-  z-index: 110;
+  z-index: 100;
   transition: transform 150ms ease-out;
   // ${({ isOpen }) => isOpen && `transform:translateX(0)`}
 `;
@@ -84,6 +83,33 @@ const SubmitBtn = styled.button`
   }
 `;
 
+const ModalContainer = styled.div`
+  height: 100%;
+  width: 100%;
+  background-color: rgba(70, 82, 157, 0.7);
+  z-index: 200;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Modal = styled.div`
+  height: 50%;
+  width: 75%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #efefef;
+  border: 1px solid rgba(100, 100, 100, 0.5);
+  border-radius: 5px;
+  color: #333;
+  white-space: pre;
+`;
+
 const useStyles = makeStyles({
   group: {
     height: "70%",
@@ -132,5 +158,7 @@ export {
   IconContainer,
   FormWrapper,
   SubmitBtn,
+  ModalContainer,
+  Modal,
   useStyles,
 };

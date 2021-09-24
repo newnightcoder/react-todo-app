@@ -116,14 +116,30 @@ const IconCatContainer = styled.div`
 `;
 
 const TaskContainer = styled.div`
-  width: 15ch;
-  height: 100%;
+  width: 18ch;
+  height: 95%;
   display: flex;
   flex-direction: column;
   align-items: start;
   justify-content: center;
   white-space: wrap;
-  margin-right: 15px;
+  margin-right: 10px;
+  font-size: 0.9rem;
+  color: rgb(50, 50, 50);
+`;
+const TimeContainer = styled.div`
+  width: 12ch;
+  height: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  background-color: #efefef;
+  border: 1px solid #bebebe;
+  border-radius: 15px;
+  padding: 2px;
+  font-size: 0.6rem;
+  color: rgb(50, 50, 50);
 `;
 
 const PlusBtn = styled.button`
@@ -160,6 +176,7 @@ export {
   TodoList,
   StyledTodo,
   TaskContainer,
+  TimeContainer,
   IconCatContainer,
   PlusBtn,
 };

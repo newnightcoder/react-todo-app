@@ -5,6 +5,7 @@ import {
   MuiPickersUtilsProvider,
 } from "@material-ui/pickers";
 import "date-fns";
+import isPast from "date-fns/isPast";
 import React, { useEffect, useState } from "react";
 import { ChevronLeft } from "react-bootstrap-icons";
 import { imgHandler } from "./imgHandler";
@@ -14,10 +15,13 @@ import {
   FormWrapper,
   Header,
   IconContainer,
+  Modal,
+  ModalContainer,
   SubmitBtn,
   Title,
   useStyles,
 } from "./styles";
+
 // today's date for datepicker default value
 const curr = new Date();
 curr.setDate(curr.getDate());
@@ -35,7 +39,8 @@ const FormDrawer = ({
   const [newTodo, setNewTodo] = useState("");
   const [selectedDate, setSelectedDate] = useState(today);
   const [isSubmitBtn, setIsSubmitBtn] = useState(false);
-  const [id, SetId] = useState(undefined);
+  const [id, setId] = useState(undefined);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     if (todoEdit !== null) {
@@ -43,14 +48,14 @@ const FormDrawer = ({
       setCategory(todoEdit.icon);
       setNewTodo(todoEdit.task);
       setSelectedDate(todoEdit.selectedDate);
-      SetId(todoEdit.id);
+      setId(todoEdit.id);
     } else {
       setTimeout(() => {
         setIcon("");
         setCategory("");
         setNewTodo("");
         setSelectedDate(today);
-        SetId(undefined);
+        setId(undefined);
       }, 1000);
     }
   }, [todoEdit]);
@@ -99,12 +104,41 @@ const FormDrawer = ({
     }
   };
 
+  const handleCloseBtn = () => {
+    setIsSubmitBtn(true);
+    setTimeout(() => {
+      setIsSubmitBtn(false);
+    }, 300);
+  };
+  const resetForm = () => {
+    setNewTodo("");
+    setId(undefined);
+    setSelectedDate(today);
+    setCategory("");
+    setTimeout(() => {
+      setIcon("");
+    }, 400);
+  };
+
   const handleAddTodo = (e) => {
     e.preventDefault();
     if (id !== undefined) return;
-
-    if (newTodo.trim().length === 0) return;
     if (todoEdit !== null) return;
+    if (newTodo.trim().length === 0) {
+      const errorMsg = "Your thing is empty! \n Please type a thing to do.";
+      setError(errorMsg);
+      return;
+    }
+    const year = selectedDate.split("-").map((number) => +number)[0];
+    const month = selectedDate.split("-").map((number) => +number)[1] - 1;
+    const day = selectedDate.split("-").map((number) => +number)[2] + 1;
+
+    if (isPast(new Date(year, month, day))) {
+      const errorMsg =
+        "The date you selected is in the past!\n We can't go back in time unfortunately!\nPlease choose a date starting from today.";
+      setError(errorMsg);
+      return;
+    }
 
     const todo = {
       icon,
@@ -113,22 +147,11 @@ const FormDrawer = ({
       id: Date.now(),
       done: false,
     };
-    addItem(todo);
-    setNewTodo("");
-    setSelectedDate(today);
-    setCategory("");
-    setTimeout(() => {
-      setIcon("");
-    }, 400);
-  };
 
-  const resetForm = () => {
-    setNewTodo("");
-    SetId(undefined);
-    setSelectedDate(today);
-    setCategory("");
+    addItem(todo);
+    handleCloseBtn();
     setTimeout(() => {
-      setIcon("");
+      resetForm();
     }, 400);
   };
 
@@ -147,13 +170,6 @@ const FormDrawer = ({
     resetForm();
   };
 
-  const handleCloseBtn = () => {
-    setIsSubmitBtn(true);
-    setTimeout(() => {
-      setIsSubmitBtn(false);
-    }, 300);
-  };
-
   const classes = useStyles();
 
   return (
@@ -168,7 +184,7 @@ const FormDrawer = ({
       }}
     >
       <Header>
-        <Btn onClick={toggleFormDrawer}>
+        <Btn onClick={() => toggleFormDrawer(error)}>
           <ChevronLeft color="deepskyblue" size={24} />
         </Btn>
         <Title>{id === undefined ? "Add new thing" : "Edit your thing"}</Title>
@@ -223,16 +239,25 @@ const FormDrawer = ({
             />
             <SubmitBtn
               type="submit"
-              onClick={() => {
-                handleCloseBtn();
-                toggleFormDrawer();
-              }}
+              onClick={() =>
+                setTimeout(() => {
+                  toggleFormDrawer(error);
+                }, 250)
+              }
             >
               {id !== undefined ? "edit" : "add your thing"}
             </SubmitBtn>
           </form>
         </MuiPickersUtilsProvider>
       </FormWrapper>
+      <ModalContainer
+        style={{
+          opacity: error !== "" ? 1 : 0,
+          zIndex: error !== "" ? 200 : -10,
+        }}
+      >
+        <Modal>{error}</Modal>
+      </ModalContainer>
     </DrawerContainer>
   );
 };

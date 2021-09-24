@@ -24,7 +24,8 @@ const App = () => {
     setDarkMode((dark) => !dark);
   };
 
-  const toggleFormDrawer = () => {
+  const toggleFormDrawer = (err) => {
+    if (err !== "") return;
     setIsOpen((isOpen) => !isOpen);
     setTodoEdit(null);
   };

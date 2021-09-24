@@ -11,6 +11,7 @@ import {
   PlusBtn,
   StyledTodo,
   TaskContainer,
+  TimeContainer,
   TodoList,
 } from "./styles";
 import TodoMenu from "./TodoMenu/TodoMenu";
@@ -43,7 +44,7 @@ const List = ({
     enter: { opacity: 1, transform: "scale(1)" },
     leave: { opacity: 0, transform: "scale(0)" },
   });
-
+  const error = "";
   return (
     <ListContainer>
       <Header>inbox</Header>
@@ -67,13 +68,13 @@ const List = ({
               {imgHandler(item.icon, item.done)}
             </IconCatContainer>
             <TaskContainer>{item.task}</TaskContainer>
-            <div>
+            <TimeContainer>
               {formatTime(
                 item.selectedDate.split("-").map((number) => +number)[0],
                 item.selectedDate.split("-").map((number) => +number)[1],
                 item.selectedDate.split("-").map((number) => +number)[2]
               )}
-            </div>
+            </TimeContainer>
             <IconButton size="small" onClick={() => openTodoMenu(item.id)}>
               <ThreeDotsVertical style={{ cursor: "pointer" }} />
             </IconButton>
@@ -91,12 +92,7 @@ const List = ({
           </StyledTodo>
         ))}
       </TodoList>
-      <PlusBtn
-        dark={dark}
-        onClick={() => {
-          toggleFormDrawer();
-        }}
-      >
+      <PlusBtn dark={dark} onClick={() => toggleFormDrawer(error)}>
         <Plus style={{ pointerEvents: "none" }} />
       </PlusBtn>
     </ListContainer>
