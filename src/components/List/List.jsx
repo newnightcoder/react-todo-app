@@ -15,20 +15,6 @@ import {
 } from "./styles";
 import TodoMenu from "./TodoMenu/TodoMenu";
 
-// const formatDate = (date) => {
-//   const curr = new Date();
-//   curr.setDate(curr.getDate());
-//   const today = curr.toISOString().substr(0, 10);
-//   switch (date) {
-//     case today:
-//       return "yesterday";
-//       break;
-//     default:
-//       return date;
-//       break;
-//   }
-// };
-
 const List = ({
   todos,
   selectEditTodo,
@@ -82,11 +68,11 @@ const List = ({
             </IconCatContainer>
             <TaskContainer>{item.task}</TaskContainer>
             <div>
-              {formatTime(30)}
-              {/* {formatDistanceToNowStrict(new Date(2021, 9, 15), {
-                addSuffix: true,
-                locale: en,
-              })} */}
+              {formatTime(
+                item.selectedDate.split("-").map((number) => +number)[0],
+                item.selectedDate.split("-").map((number) => +number)[1],
+                item.selectedDate.split("-").map((number) => +number)[2]
+              )}
             </div>
             <IconButton size="small" onClick={() => openTodoMenu(item.id)}>
               <ThreeDotsVertical style={{ cursor: "pointer" }} />

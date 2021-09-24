@@ -1,5 +1,4 @@
 import format from "date-fns/format";
-import "moment/locale/fr";
 import React, { useEffect, useState } from "react";
 import { DateTime, Time, Today } from "./styles";
 
@@ -13,11 +12,6 @@ const DateAndTime = () => {
   const updateTime = () => {
     setClock(new Date().toJSON());
   };
-
-  // const year = new Date().getFullYear();
-  // const month = new Date().getMonth();
-  // const day = new Date().getDate();
-  let today;
 
   return (
     <DateTime>

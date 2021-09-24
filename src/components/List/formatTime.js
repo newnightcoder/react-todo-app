@@ -1,14 +1,29 @@
-import React from "react";
-export const formatTime = (day) => {
-  switch (day) {
-    case new Date().getDate():
-      return <div>today</div>;
-    case new Date().getDate() + 1:
-      return <div>tomorrow</div>;
-    case new Date().getDate() + 7:
-      return <div>next week</div>;
+import { differenceInCalendarDays, formatDistanceToNowStrict } from "date-fns";
+import enLocale from "date-fns/locale/en-GB";
 
+export const formatTime = (selectedYear, selectedMonth, selectedDay) => {
+  const comparison = differenceInCalendarDays(
+    new Date(selectedYear, selectedMonth - 1, selectedDay),
+    new Date(
+      new Date().getFullYear(),
+      new Date().getMonth(),
+      new Date().getDate()
+    )
+  );
+  switch (comparison) {
+    case 0:
+      return "today";
+    case 1:
+      return "tomorrow";
+    case 2:
+      return "in 2 days";
     default:
-      break;
+      return formatDistanceToNowStrict(
+        new Date(selectedYear, selectedMonth - 1, selectedDay),
+        {
+          addSuffix: true,
+          locale: enLocale,
+        }
+      );
   }
 };
