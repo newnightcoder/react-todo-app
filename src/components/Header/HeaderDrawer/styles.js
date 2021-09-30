@@ -1,22 +1,9 @@
 import styled, { css } from "styled-components";
-const theme = {
-  black: {
-    default: "rgba(100,100,100,.8)",
-    active: "white",
-    border: "2.5px solid deepskyblue",
-  },
-  danger: {
-    default: "rgb(255,165,0,.4)",
-    active: "orange",
-    border: "2px solid white",
-  },
-};
 
 const DrawerWrapper = styled.div`
   width: 35%;
   min-width: 150px;
   height: 100%;
-  display: grid;
   position: relative;
   @media (max-width: 1023px) and (orientation: landscape) {
   }
@@ -47,20 +34,20 @@ const CloseDrawerBtn = styled.button`
 `;
 
 const BtnGroup = styled.div`
-  grid-column: 2;
   width: 35%;
   min-width: 150px;
   height: 30vh;
   padding: 0;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
   position: absolute;
   top: 0;
   right: 0;
   transform: translateX(100%);
   transition: transform 350ms ease-out;
   background: rgba(0, 0, 0, 0.25);
+  border: 1px solid red;
   @media (min-width: 768px) and (orientation: portrait) {
     width: 20vw;
   }
@@ -71,6 +58,19 @@ const BtnGroup = styled.div`
     width: 95px;
   }
 `;
+
+const theme = {
+  black: {
+    default: "rgba(100,100,100,.8)",
+    active: "white",
+    border: "2.5px solid deepskyblue",
+  },
+  danger: {
+    default: "rgb(255,165,0,.4)",
+    active: "orange",
+    border: "2px solid white",
+  },
+};
 
 const Btn = styled.button`
   width: 100%;
@@ -99,6 +99,7 @@ const Btn = styled.button`
     border-left: ${(props) => theme[props.theme].active};
   }
 `;
+Btn.defaultProps = { theme: "black" };
 
 const BtnToggle = styled(Btn)`
   ${({ active }) =>
@@ -113,7 +114,5 @@ const BtnToggle = styled(Btn)`
       border-left: ${(props) => theme[props.theme].active};
     `}
 `;
-
-Btn.defaultProps = { theme: "black" };
 
 export { DrawerWrapper, CloseDrawerBtn, BtnGroup, Btn, BtnToggle };

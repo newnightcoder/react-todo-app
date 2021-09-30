@@ -108,7 +108,7 @@ const App = () => {
         <Header
           todos={todos}
           todosToDisplay={todosToDisplay}
-          filterTodos={displayFilteredTodos}
+          displayFilteredTodos={displayFilteredTodos}
           clear={clearList}
           deleteMsg={handleDeleteMsg}
           darkToggle={toggleDarkMode}
@@ -121,14 +121,13 @@ const App = () => {
           selectEditTodo={selectEditTodo}
           checkItem={checkItem}
           deleteItem={deleteItem}
-          toggleFormDrawer={toggleFormDrawer}
           isTodo={isTodo}
           isMenuOpen={isMenuOpen}
           openTodoMenu={openTodoMenu}
           closeTodoMenu={closeTodoMenu}
         />
 
-        <Footer dark={dark} todos={todos} />
+        <Footer dark={dark} todos={todos} toggleFormDrawer={toggleFormDrawer} />
         <FormDrawer
           editItem={editItem}
           isOpen={isOpen}

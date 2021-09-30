@@ -1,8 +1,16 @@
 import React from "react";
-import { AppFooter, Counter, CounterBadge, CounterWrapper } from "./styles";
+import { Plus } from "react-bootstrap-icons";
+import {
+  AppFooter,
+  Counter,
+  CounterBadge,
+  CounterWrapper,
+  PlusBtn,
+} from "./styles";
 
-const Footer = ({ todos, dark }) => {
+const Footer = ({ todos, toggleFormDrawer, dark }) => {
   const todosDone = todos.filter((todo) => todo.done).length;
+  const error = "";
 
   return (
     <AppFooter>
@@ -17,14 +25,18 @@ const Footer = ({ todos, dark }) => {
           </Counter>
         </CounterWrapper>
       )}
-      {/* <Mention>
-      Built with React by Nightcoder{" "}
-      <span role="img" aria-label="sunglasses emoji">
-        😎{" "}
-      </span>
-    </Mention> */}
+      <PlusBtn dark={dark} onClick={() => toggleFormDrawer(error)}>
+        <Plus style={{ pointerEvents: "none" }} />
+      </PlusBtn>{" "}
     </AppFooter>
   );
 };
 
 export default Footer;
+
+/* <Mention>
+  Built with React by Nightcoder{" "}
+  <span role="img" aria-label="sunglasses emoji">
+    😎{" "}
+  </span>
+</Mention> */

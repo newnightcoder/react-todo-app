@@ -1,14 +1,17 @@
 import { IconButton } from "@material-ui/core";
 import React from "react";
-import { Plus, ThreeDotsVertical } from "react-bootstrap-icons";
+import { ThreeDotsVertical } from "react-bootstrap-icons";
 import { useTransition } from "react-spring";
 import { formatTime } from "./formatTime";
 import { imgHandler } from "./imgHandler";
 import {
+  FilterBtn,
+  FilterBtnWrapper,
+  FilterCategoryBtn,
+  FilterDateBtn,
   Header,
   IconCatContainer,
   ListContainer,
-  PlusBtn,
   StyledTodo,
   TaskContainer,
   TimeContainer,
@@ -30,25 +33,40 @@ const List = ({
   isMenuOpen,
 }) => {
   let filteredTodos = [];
-  if (todosToDisplay === "all") {
-    filteredTodos = todos;
-  }
-  // } else if (todosToDisplay === "done") {
-  //   filteredTodos = todos.filter((todo) => todo.done);
-  // } else if (todosToDisplay === "to-do") {
-  //   filteredTodos = todos.filter((todo) => !todo.done);
-  // }
+
+  const filterTodos = () => {
+    switch (todosToDisplay) {
+      case "all":
+        return (filteredTodos = todos);
+      case "done":
+        return (filteredTodos = todos.filter((todo) => todo.done));
+      case "not done":
+        return (filteredTodos = todos.filter((todo) => !todo.done));
+
+      default:
+        return (filteredTodos = todos);
+    }
+  };
+
+  filterTodos();
 
   const transition = useTransition(filteredTodos, (todo) => todo.id, {
     from: { opacity: 0, transform: "scale(0)" },
     enter: { opacity: 1, transform: "scale(1)" },
     leave: { opacity: 0, transform: "scale(0)" },
   });
-  const error = "";
+
   return (
     <ListContainer>
-      <Header>inbox</Header>
-
+      <Header>
+        {" "}
+        <span>inbox</span>
+        <FilterBtnWrapper>
+          <FilterBtn>filter</FilterBtn>{" "}
+          <FilterCategoryBtn>by category</FilterCategoryBtn>
+          <FilterDateBtn>by date</FilterDateBtn>
+        </FilterBtnWrapper>
+      </Header>
       <TodoList>
         {transition.map(({ item, props }) => (
           <StyledTodo
@@ -92,9 +110,6 @@ const List = ({
           </StyledTodo>
         ))}
       </TodoList>
-      <PlusBtn dark={dark} onClick={() => toggleFormDrawer(error)}>
-        <Plus style={{ pointerEvents: "none" }} />
-      </PlusBtn>
     </ListContainer>
   );
 };

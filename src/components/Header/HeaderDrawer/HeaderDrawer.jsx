@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { BtnGroup, CloseDrawerBtn, DrawerWrapper } from "./styles";
+import { BtnGroup, BtnToggle, CloseDrawerBtn, DrawerWrapper } from "./styles";
 
-const types = ["show all", "to do", "done", "delete all"];
+const types = ["show all", "done", "not done", "delete all"];
 
 const HeaderDrawer = ({
-  filterTodos,
+  displayFilteredTodos,
   clear,
   deleteMsg,
-  show,
+  openDrawer,
   drawerToggle,
 }) => {
   const [active, setActive] = useState("");
@@ -17,26 +17,26 @@ const HeaderDrawer = ({
       <CloseDrawerBtn
         onClick={drawerToggle}
         style={{
-          opacity: show ? "1" : "0",
-          transitionDelay: show ? "350ms" : "0ms",
+          opacity: openDrawer ? "1" : "0",
+          transitionDelay: openDrawer ? "350ms" : "0ms",
         }}
       >
         {/* <HighlightOffIcon /> */}x
       </CloseDrawerBtn>
       <BtnGroup
         style={{
-          transform: show ? "translateX(0)" : "translate(100%)",
+          transform: openDrawer ? "translateX(0)" : "translate(100%)",
         }}
         // active={active}
-        // filterTodos={filterTodos}
+        // displayFilteredTodos={displayFilteredTodos}
         // clear={clear}
         // show={show}
       >
-        {/* <BtnToggle
+        <BtnToggle
           active={active === types[0]}
           onClick={() => {
             setActive(types[0]);
-            filterTodos("all");
+            displayFilteredTodos("all");
           }}
         >
           {types[0]}
@@ -45,7 +45,7 @@ const HeaderDrawer = ({
           active={active === types[1]}
           onClick={() => {
             setActive(types[1]);
-            filterTodos("to-do");
+            displayFilteredTodos("done");
           }}
         >
           {types[1]}
@@ -54,7 +54,7 @@ const HeaderDrawer = ({
           active={active === types[2]}
           onClick={() => {
             setActive(types[2]);
-            filterTodos("done");
+            displayFilteredTodos("not done");
           }}
         >
           {types[2]}
@@ -66,11 +66,11 @@ const HeaderDrawer = ({
             clear();
             deleteMsg("delete");
             setActive("");
-            setTimeout(() => filterTodos("all"), 2000);
+            setTimeout(() => displayFilteredTodos("all"), 2000);
           }}
         >
           {types[3]}
-        </BtnToggle> */}
+        </BtnToggle>
       </BtnGroup>
     </DrawerWrapper>
   );

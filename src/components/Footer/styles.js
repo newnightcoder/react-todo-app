@@ -10,7 +10,8 @@ const AppFooter = styled.footer`
   background-color: rgb(253, 253, 253);
   color: gray;
   position: relative;
-  border-top: 2px solid lightgray;
+  box-shadow: 0 -5px 5px -5px rgba(0, 0, 0, 0.16);
+  // border-top: 2px solid lightgray;
   // border-top: 1px solid rgba(155, 155, 155, 0.5);
 `;
 
@@ -46,6 +47,35 @@ const CounterBadge = styled.div`
   margin-left: 7.5px;
 `;
 
+const PlusBtn = styled.button`
+  width: 55px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  position: absolute;
+  right: 25px;
+  top: 0px;
+  background-color: #2ebaee;
+  background-color: deepskyblue;
+  color: rgb(253, 253, 253);
+  font-size: 2.5rem;
+  border-radius: 50%;
+  border-width: 0px !important;
+  outline: 0;
+  transform: translateY(-50%);
+  // font-weight: 600;
+  // filter: drop-shadow(5px 5px 5px #2ebaee);
+  // transition: transform 250ms;
+  ${({ dark }) => dark && `border:1px solid rgba(200, 200, 200)`};
+  &:hover {
+    cursor: pointer;
+    // transform: scale(1.05);
+    ${({ dark }) => dark && `border:1px solid #f8bbd0`};
+  }
+`;
+
 const Mention = styled.div`
   position: absolute;
   bottom: 10px;
@@ -53,4 +83,4 @@ const Mention = styled.div`
   transform: translateX(50%);
 `;
 
-export { AppFooter, Counter, CounterWrapper, CounterBadge, Mention };
+export { AppFooter, Counter, CounterWrapper, CounterBadge, PlusBtn, Mention };

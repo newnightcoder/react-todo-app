@@ -8,13 +8,14 @@ const ListContainer = styled.section`
   width: 400px;
   grid-row: 2;
   margin: 0;
-  display: grid;
-  grid-template-rows: min-content 1fr;
+  // display: grid;
+  // grid-template-rows: min-content 1fr;
   overflow-y: scroll;
   overflow-x: hidden;
-  padding-top: 30px;
-  background-color: white;
+  // padding-top: 30px;
+  background-color: #efefef;
   transition: background-color 500ms;
+  position: relative;
   scrollbar-width: thick;
   &::-webkit-scrollbar {
     width: 0.15vw;
@@ -41,34 +42,90 @@ const ListContainer = styled.section`
 `;
 
 const Header = styled.div`
-  grid-row: 1;
   height: 6vh;
   width: inherit;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+  align-items: center;
+  justify-content: space-between;
   font-size: 0.85rem;
   font-weight: 500;
   color: gray;
   text-transform: uppercase;
   background-color: white;
   padding: 5px 20px;
-  position: fixed;
-  top: 24.9vh;
-  z-index: 20;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   @media screen and (min-width: 996px) {
     width: 400px;
   }
 `;
 
+const FilterBtnWrapper = styled.div`
+  min-height: 5vh;
+  min-width: 100px;
+  position: relative;
+`;
+
+const FilterBtn = styled.button`
+  padding: 3px 6px;
+  outline: none;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  text-transform: uppercase;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #46529d;
+  color: white;
+  font-size: 0.75rem;
+  transform: translate(40%, 25%);
+  // display: none;
+`;
+
+const FilterCategoryBtn = styled.button`
+  padding: 3px 6px;
+  outline: none;
+  border: none;
+  border-radius: 3px;
+  background-color: aqua;
+  color: gray;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transition: transform 1000ms;
+  transform: scaleX(0) translate(15%, 25%);
+  transform-origin: center;
+  // &:hover {
+  //   transform: scaleX(1) translateX(-20%);
+  // }
+`;
+const FilterDateBtn = styled(FilterCategoryBtn)`
+  background-color: aqua;
+  color: gray;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -2;
+  transition: transform 1000ms;
+  transform: scaleX(0) translate(40%, 25%);
+  transform-origin: center;
+  // &:hover {
+  //   transform: scaleX(1) translateX(-20%);
+  // }
+`;
+
 const TodoList = styled.ul`
-  grid-row: 2;
+  height: 100%;
+  width: 100%;
   list-style-type: none;
   background-color: white;
   padding: 2vh 0 150px 0;
   margin-block-start: 0;
   margin-block-end: 0;
-  width: 100%;
   ${({ dark }) =>
     dark &&
     css`
@@ -116,16 +173,19 @@ const IconCatContainer = styled.div`
 `;
 
 const TaskContainer = styled.div`
-  width: 18ch;
+  width: 15ch;
   height: 95%;
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  justify-content: center;
-  white-space: wrap;
   margin-right: 10px;
   font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   color: rgb(50, 50, 50);
+  white-space: wrap;
+  overflow-x: hidden;
+  @media screen and (min-width: 768px) {
+    width: 30ch;
+  }
 `;
 const TimeContainer = styled.div`
   width: 12ch;
@@ -142,41 +202,16 @@ const TimeContainer = styled.div`
   color: rgb(50, 50, 50);
 `;
 
-const PlusBtn = styled.button`
-  width: 55px;
-  height: 55px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 50;
-  position: absolute;
-  right: 25px;
-  bottom: 50px;
-  background-color: #2ebaee;
-  background-color: deepskyblue;
-  color: rgb(253, 253, 253);
-  font-size: 2.5rem;
-  border-radius: 50%;
-  border-width: 0px !important;
-  outline: 0;import FormDrawer from './components/FormDrawer/FormDrawer';
-  // font-weight: 600;
-  // filter: drop-shadow(5px 5px 5px #2ebaee);
-  transition: transform 250ms;
-  ${({ dark }) => dark && `border:1px solid rgba(200, 200, 200)`};
-  &:hover {
-    cursor: pointer;
-    // transform: scale(1.05);
-    ${({ dark }) => dark && `border:1px solid #f8bbd0`};
-  }
-`;
-
 export {
   ListContainer,
   Header,
+  FilterBtnWrapper,
+  FilterBtn,
+  FilterCategoryBtn,
+  FilterDateBtn,
   TodoList,
   StyledTodo,
   TaskContainer,
-  TimeContainer,
   IconCatContainer,
-  PlusBtn,
+  TimeContainer,
 };

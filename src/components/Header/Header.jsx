@@ -11,7 +11,13 @@ import { AppHeader, Subtitle, Title, TitleWrapper } from "./styles";
 //   border: 2px solid red;
 // `;
 
-const Header = ({ deleteMsg, filterTodos, clear, dark, darkToggle }) => {
+const Header = ({
+  deleteMsg,
+  displayFilteredTodos,
+  clear,
+  dark,
+  darkToggle,
+}) => {
   const [openDrawer, setOpen] = useState(false);
 
   const drawerToggle = () => {
@@ -30,8 +36,8 @@ const Header = ({ deleteMsg, filterTodos, clear, dark, darkToggle }) => {
       <Hamburger openDrawer={openDrawer} drawerToggle={drawerToggle} />
       <HeaderDrawer
         drawerToggle={drawerToggle}
-        show={openDrawer}
-        filterTodos={filterTodos}
+        openDrawer={openDrawer}
+        displayFilteredTodos={displayFilteredTodos}
         clear={clear}
         deleteMsg={deleteMsg}
       />{" "}
