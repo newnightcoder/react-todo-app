@@ -50,20 +50,20 @@ const CounterBadge = styled.div`
 const PlusBtn = styled.button`
   width: 55px;
   height: 55px;
+  outline: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 999;
   position: absolute;
   right: 25px;
   top: 0px;
+  z-index: 50;
   background-color: #2ebaee;
   background-color: deepskyblue;
   color: rgb(253, 253, 253);
   font-size: 2.5rem;
   border-radius: 50%;
   border-width: 0px !important;
-  outline: 0;
   transform: translateY(-50%);
   // font-weight: 600;
   // filter: drop-shadow(5px 5px 5px #2ebaee);

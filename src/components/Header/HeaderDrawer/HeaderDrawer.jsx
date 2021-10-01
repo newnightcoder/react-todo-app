@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import { XCircle } from "react-bootstrap-icons";
 import { BtnGroup, BtnToggle, CloseDrawerBtn, DrawerWrapper } from "./styles";
 
-const types = ["show all", "done", "not done", "delete all"];
+const types = ["all", "done", "not done", "delete all"];
 
 const HeaderDrawer = ({
   displayFilteredTodos,
@@ -10,7 +11,7 @@ const HeaderDrawer = ({
   openDrawer,
   drawerToggle,
 }) => {
-  const [active, setActive] = useState("");
+  const [active, setActive] = useState("all");
 
   return (
     <DrawerWrapper>
@@ -21,16 +22,12 @@ const HeaderDrawer = ({
           transitionDelay: openDrawer ? "350ms" : "0ms",
         }}
       >
-        {/* <HighlightOffIcon /> */}x
+        <XCircle />
       </CloseDrawerBtn>
       <BtnGroup
         style={{
           transform: openDrawer ? "translateX(0)" : "translate(100%)",
         }}
-        // active={active}
-        // displayFilteredTodos={displayFilteredTodos}
-        // clear={clear}
-        // show={show}
       >
         <BtnToggle
           active={active === types[0]}

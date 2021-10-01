@@ -95,10 +95,10 @@ const FilterCategoryBtn = styled.button`
   position: absolute;
   top: 0;
   left: 0;
-  z-index: -1;
-  transition: transform 1000ms;
-  transform: scaleX(0) translate(15%, 25%);
+  // z-index: -1;
   transform-origin: center;
+  transition: transform 500ms;
+  // transform: scaleX(0) translate(15%, 25%);
   // &:hover {
   //   transform: scaleX(1) translateX(-20%);
   // }
@@ -109,7 +109,7 @@ const FilterDateBtn = styled(FilterCategoryBtn)`
   position: absolute;
   top: 0;
   left: 0;
-  z-index: -2;
+  // z-index: -2;
   transition: transform 1000ms;
   transform: scaleX(0) translate(40%, 25%);
   transform-origin: center;
@@ -118,8 +118,21 @@ const FilterDateBtn = styled(FilterCategoryBtn)`
   // }
 `;
 
+const ResetBtn = styled.button`
+  ${flexCenter};
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  outline: none;
+  border: none;
+  color: gray;
+  position: absolute;
+  right: 0;
+  top: 0;
+`;
+
 const TodoList = styled.ul`
-  height: 100%;
+  min-height: 100%;
   width: 100%;
   list-style-type: none;
   background-color: white;
@@ -209,6 +222,7 @@ export {
   FilterBtn,
   FilterCategoryBtn,
   FilterDateBtn,
+  ResetBtn,
   TodoList,
   StyledTodo,
   TaskContainer,

@@ -10,24 +10,20 @@ const DrawerWrapper = styled.div`
 `;
 
 const CloseDrawerBtn = styled.button`
-  width: 35px;
-  height: 35px;
-  font-size: 13px;
-  background-color: transparent;
-  padding: 0;
   border-radius: 50%;
+  outline: none;
+  border: none;
+  background-color: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0;
-  outline: none;
-  border: none;
-  font-size: 2rem;
   color: white;
-  z-index: 100;
+  font-size: 1.25rem;
   position: absolute;
-  top: 2.5vh;
-  right: 2vh;
+  top: 1vh;
+  right: 1vh;
+  z-index: 100;
   &:hover {
     cursor: pointer;
   }

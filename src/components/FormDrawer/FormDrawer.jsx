@@ -35,6 +35,7 @@ const FormDrawer = ({
   editItem,
 }) => {
   const [category, setCategory] = useState("");
+  const [categoryNumber, setCategoryNumber] = useState(1);
   const [icon, setIcon] = useState("");
   const [newTodo, setNewTodo] = useState("");
   const [selectedDate, setSelectedDate] = useState(today);
@@ -46,6 +47,7 @@ const FormDrawer = ({
     if (todoEdit !== null) {
       setIcon(todoEdit.icon);
       setCategory(todoEdit.icon);
+      setCategoryNumber(todoEdit.categoryNumber);
       setNewTodo(todoEdit.task);
       setSelectedDate(todoEdit.selectedDate);
       setId(todoEdit.id);
@@ -53,6 +55,7 @@ const FormDrawer = ({
       setTimeout(() => {
         setIcon("");
         setCategory("");
+        setCategoryNumber(1);
         setNewTodo("");
         setSelectedDate(today);
         setId(undefined);
@@ -82,24 +85,31 @@ const FormDrawer = ({
     switch (e.target.value) {
       case "personal":
         setIcon("personal");
+        setCategoryNumber(2);
         break;
       case "work":
         setIcon("work");
+        setCategoryNumber(3);
         break;
       case "health":
         setIcon("health");
+        setCategoryNumber(4);
         break;
       case "groceries":
         setIcon("groceries");
+        setCategoryNumber(5);
         break;
       case "shopping":
         setIcon("shopping");
+        setCategoryNumber(6);
         break;
       case "project":
         setIcon("project");
+        setCategoryNumber(7);
         break;
       default:
         setIcon("pen");
+        setCategoryNumber(1);
         break;
     }
   };
@@ -142,6 +152,7 @@ const FormDrawer = ({
 
     const todo = {
       icon,
+      categoryNumber,
       task: newTodo,
       selectedDate,
       id: Date.now(),
@@ -160,6 +171,7 @@ const FormDrawer = ({
     if (id === undefined) return;
     const todo = {
       icon,
+      categoryNumber,
       task: newTodo,
       selectedDate,
       id,

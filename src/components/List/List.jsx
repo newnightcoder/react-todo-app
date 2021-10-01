@@ -1,8 +1,8 @@
 import { IconButton } from "@material-ui/core";
-import React from "react";
-import { ThreeDotsVertical } from "react-bootstrap-icons";
+import React, { useState } from "react";
+import { ThreeDotsVertical, XCircle } from "react-bootstrap-icons";
 import { useTransition } from "react-spring";
-import { formatTime } from "./formatTime";
+import { compareTime, formatTime } from "./formatTime";
 import { imgHandler } from "./imgHandler";
 import {
   FilterBtn,
@@ -12,6 +12,7 @@ import {
   Header,
   IconCatContainer,
   ListContainer,
+  ResetBtn,
   StyledTodo,
   TaskContainer,
   TimeContainer,
@@ -24,16 +25,21 @@ const List = ({
   selectEditTodo,
   checkItem,
   deleteItem,
+  displayFilteredTodos,
   todosToDisplay,
-  toggleFormDrawer,
   dark,
   openTodoMenu,
   closeTodoMenu,
   isTodo,
   isMenuOpen,
 }) => {
-  let filteredTodos = [];
+  const [isFilter, setIsFilter] = useState(false);
 
+  const animateFilter = () => {
+    setIsFilter(true);
+  };
+
+  let filteredTodos = [];
   const filterTodos = () => {
     switch (todosToDisplay) {
       case "all":
@@ -42,7 +48,22 @@ const List = ({
         return (filteredTodos = todos.filter((todo) => todo.done));
       case "not done":
         return (filteredTodos = todos.filter((todo) => !todo.done));
-
+      case "by date":
+        return (filteredTodos = compareTime(todos));
+      case "by category":
+        let sortedByDate = [];
+        sortedByDate = compareTime(todos);
+        return (filteredTodos = sortedByDate.sort((a, b) => {
+          if (a.categoryNumber < b.categoryNumber) return -1;
+          if (a.categoryNumber > b.categoryNumber) return 1;
+          return 0;
+        }));
+      case "reset":
+        return (filteredTodos = todos.sort((a, b) => {
+          if (a.id < b.id) return 1;
+          if (a.id > b.id) return -1;
+          return 0;
+        }));
       default:
         return (filteredTodos = todos);
     }
@@ -59,12 +80,46 @@ const List = ({
   return (
     <ListContainer>
       <Header>
-        {" "}
         <span>inbox</span>
         <FilterBtnWrapper>
-          <FilterBtn>filter</FilterBtn>{" "}
-          <FilterCategoryBtn>by category</FilterCategoryBtn>
-          <FilterDateBtn>by date</FilterDateBtn>
+          <FilterBtn
+            onClick={() => animateFilter()}
+            style={{ display: isFilter ? "none" : "block" }}
+          >
+            filter
+          </FilterBtn>
+          <FilterCategoryBtn
+            onClick={() => displayFilteredTodos("by category")}
+            style={{
+              transform: isFilter
+                ? "scaleX(1) translateX(-100%)"
+                : "scaleX(0) translate(15%)",
+              zIndex: isFilter ? 10 : -1,
+            }}
+          >
+            by category
+          </FilterCategoryBtn>
+          <FilterDateBtn
+            onClick={() => displayFilteredTodos("by date")}
+            style={{
+              transform: isFilter
+                ? "scaleX(1) translateX(20%)"
+                : "scaleX(0) translate(40%)",
+              zIndex: isFilter ? 10 : -2,
+            }}
+          >
+            by date
+          </FilterDateBtn>
+          {isFilter && (
+            <ResetBtn
+              onClick={() => {
+                displayFilteredTodos("reset");
+                setIsFilter(false);
+              }}
+            >
+              <XCircle />
+            </ResetBtn>
+          )}
         </FilterBtnWrapper>
       </Header>
       <TodoList>

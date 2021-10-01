@@ -7,7 +7,7 @@ const App = () => {
   const [isTodo, setIsTodo] = useState(null);
   const [isMenuOpen, setIsMenuOpen] = useState(null);
   const [todoEdit, setTodoEdit] = useState(null);
-  const [todosToDisplay, setTodosToDisplay] = useState("all");
+  const [todosToDisplay, setTodosToDisplay] = useState("");
   const [dark, setDarkMode] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -117,6 +117,7 @@ const App = () => {
         <List
           dark={dark}
           todos={todos}
+          displayFilteredTodos={displayFilteredTodos}
           todosToDisplay={todosToDisplay}
           selectEditTodo={selectEditTodo}
           checkItem={checkItem}
