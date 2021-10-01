@@ -16,21 +16,39 @@ const AppFooter = styled.footer`
 `;
 
 const CounterWrapper = styled.div`
-  width: 65%;
+  width: 75%;
   height: 50%;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-evenly;
+  align-items: center;
+  justify-content: flex-start;
   font-size: 0.85rem;
   font-weight: 500;
   color: gray;
-  text-transform: uppercase;
+  white-space: nowrap;
   padding-left: 18px;
 `;
 
 const Counter = styled.div`
-  display: flex;
+  height: 20px;
+  width: 75%;
+  border: 1px solid lightgray;
+  margin-right: 5px;
+  border-radius: 5px;
+  background-image: linear-gradient(to right, deepskyblue, blueviolet);
+  overflow: hidden;
+  position: relative;
+`;
+
+const ProgressBar = styled.div`
+  height: 100%;
+  width: 100%;
+  background-color: rgb(253, 253, 253);
+  transform-origin: right;
+  transition: transform 300ms;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
 `;
 
 const CounterBadge = styled.div`
@@ -83,4 +101,12 @@ const Mention = styled.div`
   transform: translateX(50%);
 `;
 
-export { AppFooter, Counter, CounterWrapper, CounterBadge, PlusBtn, Mention };
+export {
+  AppFooter,
+  Counter,
+  CounterWrapper,
+  ProgressBar,
+  CounterBadge,
+  PlusBtn,
+  Mention,
+};
