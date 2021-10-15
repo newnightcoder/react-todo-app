@@ -77,7 +77,6 @@ const SubmitBtn = styled.button`
   font-weight: 600;
   text-transform: uppercase;
   border-radius: 3px;
-  margin-top: 25px;
   &:hover {
     cursor: pointer;
   }
@@ -116,36 +115,41 @@ const useStyles = makeStyles({
     width: "100%",
     display: "flex",
     flexDirection: "column",
-    justifyContent: "space-evenly",
+    justifyContent: "space-between",
     color: "white",
   },
   root: {
-    "& .MuiFormLabel-root": {
+    "& .MuiSvgIcon-root": {
+      fill: "white",
+    },
+    "& .MuiInputLabel-root": {
       color: "white",
     },
-
-    "& .MuiInputBase-input": {
-      padding: "15px 0",
-      color: "white !important",
+    "& .MuiInputBase-root": {
+      color: "white",
+      "&:before": {
+        borderBottomColor: "white",
+      },
+      "&:hover:before": {
+        borderBottomColor: "deepskyblue",
+      },
+      "&:after": {
+        borderBottomColor: "deepskyblue",
+      },
     },
-    // "& .MuiInputLabel-outlined": {
-    //   transform: "translate(0, 20px)",
-    // },
-    // "& .MuiInputLabel-outlined.MuiInputLabel-shrink": {
-    //   transform: "translate(14px, -6px) scale(0.75)",
-    // },
-    "& .MuiOutlinedInput-root.Mui-focused, .MuiOutlinedInput-notchedOutline": {
-      borderColor: "white",
-      borderTop: "none",
-      borderLeft: "none",
-      borderRight: "none",
-      borderRadius: "0",
+    "& .MuiInput-underline:before": {
+      borderBottomColor: "white",
     },
-    "& .MuiList-root": {
-      backgroundColor: "red",
+    "& .MuiInput-underline:after": {
+      borderBottomColor: "deepskyblue",
     },
-    "& li": {
-      fontSize: 12,
+  },
+  item: {
+    textTransform: "capitalize",
+    backgroundColor: "#fefefe",
+    color: "#2196f3",
+    "&:focus": {
+      backgroundColor: "rgba(230,230,230,.5)",
     },
   },
 });

@@ -8,7 +8,7 @@ const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(null);
   const [todoEdit, setTodoEdit] = useState(null);
   const [todosToDisplay, setTodosToDisplay] = useState("");
-  const [dark, setDarkMode] = useState(false);
+  const [dark, setDarkMode] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {

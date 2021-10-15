@@ -24,7 +24,7 @@ const Container = styled.div`
   max-height: 800px;
   width: 400px;
   display: grid;
-  grid-template-rows: max-content 1fr 120px;
+  grid-template-rows: max-content 1fr 75px;
   box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.5);
   position: relative;
   margin: 0;

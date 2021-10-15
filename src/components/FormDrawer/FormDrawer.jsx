@@ -1,5 +1,7 @@
 import DateFnsUtils from "@date-io/date-fns";
 import { MenuItem, TextField } from "@material-ui/core";
+import { blue } from "@material-ui/core/colors";
+import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 import {
   KeyboardDatePicker,
   MuiPickersUtilsProvider,
@@ -64,12 +66,12 @@ const FormDrawer = ({
   }, [todoEdit]);
 
   const selectOptions = [
-    { value: "personal" },
-    { value: "work" },
-    { value: "health" },
-    { value: "groceries" },
-    { value: "shopping" },
-    { value: "project" },
+    { value: "Personal" },
+    { value: "Work" },
+    { value: "Health" },
+    { value: "Groceries" },
+    { value: "Shopping" },
+    { value: "Project" },
   ];
 
   const handleTodoInput = (e) => {
@@ -83,27 +85,27 @@ const FormDrawer = ({
   const handleCategoryInput = (e) => {
     setCategory(e.target.value);
     switch (e.target.value) {
-      case "personal":
+      case "Personal":
         setIcon("personal");
         setCategoryNumber(2);
         break;
-      case "work":
+      case "Work":
         setIcon("work");
         setCategoryNumber(3);
         break;
-      case "health":
+      case "Health":
         setIcon("health");
         setCategoryNumber(4);
         break;
-      case "groceries":
+      case "Groceries":
         setIcon("groceries");
         setCategoryNumber(5);
         break;
-      case "shopping":
+      case "Shopping":
         setIcon("shopping");
         setCategoryNumber(6);
         break;
-      case "project":
+      case "Project":
         setIcon("project");
         setCategoryNumber(7);
         break;
@@ -184,6 +186,27 @@ const FormDrawer = ({
 
   const classes = useStyles();
 
+  const menuProps = {
+    MenuProps: {
+      anchorOrigin: {
+        vertical: "bottom",
+        horizontal: "left",
+      },
+      getContentAnchorEl: null,
+      MenuListProps: {
+        style: { backgroundColor: "#fefefe" },
+      },
+    },
+  };
+
+  const calendarTheme = createTheme({
+    palette: {
+      primary: {
+        main: blue[500],
+      },
+    },
+  });
+
   return (
     <DrawerContainer
       style={{
@@ -215,15 +238,16 @@ const FormDrawer = ({
           >
             <TextField
               className={classes.root}
-              select
-              native="false"
-              label="Category"
+              select={true}
+              label="Select a category"
+              // variant="standard"
               id="standard-select"
               value={category}
               onChange={handleCategoryInput}
+              SelectProps={menuProps}
             >
               {selectOptions.map((option, i) => (
-                <MenuItem key={i} value={option.value}>
+                <MenuItem key={i} value={option.value} className={classes.item}>
                   {option.value}
                 </MenuItem>
               ))}
@@ -232,23 +256,32 @@ const FormDrawer = ({
               className={classes.root}
               id="outlined-basic"
               label="Your thing to do"
-              variant="outlined"
               value={newTodo}
               onChange={handleTodoInput}
             />
-            <KeyboardDatePicker
-              className={classes.root}
-              margin="normal"
-              id="date-picker-dialog"
-              label="When?"
-              format="dd/MM/yyyy"
-              value={selectedDate}
-              placeholder="When"
-              onChange={handleWhenInput}
-              KeyboardButtonProps={{
-                "aria-label": "change date",
-              }}
-            />
+            <ThemeProvider theme={calendarTheme}>
+              <KeyboardDatePicker
+                className={classes.root}
+                margin="normal"
+                id="date-picker-dialog"
+                label="When?"
+                format="dd/MM/yyyy"
+                value={selectedDate}
+                placeholder="When"
+                onChange={handleWhenInput}
+                KeyboardButtonProps={{
+                  "aria-label": "change date",
+                }}
+                variant="inline"
+                PopoverProps={{
+                  PaperProps: {
+                    style: {
+                      backgroundColor: "#fefefe",
+                    },
+                  },
+                }}
+              />
+            </ThemeProvider>
             <SubmitBtn
               type="submit"
               onClick={() =>

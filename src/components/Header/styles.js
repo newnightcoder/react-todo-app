@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import img from "../../img/mountains/7.jpg";
+import img from "../../img/giphy.gif";
 
 const AppHeader = styled.div`
   grid-row: 1;
@@ -16,8 +16,8 @@ const AppHeader = styled.div`
   overflow: hidden !important;
   z-index: 50;
   background: deepskyblue;
-  // background: linear-gradient(rgba(70, 82, 157, 0.7), rgba(70, 82, 157, 0.7)),
-  //   url(${img}) no-repeat center/cover;
+  background: linear-gradient(rgba(50, 50, 50, 0.7), rgba(50, 50, 50, 0.7)),
+    url(${img}) no-repeat center/cover;
   &::after {
     content: "";
     width: 100%;

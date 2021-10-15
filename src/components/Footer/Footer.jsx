@@ -13,7 +13,7 @@ const Footer = ({ todos, toggleFormDrawer, dark }) => {
   const error = "";
 
   return (
-    <AppFooter>
+    <AppFooter dark={dark}>
       <CounterWrapper>
         <Counter>
           <ProgressBar
@@ -25,9 +25,7 @@ const Footer = ({ todos, toggleFormDrawer, dark }) => {
             }}
           />
         </Counter>
-        <span>
-          {todosDone}/{todos.length} things
-        </span>
+        <span>{(todosDone / todos.length) * 100}% completed</span>
       </CounterWrapper>
       <PlusBtn dark={dark} onClick={() => toggleFormDrawer(error)}>
         <Plus style={{ pointerEvents: "none" }} />

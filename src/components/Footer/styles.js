@@ -8,7 +8,9 @@ const AppFooter = styled.footer`
   justify-content: center;
   font-size: 0.7rem;
   background-color: rgb(253, 253, 253);
-  color: gray;
+  background-color: ${(props) =>
+    props.dark ? "dimgray" : "rgb(253, 253, 253)"};
+  color: ${(props) => (props.dark ? "white" : "gray")};
   position: relative;
   box-shadow: 0 -5px 5px -5px rgba(0, 0, 0, 0.16);
   // border-top: 2px solid lightgray;
@@ -23,7 +25,6 @@ const CounterWrapper = styled.div`
   justify-content: flex-start;
   font-size: 0.85rem;
   font-weight: 500;
-  color: gray;
   white-space: nowrap;
   padding-left: 18px;
 `;
@@ -47,7 +48,7 @@ const ProgressBar = styled.div`
   transition: transform 300ms;
   position: absolute;
   top: 0;
-  left: 0;
+  right: 0;
   z-index: 10;
 `;
 
