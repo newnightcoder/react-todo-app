@@ -7,14 +7,11 @@ const AppFooter = styled.footer`
   align-items: flex-start;
   justify-content: center;
   font-size: 0.7rem;
-  background-color: rgb(253, 253, 253);
-  background-color: ${(props) =>
-    props.dark ? "dimgray" : "rgb(253, 253, 253)"};
-  color: ${(props) => (props.dark ? "white" : "gray")};
+  transition: all 500ms;
+  background-color: ${({ dark }) => (dark ? "#333" : "rgb(253, 253, 253)")};
+  color: ${({ dark }) => (dark ? "#fefefe" : "gray")};
   position: relative;
   box-shadow: 0 -5px 5px -5px rgba(0, 0, 0, 0.16);
-  // border-top: 2px solid lightgray;
-  // border-top: 1px solid rgba(155, 155, 155, 0.5);
 `;
 
 const CounterWrapper = styled.div`
@@ -77,21 +74,15 @@ const PlusBtn = styled.button`
   right: 25px;
   top: 0px;
   z-index: 50;
-  background-color: #2ebaee;
   background-color: deepskyblue;
-  color: rgb(253, 253, 253);
+  transition: color 500ms;
+  color: ${({ dark }) => (dark ? "#333" : "rgb(253, 253, 253)")};
   font-size: 2.5rem;
   border-radius: 50%;
   border-width: 0px !important;
   transform: translateY(-50%);
-  // font-weight: 600;
-  // filter: drop-shadow(5px 5px 5px #2ebaee);
-  // transition: transform 250ms;
-  ${({ dark }) => dark && `border:1px solid rgba(200, 200, 200)`};
   &:hover {
     cursor: pointer;
-    // transform: scale(1.05);
-    ${({ dark }) => dark && `border:1px solid #f8bbd0`};
   }
 `;
 

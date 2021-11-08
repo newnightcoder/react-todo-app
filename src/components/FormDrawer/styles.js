@@ -1,4 +1,4 @@
-import { makeStyles } from "@material-ui/core/styles";
+import { createTheme, makeStyles } from "@material-ui/core/styles";
 import styled from "styled-components";
 
 const DrawerContainer = styled.div`
@@ -8,14 +8,14 @@ const DrawerContainer = styled.div`
   display: grid;
   grid-template-rows: 5vh 1fr 5vh;
   grid-gap: 20px;
-  background-color: #46529d;
+  transition: background-color 500ms;
+  background-color: ${({ dark }) => (dark ? "#333" : "#46529d")};
   color: white;
   position: absolute;
   top: 0;
   right: 0;
   z-index: 100;
   transition: transform 150ms ease-out;
-  // ${({ isOpen }) => isOpen && `transform:translateX(0)`}
 `;
 
 const Header = styled.div`
@@ -64,7 +64,6 @@ const FormWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  // border: 1px solid white;
 `;
 
 const SubmitBtn = styled.button`
@@ -73,7 +72,8 @@ const SubmitBtn = styled.button`
   outline: none;
   border: none;
   background-color: deepskyblue;
-  color: white;
+  transition: color 500ms;
+  color: ${({ dark }) => (dark ? "#333" : "#fefefe")};
   font-weight: 600;
   text-transform: uppercase;
   border-radius: 3px;
@@ -118,6 +118,7 @@ const useStyles = makeStyles({
     justifyContent: "space-between",
     color: "white",
   },
+
   root: {
     "& .MuiSvgIcon-root": {
       fill: "white",
@@ -127,6 +128,7 @@ const useStyles = makeStyles({
     },
     "& .MuiInputBase-root": {
       color: "white",
+
       "&:before": {
         borderBottomColor: "white",
       },
@@ -137,6 +139,7 @@ const useStyles = makeStyles({
         borderBottomColor: "deepskyblue",
       },
     },
+
     "& .MuiInput-underline:before": {
       borderBottomColor: "white",
     },
@@ -152,6 +155,54 @@ const useStyles = makeStyles({
       backgroundColor: "rgba(230,230,230,.5)",
     },
   },
+  picker: {
+    "& .MuiSvgIcon-root": {
+      fill: "white",
+    },
+    "& .MuiInputLabel-root": {
+      color: "white",
+    },
+    "& .MuiInputBase-root": {
+      color: "white",
+
+      "&:before": {
+        borderBottomColor: "white",
+      },
+      "&:hover:before": {
+        borderBottomColor: "deepskyblue",
+      },
+      "&:after": {
+        borderBottomColor: "deepskyblue",
+      },
+    },
+    "& :hover": {
+      cursor: "pointer",
+    },
+  },
+});
+
+const menuProps = {
+  MenuProps: {
+    anchorOrigin: {
+      vertical: "bottom",
+      horizontal: "left",
+    },
+    getContentAnchorEl: null,
+    MenuListProps: {
+      style: {
+        backgroundColor: ({ dark }) => (dark ? "red" : "#fefefe"),
+      },
+    },
+  },
+};
+
+const calendarTheme = createTheme({
+  palette: {
+    primary: {
+      contrastText: "#fff",
+      main: "#00bbff",
+    },
+  },
 });
 
 export {
@@ -164,5 +215,7 @@ export {
   SubmitBtn,
   ModalContainer,
   Modal,
+  calendarTheme,
+  menuProps,
   useStyles,
 };

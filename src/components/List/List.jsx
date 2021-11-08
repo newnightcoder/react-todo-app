@@ -34,7 +34,7 @@ const List = ({
   isMenuOpen,
 }) => {
   const [isFilter, setIsFilter] = useState(false);
-
+  console.log("dark", dark);
   const animateFilter = () => {
     setIsFilter(true);
   };
@@ -78,8 +78,8 @@ const List = ({
   });
 
   return (
-    <ListContainer>
-      <Header>
+    <ListContainer dark={dark}>
+      <Header dark={dark}>
         <span>inbox</span>
         <FilterBtnWrapper>
           <FilterBtn
@@ -122,9 +122,10 @@ const List = ({
           )}
         </FilterBtnWrapper>
       </Header>
-      <TodoList>
+      <TodoList dark={dark}>
         {transition.map(({ item, props }) => (
           <StyledTodo
+            dark={dark}
             key={item.id}
             style={{
               ...props,
@@ -137,10 +138,11 @@ const List = ({
           >
             <IconCatContainer
               style={{ borderWidth: item.done ? "1px" : "2px" }}
+              dark={dark}
             >
               {imgHandler(item.icon, item.done)}
             </IconCatContainer>
-            <TaskContainer>{item.task}</TaskContainer>
+            <TaskContainer dark={dark}>{item.task}</TaskContainer>
             <TimeContainer>
               {formatTime(
                 item.selectedDate.split("-").map((number) => +number)[0],
@@ -149,10 +151,13 @@ const List = ({
               )}
             </TimeContainer>
             <IconButton size="small" onClick={() => openTodoMenu(item.id)}>
-              <ThreeDotsVertical style={{ cursor: "pointer" }} />
+              <ThreeDotsVertical
+                style={{ cursor: "pointer", color: dark ? "white" : "black" }}
+              />
             </IconButton>
 
             <TodoMenu
+              dark={dark}
               item={item}
               selectEditTodo={selectEditTodo}
               checkItem={checkItem}

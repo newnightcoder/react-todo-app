@@ -25,7 +25,12 @@ const Footer = ({ todos, toggleFormDrawer, dark }) => {
             }}
           />
         </Counter>
-        <span>{(todosDone / todos.length) * 100}% completed</span>
+        <span>
+          {todos.length !== 0
+            ? Math.round((todosDone / todos.length) * 1000) / 10
+            : 0}
+          % completed
+        </span>
       </CounterWrapper>
       <PlusBtn dark={dark} onClick={() => toggleFormDrawer(error)}>
         <Plus style={{ pointerEvents: "none" }} />

@@ -22,10 +22,12 @@ const TodoMenu = ({
   close,
   isOpen,
   isTodo,
+  dark,
 }) => {
   const classes = useStyles();
   return (
     <TodoMenuWrapper
+      dark={dark}
       style={{
         transform:
           isTodo === item.id

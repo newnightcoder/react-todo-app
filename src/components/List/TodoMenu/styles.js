@@ -8,9 +8,10 @@ const TodoMenuWrapper = styled.div`
   justify-content: space-evenly;
   position: absolute;
   right: 0;
-  background-color: #46529d;
-  background-color: rgba(70, 82, 157, 0.9);
-  color: white;
+  transition: background-color 500ms;
+  background-color: ${({ dark }) =>
+    dark ? "rgba(5, 5, 5, 0.9)" : "rgba(70, 82, 157, 0.9)"};
+  color: #fefefe;
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
   opacity: 0;

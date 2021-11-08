@@ -12,7 +12,7 @@ const AppWrapper = styled.div`
   justify-content: center;
   background-color: #d6e9f8; //moondust silver
   transition: background-color 500ms;
-  ${({ dark }) => dark && `background-color:#616161`};
+  ${({ dark }) => dark && `background-color:#111`};
 
   @media (max-width: 1023px) and (orientation: portrait) {
     background-color: transparent;

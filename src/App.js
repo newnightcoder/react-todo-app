@@ -58,7 +58,6 @@ const App = () => {
   const selectEditTodo = (id) => {
     const todosCopy = [...todos];
     const isItem = todosCopy.find((item) => item.id === id);
-    console.log(isItem);
     setIsOpen(true);
     setTodoEdit(isItem);
   };
@@ -130,6 +129,7 @@ const App = () => {
 
         <Footer dark={dark} todos={todos} toggleFormDrawer={toggleFormDrawer} />
         <FormDrawer
+          dark={dark}
           editItem={editItem}
           isOpen={isOpen}
           todoEdit={todoEdit}

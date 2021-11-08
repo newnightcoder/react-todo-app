@@ -1,5 +1,5 @@
 import { animated } from "react-spring";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 const flexCenter =
   "display: flex; align-items: center; justify-content: center;";
@@ -8,37 +8,26 @@ const ListContainer = styled.section`
   width: 400px;
   grid-row: 2;
   margin: 0;
-  // display: grid;
-  // grid-template-rows: min-content 1fr;
   overflow-y: scroll;
   overflow-x: hidden;
-  // padding-top: 30px;
-  background-color: #efefef;
-  transition: background-color 500ms;
+  background-color: ${({ dark }) => (dark ? "dimgray" : "#fefefe")};
+  transition: all 500ms;
   position: relative;
   scrollbar-width: thick;
   &::-webkit-scrollbar {
     width: 0.15vw;
-    background-color: white;
-    ${({ dark }) => dark && `background-color:rgba(100, 100, 100, 0.2)`};
+    transition: background-color 500ms;
+    background-color: ${({ dark }) =>
+      dark ? "rgba(100, 100, 100, 0.2)" : "white"};
   }
   &::-webkit-scrollbar-thumb {
     width: 0.5vw;
-    background-color: deepskyblue;
-    ${({ dark }) => dark && `background-color:#f8bbd0`};
+    transition: background-color 500ms;
+    ${({ dark }) => (dark ? "#f8bbd0" : "deepskyblue")};
   }
   @media (max-width: 1023px) {
     width: 100vw;
   }
-  // @media (max-width: 1023px) and (orientation: landscape) {
-  //   width: 100%;
-  //   padding-bottom: 25px;
-  // }
-  ${({ dark }) =>
-    dark &&
-    css`
-      background-color: lightgray;
-    `}
 `;
 
 const Header = styled.div`
@@ -49,9 +38,10 @@ const Header = styled.div`
   justify-content: space-between;
   font-size: 0.85rem;
   font-weight: 500;
-  color: gray;
+  transition: all 500ms;
+  color: ${({ dark }) => (dark ? "#fefefe" : "dimgray")};
   text-transform: uppercase;
-  background-color: white;
+  background-color: ${({ dark }) => (dark ? "#333" : "#fefefe")};
   padding: 5px 20px;
   position: sticky;
   top: 0;
@@ -95,13 +85,8 @@ const FilterCategoryBtn = styled.button`
   position: absolute;
   top: 0;
   left: 0;
-  // z-index: -1;
   transform-origin: center;
   transition: transform 500ms;
-  // transform: scaleX(0) translate(15%, 25%);
-  // &:hover {
-  //   transform: scaleX(1) translateX(-20%);
-  // }
 `;
 const FilterDateBtn = styled(FilterCategoryBtn)`
   background-color: aqua;
@@ -109,13 +94,9 @@ const FilterDateBtn = styled(FilterCategoryBtn)`
   position: absolute;
   top: 0;
   left: 0;
-  // z-index: -2;
   transition: transform 1000ms;
   transform: scaleX(0) translate(40%, 25%);
   transform-origin: center;
-  // &:hover {
-  //   transform: scaleX(1) translateX(-20%);
-  // }
 `;
 
 const ResetBtn = styled.button`
@@ -135,19 +116,12 @@ const TodoList = styled.ul`
   min-height: 100%;
   width: 100%;
   list-style-type: none;
-  background-color: white;
+  transition: background-color 500ms;
+  background-color: ${({ dark }) => (dark ? "dimgray" : "#fefefe")};
   padding: 2vh 0 150px 0;
   margin-block-start: 0;
   margin-block-end: 0;
-  ${({ dark }) =>
-    dark &&
-    css`
-      background-color: lightgray;
-    `}
   transition: background-color 500ms;
-  // @media (max-width: 1023px) and (orientation: portrait) {
-  //   padding-bottom: 50px;
-  // }
 `;
 
 const StyledTodo = styled(animated.li)`
@@ -158,21 +132,15 @@ const StyledTodo = styled(animated.li)`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: dimgray;
+  transition: all 500ms;
+  color: ${({ dark }) => (dark ? "#fefefe" : "dimgray")};
   font-size: 1rem;
-  background-color: white;
+  background-color: ${({ dark }) => (dark ? "dimgray" : "#fefefe")};
   border-bottom: 1px solid rgba(155, 155, 155, 0.2);
   padding: 0.5em 0 0.5em 0;
   margin: 0 auto;
   position: relative;
   overflow: hidden;
-  // transition: text-decoration 500ms, color 500ms;
-  ${({ dark }) =>
-    dark &&
-    css`
-      background-color: #333333;
-      color: rgb(200, 200, 200);
-    `}
 `;
 
 const IconCatContainer = styled.div`
@@ -182,7 +150,8 @@ const IconCatContainer = styled.div`
   border-radius: 50%;
   font-size: 1.25rem;
   margin-right: 15px;
-  border: 2px solid lightgray;
+  transition: border 500ms;
+  border: 2px solid ${({ dark }) => (dark ? "#fefefe" : "lightgray")};
 `;
 
 const TaskContainer = styled.div`
@@ -193,7 +162,8 @@ const TaskContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  color: rgb(50, 50, 50);
+  transition: color 500ms;
+  color: ${({ dark }) => (dark ? "#fefefe" : "rgb(50, 50, 50)")};
   white-space: wrap;
   overflow-x: hidden;
   @media screen and (min-width: 768px) {
