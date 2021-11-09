@@ -13,9 +13,9 @@ const AppWrapper = styled.div`
   transition: background-color 500ms;
   background-color: ${({ dark }) =>
     dark ? "#222" : "#d6e9f8"}; //moondust silver
-  @media (max-width: 1023px) and (orientation: portrait) {
-    background-color: transparent;
-  }
+  // @media (max-width: 1023px) and (orientation: portrait) {
+  //   background-color: transparent;
+  // }
 `;
 
 const Container = styled.div`

@@ -1,6 +1,6 @@
 import format from "date-fns/format";
 import React, { useEffect, useState } from "react";
-import { DateTime, Time, Today } from "./styles";
+import { DateTime, Span, Time, Today } from "./styles";
 
 const DateAndTime = () => {
   const [clock, setClock] = useState(new Date().toJSON());
@@ -15,8 +15,9 @@ const DateAndTime = () => {
 
   return (
     <DateTime>
-      <Today>{format(new Date(Date.now()), "EEEE, MMM do")} </Today>-
-      <Time> {format(Date.now(), "HH:m")}</Time>
+      <Today>{format(new Date(Date.now()), "EEEE, MMM do")} </Today>
+      <Span>-</Span>
+      <Time> {format(Date.now(), "HH:mm")}</Time>
     </DateTime>
   );
 };

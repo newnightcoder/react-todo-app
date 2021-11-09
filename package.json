@@ -14,14 +14,15 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "ansi-regex": "^6.0.1",
     "browserslist": "^4.17.1",
     "date-fns": "^2.23.0",
     "fsevents": "^2.3.2",
+    "hamburger-react": "^2.4.1",
     "node-sass": "^6.0.1",
     "react": "^16.13.1",
     "react-bootstrap-icons": "^1.0.3-alpha5",
     "react-dom": "^16.13.1",
-    "react-scripts": "^4.0.3",
     "react-spring": "^8.0.27",
     "styled-components": "^5.1.1"
   },
@@ -52,6 +53,7 @@
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
-    "babel-plugin-styled-components": "^1.11.1"
+    "babel-plugin-styled-components": "^1.11.1",
+    "react-scripts": "^4.0.3"
   }
 }

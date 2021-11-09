@@ -27,7 +27,7 @@ const Footer = ({ todos, toggleFormDrawer, dark }) => {
         </Counter>
         <span>
           {todos.length !== 0
-            ? Math.round((todosDone / todos.length) * 1000) / 10
+            ? Math.floor((todosDone / todos.length) * 100)
             : 0}
           % completed
         </span>

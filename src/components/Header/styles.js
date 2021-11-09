@@ -6,7 +6,7 @@ const AppHeader = styled.div`
   height: 25vh;
   max-height: 350px;
   width: 400px;
-  padding-left: 1.75vw;
+  padding-left: 25px;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -15,7 +15,7 @@ const AppHeader = styled.div`
   white-space: nowrap;
   overflow: hidden !important;
   z-index: 50;
-  background: linear-gradient(rgba(50, 50, 50, 0.7), rgba(50, 50, 50, 0.7)),
+  background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),
     url(${img}) no-repeat center/cover;
   &::after {
     content: "";
@@ -70,8 +70,24 @@ const Title = styled.h1`
 const Subtitle = styled.p`
   color: white;
   font-size: 1rem;
-  font-weight: 400;
+  font-weight: 500;
   padding: 0.75vh 5px;
+`;
+
+const HamburgerContainer = styled.div`
+  width: 50px;
+  height: 40px;
+  padding: 0;
+  display: flex;
+  background-color: transparent;
+  outline: none;
+  border-width: 0;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 2vh;
+  right: 1.5vh;
+  z-index: 100;
 `;
 
 const BottomRowContainer = styled.div`
@@ -142,6 +158,7 @@ const ToggleDiv = styled.div`
 
 export {
   AppHeader,
+  HamburgerContainer,
   BottomRowContainer,
   Label,
   Sun,

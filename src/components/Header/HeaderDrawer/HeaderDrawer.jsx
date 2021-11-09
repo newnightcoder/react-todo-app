@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { XCircle } from "react-bootstrap-icons";
-import { BtnGroup, BtnToggle, CloseDrawerBtn, DrawerWrapper } from "./styles";
+import { BtnGroup, BtnToggle, DrawerWrapper } from "./styles";
 
 const types = ["all", "done", "not done", "delete all"];
 
@@ -15,15 +14,6 @@ const HeaderDrawer = ({
 
   return (
     <DrawerWrapper>
-      <CloseDrawerBtn
-        onClick={drawerToggle}
-        style={{
-          opacity: openDrawer ? "1" : "0",
-          transitionDelay: openDrawer ? "350ms" : "0ms",
-        }}
-      >
-        <XCircle />
-      </CloseDrawerBtn>
       <BtnGroup
         style={{
           transform: openDrawer ? "translateX(0)" : "translate(100%)",

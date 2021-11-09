@@ -1,15 +1,16 @@
 import styled from "styled-components";
 
 const DateTime = styled.div`
-  width: 50%;
-  height: 3vh;
+  width: max-content;
+  height: 20px;
+  margin-left: 22px;
   font-size: 0.75rem;
-  font-weight: 500;
+  font-weight: 600;
   color: rgba(255, 255, 255, 0.75);
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid yellow;
+  // border: 1px solid yellow;
   animation: appear 1000ms forwards;
   @keyframes appear {
     0% {
@@ -22,21 +23,22 @@ const DateTime = styled.div`
 `;
 
 const Today = styled.div`
-  width: 70%;
+  width: max-content;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  @media (max-width: 800px) and (orientation: portrait) {
-    padding-left: 5.5vw;
-  }
+  justify-content: center;
 `;
 
 const Time = styled.div`
-  width: 30%;
+  width: max-content;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  padding-left: 0.5vw;
+  justify-content: center;
 `;
 
-export { DateTime, Today, Time };
+const Span = styled.span`
+  width: max-content;
+  padding: 0 3px;
+`;
+
+export { DateTime, Today, Time, Span };

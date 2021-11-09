@@ -9,26 +9,6 @@ const DrawerWrapper = styled.div`
   }
 `;
 
-const CloseDrawerBtn = styled.button`
-  border-radius: 50%;
-  outline: none;
-  border: none;
-  background-color: transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  color: white;
-  font-size: 1.25rem;
-  position: absolute;
-  top: 1vh;
-  right: 1vh;
-  z-index: 100;
-  &:hover {
-    cursor: pointer;
-  }
-`;
-
 const BtnGroup = styled.div`
   width: 35%;
   min-width: 150px;
@@ -43,7 +23,7 @@ const BtnGroup = styled.div`
   transform: translateX(100%);
   transition: transform 350ms ease-out;
   background: rgba(0, 0, 0, 0.25);
-  border: 1px solid red;
+  border-left: 1px solid rgba(10, 10, 10, 0.25);
   @media (min-width: 768px) and (orientation: portrait) {
     width: 20vw;
   }
@@ -111,4 +91,4 @@ const BtnToggle = styled(Btn)`
     `}
 `;
 
-export { DrawerWrapper, CloseDrawerBtn, BtnGroup, Btn, BtnToggle };
+export { DrawerWrapper, BtnGroup, Btn, BtnToggle };

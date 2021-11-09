@@ -1,8 +1,14 @@
+import Hamburger from "hamburger-react";
 import React, { useState } from "react";
 import BottomRow from "./BottomRow";
-import Hamburger from "./Hamburger/Hamburger";
 import HeaderDrawer from "./HeaderDrawer/HeaderDrawer";
-import { AppHeader, Subtitle, Title, TitleWrapper } from "./styles";
+import {
+  AppHeader,
+  HamburgerContainer,
+  Subtitle,
+  Title,
+  TitleWrapper,
+} from "./styles";
 
 // const HeaderImg = styled.div`
 //   background: url(${img}) no-repeat center/cover;
@@ -31,7 +37,14 @@ const Header = ({
         <Title>Things</Title>
         <Subtitle>Let's get things done!</Subtitle>
       </TitleWrapper>
-      <Hamburger openDrawer={openDrawer} drawerToggle={drawerToggle} />
+      <HamburgerContainer>
+        <Hamburger
+          direction="right"
+          toggled={openDrawer}
+          toggle={drawerToggle}
+          color="#fefefe"
+        />
+      </HamburgerContainer>
       <HeaderDrawer
         drawerToggle={drawerToggle}
         openDrawer={openDrawer}
