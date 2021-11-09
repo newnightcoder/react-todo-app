@@ -10,8 +10,8 @@ const ListContainer = styled.section`
   margin: 0;
   overflow-y: scroll;
   overflow-x: hidden;
+  transition: background-color 500ms;
   background-color: ${({ dark }) => (dark ? "dimgray" : "#fefefe")};
-  transition: all 500ms;
   position: relative;
   scrollbar-width: thick;
   &::-webkit-scrollbar {
@@ -23,7 +23,7 @@ const ListContainer = styled.section`
   &::-webkit-scrollbar-thumb {
     width: 0.5vw;
     transition: background-color 500ms;
-    ${({ dark }) => (dark ? "#f8bbd0" : "deepskyblue")};
+    background-color: ${({ dark }) => (dark ? "yellow" : "deepskyblue")};
   }
   @media (max-width: 1023px) {
     width: 100vw;
@@ -38,9 +38,10 @@ const Header = styled.div`
   justify-content: space-between;
   font-size: 0.85rem;
   font-weight: 500;
-  transition: all 500ms;
-  color: ${({ dark }) => (dark ? "#fefefe" : "dimgray")};
   text-transform: uppercase;
+  transition-property: color, background-color;
+  transition-duration: 500ms;
+  color: ${({ dark }) => (dark ? "#fefefe" : "dimgray")};
   background-color: ${({ dark }) => (dark ? "#333" : "#fefefe")};
   padding: 5px 20px;
   position: sticky;
@@ -56,6 +57,10 @@ const FilterBtnWrapper = styled.div`
   min-height: 5vh;
   min-width: 100px;
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid red;
 `;
 
 const FilterBtn = styled.button`
@@ -65,13 +70,14 @@ const FilterBtn = styled.button`
   border-radius: 3px;
   cursor: pointer;
   text-transform: uppercase;
-  position: absolute;
-  top: 0;
-  left: 0;
+  z-index: 50;
+  position: relative;
+  // top: 0;
+  // left: 0;
   background-color: #46529d;
   color: white;
   font-size: 0.75rem;
-  transform: translate(40%, 25%);
+  // transform: translate(40%, 25%);
   // display: none;
 `;
 
@@ -82,15 +88,19 @@ const FilterCategoryBtn = styled.button`
   border-radius: 3px;
   background-color: aqua;
   color: gray;
+  // z-index: 40;
   position: absolute;
   top: 0;
   left: 0;
   transform-origin: center;
   transition: transform 500ms;
+  display: ${({ isFilter }) => isFilter && "block"};
 `;
+
 const FilterDateBtn = styled(FilterCategoryBtn)`
   background-color: aqua;
   color: gray;
+  // z-index: 30;
   position: absolute;
   top: 0;
   left: 0;
@@ -121,7 +131,6 @@ const TodoList = styled.ul`
   padding: 2vh 0 150px 0;
   margin-block-start: 0;
   margin-block-end: 0;
-  transition: background-color 500ms;
 `;
 
 const StyledTodo = styled(animated.li)`
@@ -132,9 +141,10 @@ const StyledTodo = styled(animated.li)`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  transition: all 500ms;
-  color: ${({ dark }) => (dark ? "#fefefe" : "dimgray")};
+  transition-property: color, background-color;
+  transition-duration: 500ms;
   font-size: 1rem;
+  color: ${({ dark }) => (dark ? "#fefefe" : "dimgray")};
   background-color: ${({ dark }) => (dark ? "dimgray" : "#fefefe")};
   border-bottom: 1px solid rgba(155, 155, 155, 0.2);
   padding: 0.5em 0 0.5em 0;

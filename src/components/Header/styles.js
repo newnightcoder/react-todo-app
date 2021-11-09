@@ -15,7 +15,6 @@ const AppHeader = styled.div`
   white-space: nowrap;
   overflow: hidden !important;
   z-index: 50;
-  background: deepskyblue;
   background: linear-gradient(rgba(50, 50, 50, 0.7), rgba(50, 50, 50, 0.7)),
     url(${img}) no-repeat center/cover;
   &::after {
@@ -32,32 +31,6 @@ const AppHeader = styled.div`
     &::after {
       width: 100vw;
     }
-  }
-  // @media (max-width: 1023px) and (orientation: landscape) {
-  //   width: 100%;
-  //   padding: 0 0 0 1vw;
-  //   &::after {
-  //     display: none;
-  //   }
-  // }
-`;
-
-const DarkModeBtn = styled.button`
-  height: 20px;
-  width: 20px;
-  background-color: transparent;
-  border-radius: 50%;
-  outline: none;
-  border: none;
-  position: absolute;
-  bottom: 2vh;
-  right: 25px;
-  z-index: 1000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  &:hover {
-    cursor: pointer;
   }
 `;
 
@@ -87,11 +60,13 @@ const TitleWrapper = styled.div`
     padding-top: 0;
   }
 `;
+
 const Title = styled.h1`
   color: white;
   font-size: 3rem;
   font-weight: 400;
 `;
+
 const Subtitle = styled.p`
   color: white;
   font-size: 1rem;
@@ -99,4 +74,82 @@ const Subtitle = styled.p`
   padding: 0.75vh 5px;
 `;
 
-export { AppHeader, DarkModeBtn, Title, Subtitle, TitleWrapper };
+const BottomRowContainer = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: absolute;
+  left: 0;
+  bottom: 2vh;
+  padding: 0 2.5vw;
+`;
+
+const ToggleContainer = styled.div`
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+`;
+
+const Input = styled.input`
+  display: none;
+`;
+
+const Label = styled.label`
+  height: 22px;
+  width: 52.5px;
+  position: relative;
+  display: block;
+  border-radius: 20px;
+  background-color: #fefefe;
+  border: 1px solid deepskyblue;
+`;
+
+const Sun = styled.div`
+  height: 20px;
+  width: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  position: absolute;
+  left: 1px;
+`;
+
+const Moon = styled.div`
+  height: 20px;
+  width: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  position: absolute;
+  right: 0;
+  bottom: 0.5px;
+`;
+
+const ToggleDiv = styled.div`
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  border: 1px solid deepskyblue;
+  background-color: deepskyblue;
+  transition: transform 300ms;
+  transform: ${({ isToggled }) =>
+    isToggled ? "translateX(31px)" : "translateX(0px)"};
+`;
+
+export {
+  AppHeader,
+  BottomRowContainer,
+  Label,
+  Sun,
+  Moon,
+  ToggleContainer,
+  ToggleDiv,
+  Input,
+  Title,
+  Subtitle,
+  TitleWrapper,
+};

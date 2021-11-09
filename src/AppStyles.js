@@ -10,10 +10,9 @@ const AppWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #d6e9f8; //moondust silver
   transition: background-color 500ms;
-  ${({ dark }) => dark && `background-color:#111`};
-
+  background-color: ${({ dark }) =>
+    dark ? "#222" : "#d6e9f8"}; //moondust silver
   @media (max-width: 1023px) and (orientation: portrait) {
     background-color: transparent;
   }
@@ -29,8 +28,6 @@ const Container = styled.div`
   position: relative;
   margin: 0;
   overflow: hidden;
-  // transform: translateX(-100%);
-
   @media (max-width: 996px) {
     position: fixed;
     bottom: 0;
@@ -38,12 +35,6 @@ const Container = styled.div`
     height: 100%;
     max-height: none;
   }
-  // @media (max-width: 1023px) and (orientation: landscape) {
-  //   position: fixed;
-  //   bottom: 0;
-  //   width: 100%;
-  //   height: 100%;
-  // }
 `;
 
 export { AppWrapper, Container };

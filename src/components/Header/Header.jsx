@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import DateAndTime from "./DateTime/DateAndTime";
+import BottomRow from "./BottomRow";
 import Hamburger from "./Hamburger/Hamburger";
 import HeaderDrawer from "./HeaderDrawer/HeaderDrawer";
 import { AppHeader, Subtitle, Title, TitleWrapper } from "./styles";
@@ -16,7 +16,8 @@ const Header = ({
   displayFilteredTodos,
   clear,
   dark,
-  darkToggle,
+  toggleDarkMode,
+  isToggled,
 }) => {
   const [openDrawer, setOpen] = useState(false);
 
@@ -30,9 +31,6 @@ const Header = ({
         <Title>Things</Title>
         <Subtitle>Let's get things done!</Subtitle>
       </TitleWrapper>
-      {/* <DarkModeBtn onClick={darkToggle}>
-        <Brightness4Icon style={{ color: "white", fontSize: "large" }} />
-      </DarkModeBtn> */}
       <Hamburger openDrawer={openDrawer} drawerToggle={drawerToggle} />
       <HeaderDrawer
         drawerToggle={drawerToggle}
@@ -40,8 +38,8 @@ const Header = ({
         displayFilteredTodos={displayFilteredTodos}
         clear={clear}
         deleteMsg={deleteMsg}
-      />{" "}
-      <DateAndTime />
+      />
+      <BottomRow toggleDarkMode={toggleDarkMode} isToggled={isToggled} />
     </AppHeader>
   );
 };

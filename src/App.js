@@ -8,7 +8,8 @@ const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(null);
   const [todoEdit, setTodoEdit] = useState(null);
   const [todosToDisplay, setTodosToDisplay] = useState("");
-  const [dark, setDarkMode] = useState(true);
+  const [dark, setDarkMode] = useState(false);
+  const [isToggled, setIsToggled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
@@ -22,7 +23,10 @@ const App = () => {
 
   const toggleDarkMode = () => {
     setDarkMode((dark) => !dark);
+    setIsToggled((isToggled) => !isToggled);
   };
+
+  const toggleBtn = () => {};
 
   const toggleFormDrawer = (err) => {
     if (err !== "") return;
@@ -43,6 +47,7 @@ const App = () => {
       setIsTodo(id);
     }
   };
+
   const closeTodoMenu = (id) => {
     const todosCopy = [...todos];
     const item = todosCopy.find((todo) => todo.id === id);
@@ -112,6 +117,8 @@ const App = () => {
           deleteMsg={handleDeleteMsg}
           darkToggle={toggleDarkMode}
           dark={dark}
+          toggleDarkMode={toggleDarkMode}
+          isToggled={isToggled}
         />
         <List
           dark={dark}

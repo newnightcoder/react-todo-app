@@ -9,7 +9,7 @@ const DrawerContainer = styled.div`
   grid-template-rows: 5vh 1fr 5vh;
   grid-gap: 20px;
   transition: background-color 500ms;
-  background-color: ${({ dark }) => (dark ? "#333" : "#46529d")};
+  background-color: ${({ dark }) => (dark ? "#111" : "#46529d")};
   color: white;
   position: absolute;
   top: 0;
@@ -190,7 +190,7 @@ const menuProps = {
     getContentAnchorEl: null,
     MenuListProps: {
       style: {
-        backgroundColor: ({ dark }) => (dark ? "red" : "#fefefe"),
+        backgroundColor: "#fefefe",
       },
     },
   },

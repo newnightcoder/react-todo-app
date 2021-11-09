@@ -15,10 +15,8 @@ const DateAndTime = () => {
 
   return (
     <DateTime>
-      <Today>
-        {format(new Date(Date.now()), "EEEE, MMM do")} -
-        <Time> {format(Date.now(), "HH:m")}</Time>
-      </Today>
+      <Today>{format(new Date(Date.now()), "EEEE, MMM do")} </Today>-
+      <Time> {format(Date.now(), "HH:m")}</Time>
     </DateTime>
   );
 };

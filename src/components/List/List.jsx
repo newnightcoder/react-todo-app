@@ -34,7 +34,7 @@ const List = ({
   isMenuOpen,
 }) => {
   const [isFilter, setIsFilter] = useState(false);
-  console.log("dark", dark);
+
   const animateFilter = () => {
     setIsFilter(true);
   };
@@ -94,7 +94,7 @@ const List = ({
               transform: isFilter
                 ? "scaleX(1) translateX(-100%)"
                 : "scaleX(0) translate(15%)",
-              zIndex: isFilter ? 10 : -1,
+              zIndex: isFilter ? 40 : -1,
             }}
           >
             by category

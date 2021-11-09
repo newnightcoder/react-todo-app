@@ -216,7 +216,6 @@ const FormDrawer = ({
         <IconContainer>{imgHandler(icon)}</IconContainer>
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <form
-            dark={dark}
             className={classes.group}
             noValidate
             autoComplete="off"
