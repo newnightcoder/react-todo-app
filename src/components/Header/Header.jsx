@@ -1,4 +1,4 @@
-import Hamburger from "hamburger-react";
+import { Turn as Hamburger } from "hamburger-react";
 import React, { useState } from "react";
 import BottomRow from "./BottomRow";
 import HeaderDrawer from "./HeaderDrawer/HeaderDrawer";
@@ -42,6 +42,8 @@ const Header = ({
           direction="right"
           toggled={openDrawer}
           toggle={drawerToggle}
+          rounded
+          hideOutline={true}
           color="#fefefe"
         />
       </HamburgerContainer>

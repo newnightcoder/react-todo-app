@@ -85,28 +85,53 @@ const SubmitBtn = styled.button`
 const ModalContainer = styled.div`
   height: 100%;
   width: 100%;
-  background-color: rgba(70, 82, 157, 0.7);
+  background-color: rgba(50, 50, 50, 0.75);
   z-index: 200;
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 0;
+  left: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  transform-origin: center;
+  transition-property: opacity, transform;
+  transition-duration: 125ms;
 `;
 
 const Modal = styled.div`
   height: 50%;
   width: 75%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   background-color: #efefef;
-  border: 1px solid rgba(100, 100, 100, 0.5);
-  border-radius: 5px;
+  border-radius: 3px;
   color: #333;
   white-space: pre;
+`;
+
+const SpanError = styled.span`
+  display: inline-block;
+  text-align: center;
+  line-height: 1.33rem;
+  font-weight: 600;
+`;
+
+const CloseModalBtn = styled.button`
+  outline: none;
+  width: 30%;
+  border: none;
+  padding: 7px;
+  background-color: deepskyblue;
+  color: white;
+  font-weight: 600;
+  border-radius: 3px;
+  transform: translateY(100%);
+  &:hover {
+    cursor: pointer;
+    color: black;
+  }
 `;
 
 const useStyles = makeStyles({
@@ -215,6 +240,8 @@ export {
   SubmitBtn,
   ModalContainer,
   Modal,
+  SpanError,
+  CloseModalBtn,
   calendarTheme,
   menuProps,
   useStyles,

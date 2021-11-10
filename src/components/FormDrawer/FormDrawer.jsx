@@ -13,6 +13,7 @@ import { imgHandler } from "./imgHandler";
 import {
   Btn,
   calendarTheme,
+  CloseModalBtn,
   DrawerContainer,
   FormWrapper,
   Header,
@@ -20,6 +21,7 @@ import {
   menuProps,
   Modal,
   ModalContainer,
+  SpanError,
   SubmitBtn,
   Title,
   useStyles,
@@ -48,7 +50,13 @@ const FormDrawer = ({
   const [error, setError] = useState("");
   const [isPickerOpen, setIsPickerOpen] = useState(false);
 
+  // useEffect(()=>{
+
+  // },[error])
+
   useEffect(() => {
+    console.log(error);
+
     if (todoEdit !== null) {
       setIcon(todoEdit.icon);
       setCategory(todoEdit.category);
@@ -66,7 +74,7 @@ const FormDrawer = ({
         setId(undefined);
       }, 1000);
     }
-  }, [todoEdit]);
+  }, [todoEdit, error]);
 
   const selectOptions = [
     { value: "Personal" },
@@ -125,6 +133,7 @@ const FormDrawer = ({
       setIsSubmitBtn(false);
     }, 300);
   };
+
   const resetForm = () => {
     setNewTodo("");
     setId(undefined);
@@ -141,8 +150,7 @@ const FormDrawer = ({
     if (todoEdit !== null) return;
     if (newTodo.trim().length === 0) {
       const errorMsg = "Your thing is empty! \n Please type a thing to do.";
-      setError(errorMsg);
-      return;
+      return setError(errorMsg);
     }
     const year = selectedDate.split("-").map((number) => +number)[0];
     const month = selectedDate.split("-").map((number) => +number)[1] - 1;
@@ -151,8 +159,7 @@ const FormDrawer = ({
     if (isPast(new Date(year, month, day))) {
       const errorMsg =
         "The date you selected is in the past!\n We can't go back in time unfortunately!\nPlease choose a date starting from today.";
-      setError(errorMsg);
-      return;
+      return setError(errorMsg);
     }
     const todo = {
       icon,
@@ -164,7 +171,7 @@ const FormDrawer = ({
       done: false,
     };
     addItem(todo);
-    handleCloseBtn();
+    // handleCloseBtn();
     setTimeout(() => {
       resetForm();
     }, 400);
@@ -173,6 +180,11 @@ const FormDrawer = ({
   const handleEditTodo = (e) => {
     e.preventDefault();
     if (id === undefined) return;
+    if (newTodo.trim().length === 0) {
+      const errorMsg = "Your thing is empty! \n Please type a thing to do.";
+      setError(errorMsg);
+      return;
+    }
     const todo = {
       icon,
       category,
@@ -182,9 +194,14 @@ const FormDrawer = ({
       id,
       done: false,
     };
-    console.log("edited todo!", todo);
     editItem(id, todo);
     resetForm();
+  };
+
+  const preventDrawerCloseWhenError = () => {
+    console.log("error", error);
+    if (error.length !== 0) return;
+    toggleFormDrawer();
   };
 
   const classes = useStyles();
@@ -210,7 +227,9 @@ const FormDrawer = ({
         >
           <ChevronLeft color="#00bbff" size={24} />
         </Btn>
-        <Title>{id === undefined ? "Add new thing" : "Edit your thing"}</Title>
+        <Title>
+          {id === undefined ? "Add a new thing" : "Edit your thing"}
+        </Title>
       </Header>
       <FormWrapper dark={dark}>
         <IconContainer>{imgHandler(icon)}</IconContainer>
@@ -277,11 +296,7 @@ const FormDrawer = ({
             <SubmitBtn
               dark={dark}
               type="submit"
-              onClick={() =>
-                setTimeout(() => {
-                  toggleFormDrawer(error);
-                }, 250)
-              }
+              onClick={() => console.log("error onclick", error)}
             >
               {id !== undefined ? "edit" : "add your thing"}
             </SubmitBtn>
@@ -290,11 +305,15 @@ const FormDrawer = ({
       </FormWrapper>
       <ModalContainer
         style={{
-          opacity: error !== "" ? 1 : 0,
-          zIndex: error !== "" ? 200 : -10,
+          opacity: error.length !== 0 ? 1 : 0,
+          transform: error.length !== 0 ? "scale(1)" : "scale(0)",
+          zIndex: error.length !== 0 ? 200 : -10,
         }}
       >
-        <Modal>{error}</Modal>
+        <Modal style={{ opacity: error ? 1 : 0 }}>
+          <SpanError>{error}</SpanError>
+          <CloseModalBtn onClick={() => setError("")}>OK</CloseModalBtn>
+        </Modal>
       </ModalContainer>
     </DrawerContainer>
   );

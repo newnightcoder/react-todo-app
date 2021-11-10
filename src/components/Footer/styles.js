@@ -15,11 +15,11 @@ const AppFooter = styled.footer`
 `;
 
 const CounterWrapper = styled.div`
-  width: 75%;
+  width: 80%;
   height: 50%;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   font-size: 0.85rem;
   font-weight: 500;
   white-space: nowrap;
@@ -28,13 +28,26 @@ const CounterWrapper = styled.div`
 
 const Counter = styled.div`
   height: 20px;
-  width: 75%;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border: 1px solid lightgray;
-  margin-right: 5px;
   border-radius: 5px;
   background-image: linear-gradient(to right, deepskyblue, blueviolet);
   overflow: hidden;
   position: relative;
+`;
+
+const CounterText = styled.div`
+  width: 50%;
+  padding-left: 3px;
+`;
+
+const Number = styled.span`
+  display: inline-block;
+  width: 25px;
+  text-align: right;
 `;
 
 const ProgressBar = styled.div`
@@ -47,20 +60,6 @@ const ProgressBar = styled.div`
   top: 0;
   right: 0;
   z-index: 10;
-`;
-
-const CounterBadge = styled.div`
-  height: 15px;
-  width: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background-color: grey;
-  color: white;
-  font-size: 0.65rem;
-  font-weight: 500;
-  margin-left: 7.5px;
 `;
 
 const PlusBtn = styled.button`
@@ -97,8 +96,9 @@ export {
   AppFooter,
   Counter,
   CounterWrapper,
+  CounterText,
+  Number,
   ProgressBar,
-  CounterBadge,
   PlusBtn,
   Mention,
 };

@@ -136,10 +136,7 @@ const List = ({
               backgroundColor: item.done ? "" : null,
             }}
           >
-            <IconCatContainer
-              style={{ borderWidth: item.done ? "1px" : "2px" }}
-              dark={dark}
-            >
+            <IconCatContainer dark={dark}>
               {imgHandler(item.icon, item.done)}
             </IconCatContainer>
             <TaskContainer dark={dark}>{item.task}</TaskContainer>

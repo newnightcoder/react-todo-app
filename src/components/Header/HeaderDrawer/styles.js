@@ -1,37 +1,62 @@
 import styled, { css } from "styled-components";
 
+const flexColumn = `display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center`;
+
 const DrawerWrapper = styled.div`
-  width: 35%;
-  min-width: 150px;
+  width: 150px;
   height: 100%;
   position: relative;
-  @media (max-width: 1023px) and (orientation: landscape) {
+  @media (min-width: 768px) {
+    width: 220px;
+  }
+  @media (min-width: 1024px) {
+    width: 150px;
+  }
+  @media (max-width: 350px) {
+    width: 120px;
+  }
+`;
+
+const Drawer = styled.div`
+  ${flexColumn};
+  width: 150px;
+  height: 100%;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  transform: translateX(100%);
+  transition: transform 350ms ease-out;
+  @media (min-width: 768px) {
+    width: 220px;
+  }
+  @media (min-width: 1024px) {
+    width: 150px;
+  }
+  @media (max-width: 350px) {
+    width: 120px;
   }
 `;
 
 const BtnGroup = styled.div`
-  width: 35%;
-  min-width: 150px;
-  height: 30vh;
+  width: 150px;
+  height: 60%;
   padding: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  position: absolute;
-  top: 0;
-  right: 0;
-  transform: translateX(100%);
-  transition: transform 350ms ease-out;
-  background: rgba(0, 0, 0, 0.25);
+  justify-content: space-evenly;
+  align-items: center;
   border-left: 1px solid rgba(10, 10, 10, 0.25);
-  @media (min-width: 768px) and (orientation: portrait) {
-    width: 20vw;
+  @media (min-width: 768px) {
+    width: 220px;
   }
-  @media (max-width: 700px) and (orientation: portrait) {
+  @media (min-width: 1024px) {
+    width: 150px;
+  }
+  @media (max-width: 350px) {
     width: 120px;
-  }
-  @media (max-width: 350px) and (orientation: portrait) {
-    width: 95px;
   }
 `;
 
@@ -49,21 +74,20 @@ const theme = {
 };
 
 const Btn = styled.button`
-  width: 100%;
-  height: 3vh;
+  width: 90%;
+  height: 25px;
   background-color: ${(props) => theme[props.theme].default};
   font-size: 0.75rem;
   font-style: italic;
   font-weight: bold;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.8);
   display: flex;
   justify-content: center;
   align-items: center;
   outline: none;
   border: 2.5px solid transparent;
-  //   transition: all 200ms ease-in;
-  clip-path: polygon(10% 0, 100% 0%, 100% 100%, 0% 100%);
+  border-radius: 10px;
   &:hover {
     cursor: pointer;
     background-color: ${(props) => theme[props.theme].active};
@@ -91,4 +115,4 @@ const BtnToggle = styled(Btn)`
     `}
 `;
 
-export { DrawerWrapper, BtnGroup, Btn, BtnToggle };
+export { DrawerWrapper, Drawer, BtnGroup, Btn, BtnToggle };

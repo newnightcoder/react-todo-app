@@ -5,14 +5,14 @@ const flexCenter =
   "display: flex; align-items: center; justify-content: center;";
 
 const ListContainer = styled.section`
-  width: 400px;
+  width: 100vw;
   grid-row: 2;
   margin: 0;
-  overflow-y: scroll;
   overflow-x: hidden;
   transition: background-color 500ms;
   background-color: ${({ dark }) => (dark ? "dimgray" : "#fefefe")};
   position: relative;
+  overflow-y: scroll;
   scrollbar-width: thick;
   &::-webkit-scrollbar {
     width: 0.15vw;
@@ -25,13 +25,13 @@ const ListContainer = styled.section`
     transition: background-color 500ms;
     background-color: ${({ dark }) => (dark ? "yellow" : "deepskyblue")};
   }
-  @media (max-width: 1023px) {
-    width: 100vw;
+  @media (min-width: 1024px) {
+    width: 400px;
   }
 `;
 
 const Header = styled.div`
-  height: 6vh;
+  height: 55px;
   width: inherit;
   display: flex;
   align-items: center;
@@ -48,7 +48,7 @@ const Header = styled.div`
   top: 0;
   z-index: 100;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  @media screen and (min-width: 996px) {
+  @media screen and (min-width: 1024px) {
     width: 400px;
   }
 `;
@@ -60,7 +60,6 @@ const FilterBtnWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid red;
 `;
 
 const FilterBtn = styled.button`
@@ -72,13 +71,9 @@ const FilterBtn = styled.button`
   text-transform: uppercase;
   z-index: 50;
   position: relative;
-  // top: 0;
-  // left: 0;
   background-color: #46529d;
   color: white;
   font-size: 0.75rem;
-  // transform: translate(40%, 25%);
-  // display: none;
 `;
 
 const FilterCategoryBtn = styled.button`
@@ -159,16 +154,16 @@ const IconCatContainer = styled.div`
   width: 55px;
   border-radius: 50%;
   font-size: 1.25rem;
-  margin-right: 15px;
+  // margin-right: 15px;
   transition: border 500ms;
   border: 2px solid ${({ dark }) => (dark ? "#fefefe" : "lightgray")};
 `;
 
 const TaskContainer = styled.div`
-  width: 15ch;
+  width: 50vw;
   height: 95%;
-  margin-right: 10px;
   font-size: 0.9rem;
+  padding: 0 0.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -176,10 +171,14 @@ const TaskContainer = styled.div`
   color: ${({ dark }) => (dark ? "#fefefe" : "rgb(50, 50, 50)")};
   white-space: wrap;
   overflow-x: hidden;
-  @media screen and (min-width: 768px) {
-    width: 30ch;
+  @media screen and (min-width: 500px) {
+    width: 68vw;
+  }
+  @media screen and (min-width: 1024px) {
+    width: 175px;
   }
 `;
+
 const TimeContainer = styled.div`
   width: 12ch;
   height: 30%;

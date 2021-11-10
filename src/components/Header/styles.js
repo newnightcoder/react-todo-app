@@ -4,8 +4,8 @@ import img from "../../img/giphy.gif";
 const AppHeader = styled.div`
   grid-row: 1;
   height: 25vh;
-  max-height: 350px;
-  width: 400px;
+  min-height: 200px;
+  width: 100%;
   padding-left: 25px;
   display: flex;
   flex-direction: row;
@@ -19,17 +19,17 @@ const AppHeader = styled.div`
     url(${img}) no-repeat center/cover;
   &::after {
     content: "";
-    width: 100%;
+    width: 100vw;
     height: 4px;
     background: linear-gradient(to right, blueviolet, deepskyblue 60%);
     position: absolute;
     bottom: 0;
     left: 0;
   }
-  @media (max-width: 996px) {
-    width: 100%;
+  @media (min-width: 1024px) {
+    width: 400px;
     &::after {
-      width: 100vw;
+      width: 100%;
     }
   }
 `;
@@ -37,10 +37,10 @@ const AppHeader = styled.div`
 const TitleWrapper = styled.div`
   height: 15vh;
   width: 50vw;
-  padding-top: 1vh;
+  padding-top: 7.5px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-start;
   animation: intro 1000ms forwards;
   z-index: 100;
@@ -51,13 +51,6 @@ const TitleWrapper = styled.div`
     100% {
       opacity: 1;
     }
-  }
-  @media (max-width: 1023px) and (orientation: portrait) {
-    padding-left: 5vw;
-  }
-  @media (max-width: 1023px) and (orientation: landscape) {
-    justify-content: flex-start;
-    padding-top: 0;
   }
 `;
 
@@ -85,8 +78,8 @@ const HamburgerContainer = styled.div`
   align-items: center;
   justify-content: center;
   position: absolute;
-  top: 2vh;
-  right: 1.5vh;
+  top: 17px;
+  right: 10px;
   z-index: 100;
 `;
 
@@ -97,8 +90,8 @@ const BottomRowContainer = styled.div`
   justify-content: space-between;
   position: absolute;
   left: 0;
-  bottom: 2vh;
-  padding: 0 2.5vw;
+  bottom: 15px;
+  padding: 0 25px;
 `;
 
 const ToggleContainer = styled.div`
@@ -120,6 +113,9 @@ const Label = styled.label`
   border-radius: 20px;
   background-color: #fefefe;
   border: 1px solid deepskyblue;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const Sun = styled.div`
@@ -149,7 +145,7 @@ const ToggleDiv = styled.div`
   height: 20px;
   width: 20px;
   border-radius: 50%;
-  border: 1px solid deepskyblue;
+  border: 1px solid lightgray;
   background-color: deepskyblue;
   transition: transform 300ms;
   transform: ${({ isToggled }) =>

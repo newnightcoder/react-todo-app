@@ -3,7 +3,9 @@ import { Plus } from "react-bootstrap-icons";
 import {
   AppFooter,
   Counter,
+  CounterText,
   CounterWrapper,
+  Number,
   PlusBtn,
   ProgressBar,
 } from "./styles";
@@ -25,12 +27,14 @@ const Footer = ({ todos, toggleFormDrawer, dark }) => {
             }}
           />
         </Counter>
-        <span>
-          {todos.length !== 0
-            ? Math.floor((todosDone / todos.length) * 100)
-            : 0}
+        <CounterText>
+          <Number>
+            {todos.length !== 0
+              ? Math.floor((todosDone / todos.length) * 100)
+              : 0}
+          </Number>
           % completed
-        </span>
+        </CounterText>
       </CounterWrapper>
       <PlusBtn dark={dark} onClick={() => toggleFormDrawer(error)}>
         <Plus style={{ pointerEvents: "none" }} />

@@ -3,14 +3,13 @@ import styled from "styled-components";
 const DateTime = styled.div`
   width: max-content;
   height: 20px;
-  margin-left: 22px;
+  margin-left: 5px;
   font-size: 0.75rem;
   font-weight: 600;
   color: rgba(255, 255, 255, 0.75);
   display: flex;
   justify-content: center;
-  align-items: center;
-  // border: 1px solid yellow;
+  align-items: flex-end;
   animation: appear 1000ms forwards;
   @keyframes appear {
     0% {

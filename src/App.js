@@ -26,10 +26,7 @@ const App = () => {
     setIsToggled((isToggled) => !isToggled);
   };
 
-  const toggleBtn = () => {};
-
-  const toggleFormDrawer = (err) => {
-    if (err !== "") return;
+  const toggleFormDrawer = () => {
     setIsOpen((isOpen) => !isOpen);
     setTodoEdit(null);
   };
