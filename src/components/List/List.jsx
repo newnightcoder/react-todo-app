@@ -42,6 +42,7 @@ const List = ({
   isMenuOpen,
 }) => {
   const [isFilter, setIsFilter] = useState(false);
+  const [active, setActive] = useState("");
 
   const animateFilter = () => {
     setIsFilter((isFilter) => !isFilter);
@@ -141,7 +142,11 @@ const List = ({
           <FilterBtnsContainer isFilter={isFilter} dark={dark}>
             <FilterCategoryBtn
               dark={dark}
-              onClick={() => displayFilteredTodos("by category")}
+              active={active === "category"}
+              onClick={() => {
+                displayFilteredTodos("by category");
+                setActive("category");
+              }}
               style={{
                 transform: isFilter ? "scaleX(1)" : "scaleX(0)",
                 zIndex: isFilter ? 40 : -1,
@@ -151,7 +156,11 @@ const List = ({
             </FilterCategoryBtn>
             <FilterDateBtn
               dark={dark}
-              onClick={() => displayFilteredTodos("by date")}
+              active={active === "by date"}
+              onClick={() => {
+                displayFilteredTodos("by date");
+                setActive("by date");
+              }}
               style={{
                 transform: isFilter ? "scaleX(1)" : "scaleX(0)",
                 zIndex: isFilter ? 10 : -2,
@@ -161,8 +170,10 @@ const List = ({
             </FilterDateBtn>
             <ResetBtn
               dark={dark}
+              active={active === "reset"}
               onClick={() => {
                 displayFilteredTodos("reset");
+                setActive("reset");
               }}
             >
               Last added

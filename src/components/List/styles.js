@@ -207,9 +207,10 @@ const FilterCategoryBtn = styled.button`
   width: 100%;
   padding: 6px;
   text-align: left;
-  color: ${({ dark }) => (dark ? "#222" : "dimgray")};
-  background-color: ${({ dark }) =>
-    dark ? "rgb(150,150,150)" : "rgb(245, 245, 245)"};
+  color: ${({ dark, active }) =>
+    active ? "#fefefe" : dark ? "#222" : "dimgray"};
+  background-color: ${({ dark, active }) =>
+    active ? "#46529d" : dark ? "rgb(150,150,150)" : "rgb(245, 245, 245)"};
   outline: none;
   border: none;
   border-bottom: 1px solid ${({ dark }) => (dark ? "#222" : "gray")};
@@ -221,6 +222,9 @@ const FilterCategoryBtn = styled.button`
     cursor: pointer;
     background-color: #46529d;
     color: #fefefe;
+  }
+  &:active {
+    background-color: ${({ active }) => active && "#46529d"};
   }
 `;
 
