@@ -41,6 +41,7 @@ const Counter = styled.div`
 
 const CounterText = styled.div`
   width: 50%;
+  color: #555;
   padding-left: 3px;
 `;
 

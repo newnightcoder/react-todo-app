@@ -20,6 +20,7 @@ import {
 const Header = ({
   deleteMsg,
   displayFilteredTodos,
+  displayStatusMessage,
   clear,
   dark,
   toggleDarkMode,
@@ -51,6 +52,7 @@ const Header = ({
         drawerToggle={drawerToggle}
         openDrawer={openDrawer}
         displayFilteredTodos={displayFilteredTodos}
+        displayStatusMessage={displayStatusMessage}
         clear={clear}
         deleteMsg={deleteMsg}
       />

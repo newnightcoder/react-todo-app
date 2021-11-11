@@ -7,7 +7,8 @@ const App = () => {
   const [isTodo, setIsTodo] = useState(null);
   const [isMenuOpen, setIsMenuOpen] = useState(null);
   const [todoEdit, setTodoEdit] = useState(null);
-  const [todosToDisplay, setTodosToDisplay] = useState("");
+  const [todosToDisplay, setTodosToDisplay] = useState("all");
+  const [statusMessage, setStatusMessage] = useState("all");
   const [dark, setDarkMode] = useState(false);
   const [isToggled, setIsToggled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -94,6 +95,10 @@ const App = () => {
     setTodosToDisplay(string);
   };
 
+  const displayStatusMessage = (string) => {
+    setStatusMessage(string);
+  };
+
   const handleDeleteMsg = (string) => {
     setTodosToDisplay(string);
   };
@@ -110,6 +115,7 @@ const App = () => {
           todos={todos}
           todosToDisplay={todosToDisplay}
           displayFilteredTodos={displayFilteredTodos}
+          displayStatusMessage={displayStatusMessage}
           clear={clearList}
           deleteMsg={handleDeleteMsg}
           darkToggle={toggleDarkMode}
@@ -122,6 +128,7 @@ const App = () => {
           todos={todos}
           displayFilteredTodos={displayFilteredTodos}
           todosToDisplay={todosToDisplay}
+          statusMessage={statusMessage}
           selectEditTodo={selectEditTodo}
           checkItem={checkItem}
           deleteItem={deleteItem}

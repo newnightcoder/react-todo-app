@@ -6,6 +6,7 @@ const flexCenter =
 
 const ListContainer = styled.section`
   width: 100vw;
+  min-width: 330px;
   grid-row: 2;
   margin: 0;
   overflow-x: hidden;
@@ -33,33 +34,120 @@ const ListContainer = styled.section`
 const Header = styled.div`
   height: 55px;
   width: inherit;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 0.85rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  transition-property: color, background-color;
-  transition-duration: 500ms;
-  color: ${({ dark }) => (dark ? "#fefefe" : "dimgray")};
-  background-color: ${({ dark }) => (dark ? "#333" : "#fefefe")};
-  padding: 5px 20px;
   position: sticky;
   top: 0;
   z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: ${({ dark }) => (dark ? "#333" : "#fefefe")};
+  color: ${({ dark }) => (dark ? "#fefefe" : "#555")};
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 0 25px;
+  transition-property: color, background-color;
+  transition-duration: 500ms;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   @media screen and (min-width: 1024px) {
     width: 400px;
   }
 `;
 
+const MessageContainer = styled.div`
+  ${flexCenter};
+  width: 100%;
+  height: 100%;
+  padding: 0 10px;
+  overflow: hidden;
+`;
+
+const WelcomeMessage = styled.div`
+  ${flexCenter};
+  width: inherit;
+  height: inherit;
+  font-style: italic;
+  color: #555;
+  background-color: #fefefe;
+  position: relative;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(-25%);
+  position: absolute;
+  left: 0;
+  z-index: 100;
+  animation: fadeIn 1250ms forwards, disappear 500ms forwards 3500ms;
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  @keyframes disappear {
+    100% {
+      opacity: 0;
+      z-index: -1;
+      visibility: hidden;
+    }
+  }
+  &::after {
+    content: "";
+    height: 1px;
+    width: 40%;
+    position: absolute;
+    bottom: 12px;
+    background-color: rgba(200, 200, 200, 0.75);
+  }
+`;
+
+const StatusMessage = styled.div`
+  ${flexCenter};
+  width: max-content;
+  height: inherit;
+  font-style: italic;
+  color: #555;
+  position: relative;
+  white-space: nowrap;
+  position: absolute;
+  left: 48%;
+  transform: translateX(-50%);
+  z-index: 100;
+  opacity: 0;
+  visibility: hidden;
+  animation: appear 1000ms forwards 6000ms;
+  &::after {
+    content: "";
+    height: 1px;
+    width: 50%;
+    position: absolute;
+    bottom: 12px;
+    background-color: rgba(200, 200, 200, 0.75);
+  }
+`;
+
+const SpanInbox = styled.span`
+  display: inline-block;
+  text-transform: uppercase;
+  visibility: hidden;
+  opacity: 0;
+  animation: appear 500ms forwards 3500ms;
+  @keyframes appear {
+    100% {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+`;
+
 const FilterBtnWrapper = styled.div`
   min-height: 5vh;
-  min-width: 100px;
+  width: max-content;
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
+  visibility: hidden;
+  opacity: 0;
+  animation: appear 500ms forwards 3500ms;
 `;
 
 const FilterBtn = styled.button`
@@ -74,6 +162,7 @@ const FilterBtn = styled.button`
   background-color: #46529d;
   color: white;
   font-size: 0.75rem;
+  text-transform: uppercase;
 `;
 
 const FilterCategoryBtn = styled.button`
@@ -123,9 +212,30 @@ const TodoList = styled.ul`
   list-style-type: none;
   transition: background-color 500ms;
   background-color: ${({ dark }) => (dark ? "dimgray" : "#fefefe")};
-  padding: 2vh 0 150px 0;
+  padding: 2vh 0 100px 0;
   margin-block-start: 0;
   margin-block-end: 0;
+`;
+
+const EmptyListMessage = styled.div`
+  min-height: 40vh;
+  width: 100%;
+  ${flexCenter};
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 20px;
+  color: rgba(100, 100, 100, 0.5);
+`;
+
+const SpanPlusBtn = styled.span`
+  height: 25px;
+  width: 25px;
+  ${flexCenter};
+  border-radius: 50%;
+  font-size: 1.5rem;
+  font-style: normal;
+  background-color: rgba(100, 100, 100, 0.25);
+  color: #fefefe;
 `;
 
 const StyledTodo = styled(animated.li)`
@@ -197,6 +307,12 @@ const TimeContainer = styled.div`
 export {
   ListContainer,
   Header,
+  MessageContainer,
+  WelcomeMessage,
+  StatusMessage,
+  EmptyListMessage,
+  SpanPlusBtn,
+  SpanInbox,
   FilterBtnWrapper,
   FilterBtn,
   FilterCategoryBtn,

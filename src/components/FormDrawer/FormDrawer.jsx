@@ -50,12 +50,8 @@ const FormDrawer = ({
   const [error, setError] = useState("");
   const [isPickerOpen, setIsPickerOpen] = useState(false);
 
-  // useEffect(()=>{
-
-  // },[error])
-
   useEffect(() => {
-    console.log(error);
+    console.log("error useEffect", error);
 
     if (todoEdit !== null) {
       setIcon(todoEdit.icon);
@@ -198,9 +194,8 @@ const FormDrawer = ({
     resetForm();
   };
 
-  const preventDrawerCloseWhenError = () => {
-    console.log("error", error);
-    if (error.length !== 0) return;
+  const handleToggleDrawer = () => {
+    if (newTodo.length === 0) return;
     toggleFormDrawer();
   };
 
@@ -221,7 +216,7 @@ const FormDrawer = ({
       <Header>
         <Btn
           onClick={() => {
-            toggleFormDrawer(error);
+            toggleFormDrawer();
             resetForm();
           }}
         >
@@ -293,11 +288,7 @@ const FormDrawer = ({
                 onClose={() => setIsPickerOpen(false)}
               />
             </ThemeProvider>
-            <SubmitBtn
-              dark={dark}
-              type="submit"
-              onClick={() => console.log("error onclick", error)}
-            >
+            <SubmitBtn dark={dark} type="submit" onClick={handleToggleDrawer}>
               {id !== undefined ? "edit" : "add your thing"}
             </SubmitBtn>
           </form>

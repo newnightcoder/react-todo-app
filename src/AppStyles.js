@@ -5,6 +5,7 @@ const AppWrapper = styled.div`
   padding: 0;
   height: 100vh;
   width: 100vw;
+  min-width: 330px;
   position: relative;
   overflow: hidden;
   display: flex;
@@ -18,6 +19,7 @@ const AppWrapper = styled.div`
 const Container = styled.div`
   height: 100%;
   width: 100vw;
+  min-width: 330px;
   position: fixed;
   bottom: 0;
   max-height: none;

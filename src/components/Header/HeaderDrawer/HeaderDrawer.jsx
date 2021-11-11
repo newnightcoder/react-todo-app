@@ -5,6 +5,7 @@ const types = ["all", "done", "not done", "delete all"];
 
 const HeaderDrawer = ({
   displayFilteredTodos,
+  displayStatusMessage,
   clear,
   deleteMsg,
   openDrawer,
@@ -23,6 +24,7 @@ const HeaderDrawer = ({
             onClick={() => {
               setActive(types[0]);
               displayFilteredTodos("all");
+              displayStatusMessage("all");
             }}
           >
             {types[0]}
@@ -32,6 +34,7 @@ const HeaderDrawer = ({
             onClick={() => {
               setActive(types[1]);
               displayFilteredTodos("done");
+              displayStatusMessage("done");
             }}
           >
             {types[1]}
@@ -41,6 +44,7 @@ const HeaderDrawer = ({
             onClick={() => {
               setActive(types[2]);
               displayFilteredTodos("not done");
+              displayStatusMessage("not done");
             }}
           >
             {types[2]}

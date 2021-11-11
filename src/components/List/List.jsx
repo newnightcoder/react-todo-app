@@ -5,6 +5,7 @@ import { useTransition } from "react-spring";
 import { compareTime, formatTime } from "./formatTime";
 import { imgHandler } from "./imgHandler";
 import {
+  EmptyListMessage,
   FilterBtn,
   FilterBtnWrapper,
   FilterCategoryBtn,
@@ -12,11 +13,16 @@ import {
   Header,
   IconCatContainer,
   ListContainer,
+  MessageContainer,
   ResetBtn,
+  SpanInbox,
+  SpanPlusBtn,
+  StatusMessage,
   StyledTodo,
   TaskContainer,
   TimeContainer,
   TodoList,
+  WelcomeMessage,
 } from "./styles";
 import TodoMenu from "./TodoMenu/TodoMenu";
 
@@ -27,6 +33,7 @@ const List = ({
   deleteItem,
   displayFilteredTodos,
   todosToDisplay,
+  statusMessage,
   dark,
   openTodoMenu,
   closeTodoMenu,
@@ -68,8 +75,47 @@ const List = ({
         return (filteredTodos = todos);
     }
   };
-
   filterTodos();
+
+  let message = "";
+
+  const displayMessage = () => {
+    switch (statusMessage) {
+      case "all": {
+        if (todos.length === 0) return (message = "");
+        return (message = "You have things to do");
+      }
+      case "done": {
+        if (todos.length === 0) {
+          return (message = "Nothing to do yet.");
+        }
+        if (todos.length !== 0 && filteredTodos.length === todos.length) {
+          return (message = "You have done everything! Congrats!");
+        }
+        if (filteredTodos.length === 0) {
+          return (message = "Nothing done yet...");
+        }
+        return (message = `You have done ${filteredTodos.length} thing${
+          filteredTodos.length === 1 ? "" : "s"
+        }!`);
+      }
+      case "not done": {
+        if (todos.length === 0) {
+          return (message = "Nothing to do yet.");
+        }
+        if (todos.length !== 0 && filteredTodos.length === 0) {
+          return (message = "You have done everything! Congrats!");
+        }
+        return (message = `${filteredTodos.length} thing${
+          filteredTodos.length === 1 ? "" : "s"
+        } left to do.`);
+      }
+      default:
+        return message;
+    }
+  };
+
+  displayMessage();
 
   const transition = useTransition(filteredTodos, (todo) => todo.id, {
     from: { opacity: 0, transform: "scale(0)" },
@@ -80,7 +126,11 @@ const List = ({
   return (
     <ListContainer dark={dark}>
       <Header dark={dark}>
-        <span>inbox</span>
+        <SpanInbox>inbox</SpanInbox>
+        <MessageContainer>
+          <WelcomeMessage>Welcome to your TO-DO app!</WelcomeMessage>
+          <StatusMessage>{message}</StatusMessage>
+        </MessageContainer>
         <FilterBtnWrapper>
           <FilterBtn
             onClick={() => animateFilter()}
@@ -123,6 +173,38 @@ const List = ({
         </FilterBtnWrapper>
       </Header>
       <TodoList dark={dark}>
+        {todos.length === 0 && (
+          <EmptyListMessage>
+            <span style={{ paddingBottom: "1.5rem" }}>
+              YOUR LIST IS EMPTY...
+            </span>
+            <div
+              style={{
+                fontStyle: "italic",
+                width: "70%",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <p
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: "100%",
+                  paddingBottom: ".33rem",
+                }}
+              >
+                Click the&nbsp;<SpanPlusBtn>+</SpanPlusBtn>&nbsp;button
+              </p>
+              <p style={{ display: "flex", width: "100%" }}>
+                to add a new thing to your list.
+              </p>
+            </div>
+          </EmptyListMessage>
+        )}
         {transition.map(({ item, props }) => (
           <StyledTodo
             dark={dark}
