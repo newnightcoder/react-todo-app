@@ -1,6 +1,6 @@
 import React from "react";
 
-export const imgHandler = (icon, bool) => {
+export const imgHandler = (icon, bool, dark) => {
   switch (icon) {
     case "personal":
       return (
@@ -16,8 +16,16 @@ export const imgHandler = (icon, bool) => {
         >
           <defs>
             <linearGradient id="gradient">
-              <stop stopColor="deepskyblue" offset="10%"></stop>
-              <stop stopColor="navy" offset="100%"></stop>
+              <stop
+                style={{ transition: "stop-color 500ms" }}
+                stopColor={dark ? "blue" : "deepskyblue"}
+                offset="10%"
+              ></stop>
+              <stop
+                style={{ transition: "stop-color 500ms" }}
+                stopColor={dark ? "cyan" : "navy"}
+                offset="100%"
+              ></stop>
             </linearGradient>
           </defs>
           <defs>
@@ -46,8 +54,16 @@ export const imgHandler = (icon, bool) => {
         >
           <defs>
             <linearGradient id="gradient">
-              <stop stopColor="deepskyblue" offset="10%"></stop>
-              <stop stopColor="navy" offset="100%"></stop>
+              <stop
+                style={{ transition: "stop-color 500ms" }}
+                stopColor={dark ? "blue" : "deepskyblue"}
+                offset="10%"
+              ></stop>
+              <stop
+                style={{ transition: "stop-color 500ms" }}
+                stopColor={dark ? "cyan" : "navy"}
+                offset="100%"
+              ></stop>
             </linearGradient>
           </defs>
           <defs>
@@ -76,8 +92,16 @@ export const imgHandler = (icon, bool) => {
         >
           <defs>
             <linearGradient id="gradient">
-              <stop stopColor="deepskyblue" offset="10%"></stop>
-              <stop stopColor="navy" offset="100%"></stop>
+              <stop
+                style={{ transition: "stop-color 500ms" }}
+                stopColor={dark ? "blue" : "deepskyblue"}
+                offset="10%"
+              ></stop>
+              <stop
+                style={{ transition: "stop-color 500ms" }}
+                stopColor={dark ? "cyan" : "navy"}
+                offset="100%"
+              ></stop>
             </linearGradient>
           </defs>
           <defs>
@@ -106,8 +130,16 @@ export const imgHandler = (icon, bool) => {
         >
           <defs>
             <linearGradient id="gradient">
-              <stop stopColor="deepskyblue" offset="10%"></stop>
-              <stop stopColor="navy" offset="100%"></stop>
+              <stop
+                style={{ transition: "stop-color 500ms" }}
+                stopColor={dark ? "blue" : "deepskyblue"}
+                offset="10%"
+              ></stop>
+              <stop
+                style={{ transition: "stop-color 500ms" }}
+                stopColor={dark ? "cyan" : "navy"}
+                offset="100%"
+              ></stop>
             </linearGradient>
           </defs>
           <defs>
@@ -136,8 +168,16 @@ export const imgHandler = (icon, bool) => {
         >
           <defs>
             <linearGradient id="gradient">
-              <stop stopColor="deepskyblue" offset="10%"></stop>
-              <stop stopColor="navy" offset="100%"></stop>
+              <stop
+                style={{ transition: "stop-color 500ms" }}
+                stopColor={dark ? "blue" : "deepskyblue"}
+                offset="10%"
+              ></stop>
+              <stop
+                style={{ transition: "stop-color 500ms" }}
+                stopColor={dark ? "cyan" : "navy"}
+                offset="100%"
+              ></stop>
             </linearGradient>
           </defs>
           <defs>
@@ -184,8 +224,16 @@ export const imgHandler = (icon, bool) => {
         >
           <defs>
             <linearGradient id="gradient">
-              <stop stopColor="deepskyblue" offset="10%"></stop>
-              <stop stopColor="navy" offset="100%"></stop>
+              <stop
+                style={{ transition: "stop-color 500ms" }}
+                stopColor={dark ? "blue" : "deepskyblue"}
+                offset="10%"
+              ></stop>
+              <stop
+                style={{ transition: "stop-color 500ms" }}
+                stopColor={dark ? "cyan" : "navy"}
+                offset="100%"
+              ></stop>
             </linearGradient>
           </defs>
           <defs>

@@ -33,7 +33,7 @@ const ListContainer = styled.section`
 
 const Header = styled.div`
   height: 55px;
-  width: inherit;
+  width: 100%;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -51,6 +51,9 @@ const Header = styled.div`
   @media screen and (min-width: 1024px) {
     width: 400px;
   }
+  @media screen and (max-width: 358px) {
+    padding: 0 12.5px 0 20px;
+  }
 `;
 
 const MessageContainer = styled.div`
@@ -66,9 +69,11 @@ const WelcomeMessage = styled.div`
   width: inherit;
   height: inherit;
   font-style: italic;
-  color: #555;
-  background-color: #fefefe;
+  color: rgba(175, 175, 175, 0.99);
+  background-color: ${({ dark }) => (dark ? "#333" : "#fefefe")};
   position: relative;
+  transition-property: color, background-color;
+  transition-duration: 500ms;
   white-space: nowrap;
   opacity: 0;
   transform: translateX(-25%);
@@ -104,7 +109,7 @@ const StatusMessage = styled.div`
   width: max-content;
   height: inherit;
   font-style: italic;
-  color: #555;
+  color: rgba(175, 175, 175, 0.99);
   position: relative;
   white-space: nowrap;
   position: absolute;
@@ -127,6 +132,7 @@ const StatusMessage = styled.div`
 const SpanInbox = styled.span`
   display: inline-block;
   text-transform: uppercase;
+  font-size: 0.75rem;
   visibility: hidden;
   opacity: 0;
   animation: appear 500ms forwards 3500ms;
@@ -139,71 +145,96 @@ const SpanInbox = styled.span`
 `;
 
 const FilterBtnWrapper = styled.div`
-  min-height: 5vh;
+  height: max-content;
   width: max-content;
   position: relative;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  visibility: hidden;
-  opacity: 0;
-  animation: appear 500ms forwards 3500ms;
 `;
 
 const FilterBtn = styled.button`
-  padding: 3px 6px;
+  height: 25px;
+  // width: 55px;
+  padding: 0 7px;
+  ${flexCenter};
   outline: none;
   border: none;
   border-radius: 3px;
   cursor: pointer;
   text-transform: uppercase;
-  z-index: 50;
+  z-index: 100;
   position: relative;
   background-color: #46529d;
   color: white;
   font-size: 0.75rem;
   text-transform: uppercase;
+  visibility: hidden;
+  opacity: 0;
+  animation: appear 500ms forwards 3500ms;
+  @keyframes appear {
+    100% {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+`;
+
+const FilterBtnsContainer = styled.div`
+  height: max-content;
+  width: 100px;
+  position: relative;
+  ${flexCenter};
+  flex-direction: column;
+  align-items: flex-start;
+  transform: ${({ isFilter }) => (isFilter ? "scaleY(1)" : "scaleY(0)")};
+  transform-origin: top;
+  opacity: ${({ isFilter }) => (isFilter ? 1 : 0)};
+  transition-property: transform, opacity, color;
+  transition-duration: 250ms;
+  position: absolute;
+  left: -30%;
+  top: 25px;
+  border: 1px solid ${({ dark }) => (dark ? "#222" : "dimgray")};
+  border-radius: 3px;
+  @media screen and (max-width: 358px) {
+    left: -40%;
+  }
 `;
 
 const FilterCategoryBtn = styled.button`
-  padding: 3px 6px;
+  width: 100%;
+  padding: 6px;
+  text-align: left;
+  color: ${({ dark }) => (dark ? "#222" : "dimgray")};
+  background-color: ${({ dark }) =>
+    dark ? "rgb(150,150,150)" : "rgb(245, 245, 245)"};
   outline: none;
   border: none;
-  border-radius: 3px;
-  background-color: aqua;
-  color: gray;
-  // z-index: 40;
-  position: absolute;
-  top: 0;
-  left: 0;
-  transform-origin: center;
-  transition: transform 500ms;
-  display: ${({ isFilter }) => isFilter && "block"};
+  border-bottom: 1px solid ${({ dark }) => (dark ? "#222" : "gray")};
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  transition-property: color, background-color;
+  transition-duration: 150ms;
+  &:hover {
+    cursor: pointer;
+    background-color: #46529d;
+    color: #fefefe;
+  }
 `;
 
 const FilterDateBtn = styled(FilterCategoryBtn)`
-  background-color: aqua;
-  color: gray;
-  // z-index: 30;
-  position: absolute;
-  top: 0;
-  left: 0;
-  transition: transform 1000ms;
-  transform: scaleX(0) translate(40%, 25%);
-  transform-origin: center;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 `;
 
-const ResetBtn = styled.button`
-  ${flexCenter};
-  height: 20px;
-  width: 20px;
-  border-radius: 50%;
-  outline: none;
-  border: none;
-  color: gray;
-  position: absolute;
-  right: 0;
-  top: 0;
+const ResetBtn = styled(FilterCategoryBtn)`
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  border-bottom: none;
 `;
 
 const TodoList = styled.ul`
@@ -224,7 +255,7 @@ const EmptyListMessage = styled.div`
   flex-direction: column;
   justify-content: center;
   padding: 0 20px;
-  color: rgba(100, 100, 100, 0.5);
+  color: rgba(175, 175, 175, 0.99);
 `;
 
 const SpanPlusBtn = styled.span`
@@ -234,8 +265,11 @@ const SpanPlusBtn = styled.span`
   border-radius: 50%;
   font-size: 1.5rem;
   font-style: normal;
-  background-color: rgba(100, 100, 100, 0.25);
-  color: #fefefe;
+  background-color: ${({ dark }) =>
+    dark ? "rgba(175, 175, 175, 0.99)" : "rgba(175, 175, 175, 0.99)"};
+  color: ${({ dark }) => (dark ? " #555" : "#fefefe")};
+  transition-property: color, background-color;
+  transition-duration: 500ms;
 `;
 
 const StyledTodo = styled(animated.li)`
@@ -264,7 +298,6 @@ const IconCatContainer = styled.div`
   width: 55px;
   border-radius: 50%;
   font-size: 1.25rem;
-  // margin-right: 15px;
   transition: border 500ms;
   border: 2px solid ${({ dark }) => (dark ? "#fefefe" : "lightgray")};
 `;
@@ -315,6 +348,7 @@ export {
   SpanInbox,
   FilterBtnWrapper,
   FilterBtn,
+  FilterBtnsContainer,
   FilterCategoryBtn,
   FilterDateBtn,
   ResetBtn,

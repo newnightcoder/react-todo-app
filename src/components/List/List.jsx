@@ -1,12 +1,13 @@
 import { IconButton } from "@material-ui/core";
 import React, { useState } from "react";
-import { ThreeDotsVertical, XCircle } from "react-bootstrap-icons";
+import { Filter, ThreeDotsVertical } from "react-bootstrap-icons";
 import { useTransition } from "react-spring";
 import { compareTime, formatTime } from "./formatTime";
 import { imgHandler } from "./imgHandler";
 import {
   EmptyListMessage,
   FilterBtn,
+  FilterBtnsContainer,
   FilterBtnWrapper,
   FilterCategoryBtn,
   FilterDateBtn,
@@ -43,7 +44,7 @@ const List = ({
   const [isFilter, setIsFilter] = useState(false);
 
   const animateFilter = () => {
-    setIsFilter(true);
+    setIsFilter((isFilter) => !isFilter);
   };
 
   let filteredTodos = [];
@@ -128,48 +129,45 @@ const List = ({
       <Header dark={dark}>
         <SpanInbox>inbox</SpanInbox>
         <MessageContainer>
-          <WelcomeMessage>Welcome to your TO-DO app!</WelcomeMessage>
+          <WelcomeMessage dark={dark}>
+            Welcome to your TO-DO app!
+          </WelcomeMessage>
           <StatusMessage>{message}</StatusMessage>
         </MessageContainer>
         <FilterBtnWrapper>
-          <FilterBtn
-            onClick={() => animateFilter()}
-            style={{ display: isFilter ? "none" : "block" }}
-          >
-            filter
+          <FilterBtn onClick={() => animateFilter()}>
+            <Filter size={18} /> sort
           </FilterBtn>
-          <FilterCategoryBtn
-            onClick={() => displayFilteredTodos("by category")}
-            style={{
-              transform: isFilter
-                ? "scaleX(1) translateX(-100%)"
-                : "scaleX(0) translate(15%)",
-              zIndex: isFilter ? 40 : -1,
-            }}
-          >
-            by category
-          </FilterCategoryBtn>
-          <FilterDateBtn
-            onClick={() => displayFilteredTodos("by date")}
-            style={{
-              transform: isFilter
-                ? "scaleX(1) translateX(20%)"
-                : "scaleX(0) translate(40%)",
-              zIndex: isFilter ? 10 : -2,
-            }}
-          >
-            by date
-          </FilterDateBtn>
-          {isFilter && (
-            <ResetBtn
-              onClick={() => {
-                displayFilteredTodos("reset");
-                setIsFilter(false);
+          <FilterBtnsContainer isFilter={isFilter} dark={dark}>
+            <FilterCategoryBtn
+              dark={dark}
+              onClick={() => displayFilteredTodos("by category")}
+              style={{
+                transform: isFilter ? "scaleX(1)" : "scaleX(0)",
+                zIndex: isFilter ? 40 : -1,
               }}
             >
-              <XCircle />
+              By category
+            </FilterCategoryBtn>
+            <FilterDateBtn
+              dark={dark}
+              onClick={() => displayFilteredTodos("by date")}
+              style={{
+                transform: isFilter ? "scaleX(1)" : "scaleX(0)",
+                zIndex: isFilter ? 10 : -2,
+              }}
+            >
+              By date
+            </FilterDateBtn>
+            <ResetBtn
+              dark={dark}
+              onClick={() => {
+                displayFilteredTodos("reset");
+              }}
+            >
+              Last added
             </ResetBtn>
-          )}
+          </FilterBtnsContainer>
         </FilterBtnWrapper>
       </Header>
       <TodoList dark={dark}>
@@ -197,7 +195,8 @@ const List = ({
                   paddingBottom: ".33rem",
                 }}
               >
-                Click the&nbsp;<SpanPlusBtn>+</SpanPlusBtn>&nbsp;button
+                Click the&nbsp;<SpanPlusBtn dark={dark}>+</SpanPlusBtn>
+                &nbsp;button
               </p>
               <p style={{ display: "flex", width: "100%" }}>
                 to add a new thing to your list.
@@ -219,7 +218,7 @@ const List = ({
             }}
           >
             <IconCatContainer dark={dark}>
-              {imgHandler(item.icon, item.done)}
+              {imgHandler(item.icon, item.done, dark)}
             </IconCatContainer>
             <TaskContainer dark={dark}>{item.task}</TaskContainer>
             <TimeContainer>
@@ -231,7 +230,11 @@ const List = ({
             </TimeContainer>
             <IconButton size="small" onClick={() => openTodoMenu(item.id)}>
               <ThreeDotsVertical
-                style={{ cursor: "pointer", color: dark ? "white" : "black" }}
+                style={{
+                  cursor: "pointer",
+                  color: dark ? "white" : "black",
+                  transition: "color 500ms",
+                }}
               />
             </IconButton>
 

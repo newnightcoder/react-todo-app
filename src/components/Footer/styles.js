@@ -7,7 +7,8 @@ const AppFooter = styled.footer`
   align-items: flex-start;
   justify-content: center;
   font-size: 0.7rem;
-  transition: all 500ms;
+  transition-property: background-color, color;
+  transition-duration: 500ms;
   background-color: ${({ dark }) => (dark ? "#333" : "rgb(253, 253, 253)")};
   color: ${({ dark }) => (dark ? "#fefefe" : "gray")};
   position: relative;
@@ -41,7 +42,8 @@ const Counter = styled.div`
 
 const CounterText = styled.div`
   width: 50%;
-  color: #555;
+  color: ${({ dark }) => (dark ? "#fefefe" : "#555")};
+  transition: color 500ms;
   padding-left: 3px;
 `;
 

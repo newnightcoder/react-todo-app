@@ -3,7 +3,6 @@ import styled from "styled-components";
 const DateTime = styled.div`
   width: max-content;
   height: 20px;
-  margin-left: 5px;
   font-size: 0.75rem;
   font-weight: 600;
   color: rgba(255, 255, 255, 0.75);

@@ -27,7 +27,7 @@ const Footer = ({ todos, toggleFormDrawer, dark }) => {
             }}
           />
         </Counter>
-        <CounterText>
+        <CounterText dark={dark}>
           <Number>
             {todos.length !== 0
               ? Math.floor((todosDone / todos.length) * 100)

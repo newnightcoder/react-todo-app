@@ -19,7 +19,7 @@ const AppHeader = styled.div`
     url(${img}) no-repeat center/cover;
   &::after {
     content: "";
-    width: 100vw;
+    width: 100%;
     height: 4px;
     background: linear-gradient(to right, blueviolet, deepskyblue 60%);
     position: absolute;
@@ -92,6 +92,9 @@ const BottomRowContainer = styled.div`
   left: 0;
   bottom: 15px;
   padding: 0 25px;
+  @media screen and (max-width: 358px) {
+    padding: 0 12.5px 0 20px;
+  }
 `;
 
 const ToggleContainer = styled.div`
