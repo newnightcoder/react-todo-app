@@ -9,10 +9,14 @@ const DrawerWrapper = styled.div`
   width: 150px;
   height: 100%;
   position: relative;
+  z-index: 120;
+  transform: ${({ openDrawer }) =>
+    openDrawer ? "translateX(0)" : "translate(100%)"};
+  transition: transform 350ms ease-out;
   @media (min-width: 768px) {
     width: 220px;
   }
-  @media (min-width: 1024px) {
+  @media (min-width: 768px) {
     width: 150px;
   }
   @media (max-width: 350px) {
@@ -21,18 +25,18 @@ const DrawerWrapper = styled.div`
 `;
 
 const Drawer = styled.div`
-  ${flexColumn};
   width: 150px;
   height: 100%;
+  ${flexColumn};
+  justify-content: flex-end;
+  padding-bottom: 10px;
   border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-  background: rgba(0, 0, 0, 0.5);
-  transform: translateX(100%);
-  transition: transform 350ms ease-out;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 120;
   @media (min-width: 768px) {
     width: 220px;
   }
-  @media (min-width: 1024px) {
+  @media (min-width: 768px) {
     width: 150px;
   }
   @media (max-width: 350px) {
@@ -42,7 +46,7 @@ const Drawer = styled.div`
 
 const BtnGroup = styled.div`
   width: 150px;
-  height: 60%;
+  height: 70%;
   padding: 0;
   display: flex;
   flex-direction: column;
@@ -52,7 +56,7 @@ const BtnGroup = styled.div`
   @media (min-width: 768px) {
     width: 220px;
   }
-  @media (min-width: 1024px) {
+  @media (min-width: 768px) {
     width: 150px;
   }
   @media (max-width: 350px) {

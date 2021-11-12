@@ -5,7 +5,7 @@ const AppWrapper = styled.div`
   padding: 0;
   height: 100vh;
   width: 100vw;
-  min-width: 330px;
+  min-width: 280px;
   position: relative;
   overflow: hidden;
   display: flex;
@@ -19,7 +19,7 @@ const AppWrapper = styled.div`
 const Container = styled.div`
   height: 100%;
   width: 100vw;
-  min-width: 330px;
+  min-width: 280px;
   position: fixed;
   bottom: 0;
   max-height: none;
@@ -28,7 +28,7 @@ const Container = styled.div`
   box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.5);
   margin: 0;
   overflow: hidden;
-  @media (min-width: 1024px) {
+  @media (min-width: 768px) {
     height: 94%;
     width: 400px;
     max-height: 800px;

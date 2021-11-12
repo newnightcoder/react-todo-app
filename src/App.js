@@ -91,7 +91,7 @@ const App = () => {
     setTodos(todosCopy);
   };
 
-  const displayFilteredTodos = (string) => {
+  const handleTodosToDisplay = (string) => {
     setTodosToDisplay(string);
   };
 
@@ -114,7 +114,7 @@ const App = () => {
         <Header
           todos={todos}
           todosToDisplay={todosToDisplay}
-          displayFilteredTodos={displayFilteredTodos}
+          handleTodosToDisplay={handleTodosToDisplay}
           displayStatusMessage={displayStatusMessage}
           clear={clearList}
           deleteMsg={handleDeleteMsg}
@@ -126,7 +126,7 @@ const App = () => {
         <List
           dark={dark}
           todos={todos}
-          displayFilteredTodos={displayFilteredTodos}
+          handleTodosToDisplay={handleTodosToDisplay}
           todosToDisplay={todosToDisplay}
           statusMessage={statusMessage}
           selectEditTodo={selectEditTodo}

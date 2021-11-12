@@ -4,7 +4,7 @@ import { BtnGroup, BtnToggle, Drawer, DrawerWrapper } from "./styles";
 const types = ["all", "done", "not done", "delete all"];
 
 const HeaderDrawer = ({
-  displayFilteredTodos,
+  handleTodosToDisplay,
   displayStatusMessage,
   clear,
   deleteMsg,
@@ -14,16 +14,14 @@ const HeaderDrawer = ({
   const [active, setActive] = useState("all");
 
   return (
-    <DrawerWrapper>
-      <Drawer
-        style={{ transform: openDrawer ? "translateX(0)" : "translate(100%)" }}
-      >
+    <DrawerWrapper openDrawer={openDrawer}>
+      <Drawer>
         <BtnGroup>
           <BtnToggle
             active={active === types[0]}
             onClick={() => {
               setActive(types[0]);
-              displayFilteredTodos("all");
+              handleTodosToDisplay("all");
               displayStatusMessage("all");
             }}
           >
@@ -33,7 +31,7 @@ const HeaderDrawer = ({
             active={active === types[1]}
             onClick={() => {
               setActive(types[1]);
-              displayFilteredTodos("done");
+              handleTodosToDisplay("done");
               displayStatusMessage("done");
             }}
           >
@@ -43,7 +41,7 @@ const HeaderDrawer = ({
             active={active === types[2]}
             onClick={() => {
               setActive(types[2]);
-              displayFilteredTodos("not done");
+              handleTodosToDisplay("not done");
               displayStatusMessage("not done");
             }}
           >
@@ -56,7 +54,7 @@ const HeaderDrawer = ({
               clear();
               deleteMsg("delete");
               setActive("");
-              setTimeout(() => displayFilteredTodos("all"), 2000);
+              setTimeout(() => handleTodosToDisplay("all"), 2000);
             }}
           >
             {types[3]}

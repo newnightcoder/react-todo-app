@@ -1,5 +1,5 @@
 import { IconButton } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Filter, ThreeDotsVertical } from "react-bootstrap-icons";
 import { useTransition } from "react-spring";
 import { compareTime, formatTime } from "./formatTime";
@@ -32,7 +32,7 @@ const List = ({
   selectEditTodo,
   checkItem,
   deleteItem,
-  displayFilteredTodos,
+  handleTodosToDisplay,
   todosToDisplay,
   statusMessage,
   dark,
@@ -43,87 +43,117 @@ const List = ({
 }) => {
   const [isFilter, setIsFilter] = useState(false);
   const [active, setActive] = useState("");
+  const [rows, setRows] = useState(todos);
+  const [headerMessage, setHeaderMessage] = useState("");
+  const height = 100;
 
   const animateFilter = () => {
     setIsFilter((isFilter) => !isFilter);
   };
 
-  let filteredTodos = [];
-  const filterTodos = () => {
-    switch (todosToDisplay) {
-      case "all":
-        return (filteredTodos = todos);
-      case "done":
-        return (filteredTodos = todos.filter((todo) => todo.done));
-      case "not done":
-        return (filteredTodos = todos.filter((todo) => !todo.done));
-      case "by date":
-        return (filteredTodos = compareTime(todos));
-      case "by category":
-        let sortedByDate = [];
-        sortedByDate = compareTime(todos);
-        return (filteredTodos = sortedByDate.sort((a, b) => {
-          if (a.categoryNumber < b.categoryNumber) return -1;
-          if (a.categoryNumber > b.categoryNumber) return 1;
-          return 0;
-        }));
-      case "reset":
-        return (filteredTodos = todos.sort((a, b) => {
-          if (a.id < b.id) return 1;
-          if (a.id > b.id) return -1;
-          return 0;
-        }));
-      default:
-        return (filteredTodos = todos);
+  useEffect(() => {
+    console.log(todosToDisplay);
+    const filterTodos = () => {
+      const todosCopy = [...todos];
+      switch (todosToDisplay) {
+        case "all":
+          return setRows(todosCopy);
+        case "done":
+          return setRows(todosCopy.filter((todo) => todo.done));
+        case "not done":
+          return setRows(todosCopy.filter((todo) => !todo.done));
+        case "by date":
+          return setRows(compareTime(todosCopy));
+        case "by category":
+          let sortedByDate = [];
+          sortedByDate = compareTime(todosCopy);
+          return setRows(
+            sortedByDate.sort((a, b) => {
+              if (a.categoryNumber < b.categoryNumber) return -1;
+              if (a.categoryNumber > b.categoryNumber) return 1;
+              return 0;
+            })
+          );
+        case "reset":
+          return setRows(
+            todosCopy.sort((a, b) => {
+              if (a.id < b.id) return 1;
+              if (a.id > b.id) return -1;
+              return 0;
+            })
+          );
+        default:
+          return setRows(todosCopy);
+      }
+    };
+    filterTodos();
+  }, [todos, todosToDisplay]);
+
+  useEffect(() => {
+    const displayMessage = () => {
+      switch (statusMessage) {
+        case "all": {
+          if (todos.length === 0) return setHeaderMessage("");
+          return setHeaderMessage("You have things to do");
+        }
+        case "done": {
+          if (todos.length === 0) {
+            return setHeaderMessage("Nothing to do yet.");
+          }
+          if (
+            todos.length !== 0 &&
+            todos.filter((todo) => todo.done).length === todos.length
+          ) {
+            return setHeaderMessage("You have done everything! Congrats!");
+          }
+          if (todos.filter((todo) => todo.done).length === 0) {
+            return setHeaderMessage("Nothing done yet...");
+          }
+          return setHeaderMessage(
+            `You have done ${todos.filter((todo) => todo.done).length} thing${
+              todos.filter((todo) => todo.done).length === 1 ? "" : "s"
+            }!`
+          );
+        }
+        case "not done": {
+          if (todos.length === 0) {
+            return setHeaderMessage("Nothing to do yet.");
+          }
+          if (
+            todos.length !== 0 &&
+            todos.filter((todo) => !todo.done).length === 0
+          ) {
+            return setHeaderMessage("You have done everything! Congrats!");
+          }
+          return setHeaderMessage(
+            `${todos.filter((todo) => !todo.done).length} thing${
+              todos.filter((todo) => !todo.done).length === 1 ? "" : "s"
+            } left to do.`
+          );
+        }
+        default:
+          return headerMessage;
+      }
+    };
+    displayMessage();
+  }, [todos, rows, statusMessage]);
+
+  // const transition = useTransition(filteredTodos, (todo) => todo.id, {
+  //   from: { opacity: 0, transform: "scale(0)" },
+  //   enter: { opacity: 1, transform: "scale(1)" },
+  //   leave: { opacity: 0, transform: "scale(0)" },
+  // });
+
+  const transition = useTransition(
+    rows.map((row, i) => ({ ...row, y: i * height })),
+    (todo) => todo.id,
+    {
+      from: { opacity: 0, transform: "scale(0)" },
+      enter: { opacity: 1, transform: "scale(1)" },
+      leave: { opacity: 0, transform: "scale(0)" },
+      // update: ({ y }) => ({ y }),
     }
-  };
-  filterTodos();
-
-  let message = "";
-
-  const displayMessage = () => {
-    switch (statusMessage) {
-      case "all": {
-        if (todos.length === 0) return (message = "");
-        return (message = "You have things to do");
-      }
-      case "done": {
-        if (todos.length === 0) {
-          return (message = "Nothing to do yet.");
-        }
-        if (todos.length !== 0 && filteredTodos.length === todos.length) {
-          return (message = "You have done everything! Congrats!");
-        }
-        if (filteredTodos.length === 0) {
-          return (message = "Nothing done yet...");
-        }
-        return (message = `You have done ${filteredTodos.length} thing${
-          filteredTodos.length === 1 ? "" : "s"
-        }!`);
-      }
-      case "not done": {
-        if (todos.length === 0) {
-          return (message = "Nothing to do yet.");
-        }
-        if (todos.length !== 0 && filteredTodos.length === 0) {
-          return (message = "You have done everything! Congrats!");
-        }
-        return (message = `${filteredTodos.length} thing${
-          filteredTodos.length === 1 ? "" : "s"
-        } left to do.`);
-      }
-      default:
-        return message;
-    }
-  };
-
-  displayMessage();
-
-  const transition = useTransition(filteredTodos, (todo) => todo.id, {
-    from: { opacity: 0, transform: "scale(0)" },
-    enter: { opacity: 1, transform: "scale(1)" },
-    leave: { opacity: 0, transform: "scale(0)" },
-  });
+  );
 
   return (
     <ListContainer dark={dark}>
@@ -133,19 +163,26 @@ const List = ({
           <WelcomeMessage dark={dark}>
             Welcome to your TO-DO app!
           </WelcomeMessage>
-          <StatusMessage>{message}</StatusMessage>
+          <StatusMessage>{headerMessage}</StatusMessage>
         </MessageContainer>
         <FilterBtnWrapper>
-          <FilterBtn onClick={() => animateFilter()}>
-            <Filter size={18} /> sort
+          <FilterBtn onClick={animateFilter}>
+            <Filter
+              size={18}
+              style={{
+                transform: isFilter ? "rotate(-180deg)" : "rotate(0deg)",
+                transition: "transform 350ms",
+              }}
+            />{" "}
+            sort
           </FilterBtn>
           <FilterBtnsContainer isFilter={isFilter} dark={dark}>
             <FilterCategoryBtn
               dark={dark}
               active={active === "category"}
               onClick={() => {
-                displayFilteredTodos("by category");
                 setActive("category");
+                handleTodosToDisplay("by category");
               }}
               style={{
                 transform: isFilter ? "scaleX(1)" : "scaleX(0)",
@@ -158,8 +195,8 @@ const List = ({
               dark={dark}
               active={active === "by date"}
               onClick={() => {
-                displayFilteredTodos("by date");
                 setActive("by date");
+                handleTodosToDisplay("by date");
               }}
               style={{
                 transform: isFilter ? "scaleX(1)" : "scaleX(0)",
@@ -172,8 +209,8 @@ const List = ({
               dark={dark}
               active={active === "reset"}
               onClick={() => {
-                displayFilteredTodos("reset");
                 setActive("reset");
+                handleTodosToDisplay("reset");
               }}
             >
               Last added
@@ -215,12 +252,13 @@ const List = ({
             </div>
           </EmptyListMessage>
         )}
-        {transition.map(({ item, props }) => (
+        {transition.map(({ item, props: { y, ...rest }, key }, index) => (
           <StyledTodo
             dark={dark}
             key={item.id}
             style={{
-              ...props,
+              ...rest,
+              // transform: y.interpolate((y) => `translate3d(0,${y}px,0)`),
               textDecoration: item.done
                 ? "line-through"
                 : "line-through transparent",

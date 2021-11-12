@@ -6,7 +6,7 @@ const flexCenter =
 
 const ListContainer = styled.section`
   width: 100vw;
-  min-width: 330px;
+  min-width: 280px;
   grid-row: 2;
   margin: 0;
   overflow-x: hidden;
@@ -26,7 +26,7 @@ const ListContainer = styled.section`
     transition: background-color 500ms;
     background-color: ${({ dark }) => (dark ? "yellow" : "deepskyblue")};
   }
-  @media (min-width: 1024px) {
+  @media (min-width: 768px) {
     width: 400px;
   }
 `;
@@ -48,7 +48,7 @@ const Header = styled.div`
   transition-property: color, background-color;
   transition-duration: 500ms;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 768px) {
     width: 400px;
   }
   @media screen and (max-width: 358px) {
@@ -173,6 +173,9 @@ const FilterBtn = styled.button`
   visibility: hidden;
   opacity: 0;
   animation: appear 500ms forwards 3500ms;
+  &:hover {
+    font-weight: 600;
+  }
   @keyframes appear {
     100% {
       visibility: visible;
@@ -250,6 +253,7 @@ const TodoList = styled.ul`
   padding: 2vh 0 100px 0;
   margin-block-start: 0;
   margin-block-end: 0;
+  position: relative;
 `;
 
 const EmptyListMessage = styled.div`
@@ -279,7 +283,7 @@ const SpanPlusBtn = styled.span`
 const StyledTodo = styled(animated.li)`
   margin-block-start: 0;
   margin-block-end: 0;
-  height: 100px;
+  // height: 100px;
   width: 90%;
   display: flex;
   align-items: center;
@@ -321,7 +325,7 @@ const TaskContainer = styled.div`
   @media screen and (min-width: 500px) {
     width: 68vw;
   }
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 768px) {
     width: 175px;
   }
 `;

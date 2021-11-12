@@ -25,12 +25,16 @@ const AppHeader = styled.div`
     position: absolute;
     bottom: 0;
     left: 0;
+    transform: ${({ openDrawer }) =>
+      openDrawer ? "scaleX(78%)" : "scaleX(1)"};
+    transform-origin: left;
+    transition: transform 350ms;
   }
-  @media (min-width: 1024px) {
+  @media (max-device-height: 500px) and (orientation: landscape) {
+    display: none;
+  }
+  @media (min-width: 768px) {
     width: 400px;
-    &::after {
-      width: 100%;
-    }
   }
 `;
 
@@ -80,7 +84,7 @@ const HamburgerContainer = styled.div`
   position: absolute;
   top: 17px;
   right: 10px;
-  z-index: 100;
+  z-index: 150;
 `;
 
 const BottomRowContainer = styled.div`
