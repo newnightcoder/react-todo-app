@@ -94,6 +94,8 @@ const List = ({
       switch (statusMessage) {
         case "all": {
           if (todos.length === 0) return setHeaderMessage("");
+          if (todos.filter((todo) => todo.done).length === todos.length)
+            return setHeaderMessage("You have done everything!\nCongrats!");
           return setHeaderMessage("You have things to do");
         }
         case "done": {
@@ -104,15 +106,15 @@ const List = ({
             todos.length !== 0 &&
             todos.filter((todo) => todo.done).length === todos.length
           ) {
-            return setHeaderMessage("You have done everything! Congrats!");
+            return setHeaderMessage("You have done everything!\nCongrats!");
           }
           if (todos.filter((todo) => todo.done).length === 0) {
             return setHeaderMessage("Nothing done yet...");
           }
           return setHeaderMessage(
-            `You have done ${todos.filter((todo) => todo.done).length} thing${
+            `${todos.filter((todo) => todo.done).length} thing${
               todos.filter((todo) => todo.done).length === 1 ? "" : "s"
-            }!`
+            } done!`
           );
         }
         case "not done": {
@@ -123,7 +125,7 @@ const List = ({
             todos.length !== 0 &&
             todos.filter((todo) => !todo.done).length === 0
           ) {
-            return setHeaderMessage("You have done everything! Congrats!");
+            return setHeaderMessage("You have done everything!\nCongrats!");
           }
           return setHeaderMessage(
             `${todos.filter((todo) => !todo.done).length} thing${

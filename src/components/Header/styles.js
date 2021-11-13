@@ -25,10 +25,6 @@ const AppHeader = styled.div`
     position: absolute;
     bottom: 0;
     left: 0;
-    transform: ${({ openDrawer }) =>
-      openDrawer ? "scaleX(78%)" : "scaleX(1)"};
-    transform-origin: left;
-    transition: transform 350ms;
   }
   @media (max-device-height: 500px) and (orientation: landscape) {
     display: none;

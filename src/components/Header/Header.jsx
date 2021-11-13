@@ -1,6 +1,7 @@
 import { Turn as Hamburger } from "hamburger-react";
 import React, { useState } from "react";
 import BottomRow from "./BottomRow";
+import DeleteModal from "./DeleteModal/DeleteModal";
 import HeaderDrawer from "./HeaderDrawer/HeaderDrawer";
 import {
   AppHeader,
@@ -10,26 +11,24 @@ import {
   TitleWrapper,
 } from "./styles";
 
-// const HeaderImg = styled.div`
-//   background: url(${img}) no-repeat center/cover;
-//   height: 100%;
-//   width: 100%;
-//   border: 2px solid red;
-// `;
-
 const Header = ({
-  deleteMsg,
   handleTodosToDisplay,
   displayStatusMessage,
   clear,
   dark,
   toggleDarkMode,
   isToggled,
+  todos,
 }) => {
-  const [openDrawer, setOpen] = useState(false);
+  const [openDrawer, setOpenDrawer] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
 
   const drawerToggle = () => {
-    setOpen((openDrawer) => !openDrawer);
+    setOpenDrawer((openDrawer) => !openDrawer);
+  };
+
+  const modalToggle = () => {
+    setOpenModal((openModal) => !openModal);
   };
 
   return (
@@ -50,12 +49,21 @@ const Header = ({
       </HamburgerContainer>
       <HeaderDrawer
         drawerToggle={drawerToggle}
+        modalToggle={modalToggle}
         openDrawer={openDrawer}
+        openModal={openModal}
         handleTodosToDisplay={handleTodosToDisplay}
         displayStatusMessage={displayStatusMessage}
-        clear={clear}
-        deleteMsg={deleteMsg}
       />
+      {todos.length !== 0 && (
+        <DeleteModal
+          openModal={openModal}
+          modalToggle={modalToggle}
+          drawerToggle={drawerToggle}
+          clear={clear}
+          handleTodosToDisplay={handleTodosToDisplay}
+        />
+      )}
       <BottomRow toggleDarkMode={toggleDarkMode} isToggled={isToggled} />
     </AppHeader>
   );

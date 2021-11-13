@@ -107,24 +107,25 @@ const WelcomeMessage = styled.div`
 const StatusMessage = styled.div`
   ${flexCenter};
   width: max-content;
-  height: inherit;
+  height: max-content;
   font-style: italic;
   color: rgba(175, 175, 175, 0.99);
   position: relative;
-  white-space: nowrap;
   position: absolute;
   left: 48%;
   transform: translateX(-50%);
   z-index: 100;
   opacity: 0;
   visibility: hidden;
+  white-space: pre;
+  text-align: center;
   animation: appear 1000ms forwards 6000ms;
   &::after {
     content: "";
     height: 1px;
     width: 50%;
     position: absolute;
-    bottom: 12px;
+    bottom: -18%;
     background-color: rgba(200, 200, 200, 0.75);
   }
 `;

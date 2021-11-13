@@ -9,6 +9,8 @@ const HeaderDrawer = ({
   clear,
   deleteMsg,
   openDrawer,
+  modalToggle,
+  openModal,
   drawerToggle,
 }) => {
   const [active, setActive] = useState("all");
@@ -47,16 +49,7 @@ const HeaderDrawer = ({
           >
             {types[2]}
           </BtnToggle>
-          <BtnToggle
-            theme="danger"
-            active={active === types[3]}
-            onClick={() => {
-              clear();
-              deleteMsg("delete");
-              setActive("");
-              setTimeout(() => handleTodosToDisplay("all"), 2000);
-            }}
-          >
+          <BtnToggle theme="danger" onClick={modalToggle}>
             {types[3]}
           </BtnToggle>
         </BtnGroup>

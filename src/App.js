@@ -99,10 +99,6 @@ const App = () => {
     setStatusMessage(string);
   };
 
-  const handleDeleteMsg = (string) => {
-    setTodosToDisplay(string);
-  };
-
   const clearList = () => {
     setTodos([]);
     localStorage.clear();
@@ -117,7 +113,6 @@ const App = () => {
           handleTodosToDisplay={handleTodosToDisplay}
           displayStatusMessage={displayStatusMessage}
           clear={clearList}
-          deleteMsg={handleDeleteMsg}
           darkToggle={toggleDarkMode}
           dark={dark}
           toggleDarkMode={toggleDarkMode}

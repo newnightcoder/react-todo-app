@@ -33,6 +33,7 @@ const Drawer = styled.div`
   border-top-left-radius: 10px;
   background: rgba(0, 0, 0, 0.85);
   z-index: 120;
+  position: relative;
   @media (min-width: 768px) {
     width: 220px;
   }
