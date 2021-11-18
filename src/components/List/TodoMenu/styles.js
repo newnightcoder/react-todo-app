@@ -1,3 +1,4 @@
+import { makeStyles } from "@mui/styles";
 import styled from "styled-components";
 
 const TodoMenuWrapper = styled.div`
@@ -32,4 +33,10 @@ const MenuItemName = styled.div`
   border-bottom: 1px solid white;
 `;
 
-export { TodoMenuWrapper, MenuItemName, MenuItem };
+const useStyles = makeStyles({
+  root: {
+    padding: "10px",
+  },
+});
+
+export { TodoMenuWrapper, MenuItemName, MenuItem, useStyles };

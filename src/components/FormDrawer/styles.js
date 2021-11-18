@@ -1,4 +1,5 @@
-import { createTheme, makeStyles } from "@material-ui/core/styles";
+import { createTheme } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import styled from "styled-components";
 
 const DrawerContainer = styled.div`
@@ -173,13 +174,13 @@ const useStyles = makeStyles({
     },
   },
   item: {
-    textTransform: "capitalize",
-    backgroundColor: "#fefefe",
-    color: "#2196f3",
-    "&:focus": {
+    transition: "color 200ms",
+    "&:hover": {
       backgroundColor: "rgba(230,230,230,.5)",
+      fontWeight: 600,
     },
   },
+
   picker: {
     "& .MuiSvgIcon-root": {
       fill: "white",
@@ -226,6 +227,10 @@ const calendarTheme = createTheme({
     primary: {
       contrastText: "#fff",
       main: "#00bbff",
+    },
+    secondary: {
+      contrastText: "#000",
+      main: "#00ff",
     },
   },
 });

@@ -1,10 +1,8 @@
-import DateFnsUtils from "@date-io/date-fns";
-import { MenuItem, TextField } from "@material-ui/core";
-import { ThemeProvider } from "@material-ui/core/styles";
-import {
-  KeyboardDatePicker,
-  MuiPickersUtilsProvider,
-} from "@material-ui/pickers";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import DatePicker from "@mui/lab/DatePicker";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import { MenuItem, TextField } from "@mui/material";
+import { ThemeProvider, useTheme } from "@mui/styles";
 import "date-fns";
 import isPast from "date-fns/isPast";
 import React, { useEffect, useState } from "react";
@@ -18,7 +16,6 @@ import {
   FormWrapper,
   Header,
   IconContainer,
-  menuProps,
   Modal,
   ModalContainer,
   SpanError,
@@ -199,8 +196,8 @@ const FormDrawer = ({
     toggleFormDrawer();
   };
 
-  const classes = useStyles();
-
+  const classes = useStyles(dark);
+  const theme = useTheme();
   return (
     <DrawerContainer
       dark={dark}
@@ -228,7 +225,7 @@ const FormDrawer = ({
       </Header>
       <FormWrapper dark={dark}>
         <IconContainer>{imgHandler(icon)}</IconContainer>
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
           <form
             className={classes.group}
             noValidate
@@ -239,17 +236,37 @@ const FormDrawer = ({
             }}
           >
             <TextField
+              dark={dark}
               className={classes.root}
-              select={true}
+              select
               label="Select a category"
               id="standard-select"
               value={category}
               onChange={handleCategoryInput}
-              SelectProps={menuProps}
-              dark={dark}
+              SelectProps={{
+                MenuProps: {
+                  anchorOrigin: {
+                    vertical: "bottom",
+                    horizontal: "center",
+                  },
+                  // getContentAnchorEl: null,
+                  MenuListProps: {
+                    style: {
+                      backgroundColor: dark ? "#333" : "#fefefe",
+                      textTransform: "capitalize",
+                    },
+                  },
+                },
+              }}
             >
               {selectOptions.map((option, i) => (
-                <MenuItem key={i} value={option.value} className={classes.item}>
+                <MenuItem
+                  dark={dark}
+                  style={{ color: dark ? "#fefefe" : "#2196f3" }}
+                  key={i}
+                  value={option.value}
+                  className={classes.item}
+                >
                   {option.value}
                 </MenuItem>
               ))}
@@ -262,37 +279,39 @@ const FormDrawer = ({
               onChange={handleTodoInput}
             />
             <ThemeProvider theme={calendarTheme}>
-              <KeyboardDatePicker
-                className={classes.picker}
-                margin="normal"
-                id="date-picker-dialog"
-                label="When?"
-                format="dd/MM/yyyy"
-                value={selectedDate}
-                placeholder="When"
+              <DatePicker
                 onChange={handleWhenInput}
-                KeyboardButtonProps={{
-                  "aria-label": "change date",
-                }}
-                InputProps={{ readOnly: true }}
-                variant="inline"
+                onOpen={() => setIsPickerOpen(true)}
+                open={isPickerOpen}
+                onClose={() => setIsPickerOpen(false)}
                 PopoverProps={{
                   PaperProps: {
                     style: {
-                      backgroundColor: "#fefefe",
+                      backgroundColor: dark ? "#444" : "#fefefe",
                     },
                   },
                 }}
-                onClick={() => setIsPickerOpen(true)}
-                open={isPickerOpen}
-                onClose={() => setIsPickerOpen(false)}
+                KeyboardButtonProps={{
+                  "aria-label": "change date",
+                }}
+                dark={dark}
+                className={classes.picker}
+                margin="normal"
+                id="date-picker-dialog"
+                value={selectedDate}
+                placeholder="When"
+                InputProps={{ readOnly: true }}
+                variant="standard"
+                renderInput={(params) => (
+                  <TextField {...params} label="When?" format="dd/MM/yyyy" />
+                )}
               />
             </ThemeProvider>
             <SubmitBtn dark={dark} type="submit" onClick={handleToggleDrawer}>
               {id !== undefined ? "edit" : "add your thing"}
             </SubmitBtn>
           </form>
-        </MuiPickersUtilsProvider>
+        </LocalizationProvider>
       </FormWrapper>
       <ModalContainer
         style={{

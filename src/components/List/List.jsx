@@ -1,4 +1,4 @@
-import { IconButton } from "@material-ui/core";
+import { IconButton } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Filter, ThreeDotsVertical } from "react-bootstrap-icons";
 import { useTransition } from "react-spring";

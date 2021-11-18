@@ -1,17 +1,7 @@
-import { IconButton } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
-import CloseIcon from "@material-ui/icons/Close";
-import CreateIcon from "@material-ui/icons/Create";
-import DeleteIcon from "@material-ui/icons/Delete";
+import { CheckCircleOutline, Close, Create, Delete } from "@mui/icons-material";
+import { IconButton } from "@mui/material";
 import React from "react";
-import { MenuItem, MenuItemName, TodoMenuWrapper } from "./styles";
-
-const useStyles = makeStyles({
-  root: {
-    padding: "10px",
-  },
-});
+import { MenuItem, MenuItemName, TodoMenuWrapper, useStyles } from "./styles";
 
 const TodoMenu = ({
   item,
@@ -45,7 +35,7 @@ const TodoMenu = ({
           size="medium"
           onClick={() => checkItem(item.id)}
         >
-          <CheckCircleOutlineIcon
+          <CheckCircleOutline
             variant="outlined"
             style={{ color: item?.done ? "gray" : "white" }}
           />
@@ -59,7 +49,7 @@ const TodoMenu = ({
           size="medium"
           onClick={() => selectEditTodo(item.id)}
         >
-          <CreateIcon style={{ color: "white" }} />
+          <Create style={{ color: "white" }} />
         </IconButton>
       </MenuItem>
       <MenuItem>
@@ -69,7 +59,7 @@ const TodoMenu = ({
           size="medium"
           onClick={() => deleteItem(item.id)}
         >
-          <DeleteIcon style={{ color: "white" }} />
+          <Delete style={{ color: "white" }} />
         </IconButton>
       </MenuItem>
       <IconButton
@@ -82,7 +72,7 @@ const TodoMenu = ({
           color: "white",
         }}
       >
-        <CloseIcon fontSize="small" />
+        <Close fontSize="small" />
       </IconButton>
     </TodoMenuWrapper>
   );
