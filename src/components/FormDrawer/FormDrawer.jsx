@@ -1,8 +1,10 @@
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import DatePicker from "@mui/lab/DatePicker";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
-import { MenuItem, TextField } from "@mui/material";
-import { ThemeProvider, useTheme } from "@mui/styles";
+import PickersDay, { pickersDayClasses } from "@mui/lab/PickersDay";
+import { MenuItem, TextField, Toolbar } from "@mui/material";
+import { styled } from "@mui/material/styles";
+import { useTheme } from "@mui/styles";
 import "date-fns";
 import isPast from "date-fns/isPast";
 import React, { useEffect, useState } from "react";
@@ -10,7 +12,6 @@ import { ChevronLeft } from "react-bootstrap-icons";
 import { imgHandler } from "./imgHandler";
 import {
   Btn,
-  calendarTheme,
   CloseModalBtn,
   DrawerContainer,
   FormWrapper,
@@ -28,6 +29,12 @@ import {
 const curr = new Date();
 curr.setDate(curr.getDate());
 const today = curr.toISOString().substr(0, 10);
+
+const MyToolbar = styled(Toolbar)({
+  // "& .MuiPrivatePickersToolbar-root": {
+  //   backgroundColor: "yellow",
+  // },
+});
 
 const FormDrawer = ({
   isOpen,
@@ -196,6 +203,20 @@ const FormDrawer = ({
     toggleFormDrawer();
   };
 
+  const renderWeekPickerDay = (date, selectedDates, pickersDayProps) => {
+    return (
+      <PickersDay
+        {...pickersDayProps}
+        sx={{
+          [`&&.${pickersDayClasses.selected}`]: {
+            backgroundColor: dark ? "white" : "green",
+            color: dark ? "black" : "white",
+          },
+        }}
+      />
+    );
+  };
+
   const classes = useStyles(dark);
   const theme = useTheme();
   return (
@@ -225,93 +246,107 @@ const FormDrawer = ({
       </Header>
       <FormWrapper dark={dark}>
         <IconContainer>{imgHandler(icon)}</IconContainer>
-        <LocalizationProvider dateAdapter={AdapterDateFns}>
-          <form
-            className={classes.group}
-            noValidate
-            autoComplete="off"
-            onSubmit={(e) => {
-              handleAddTodo(e);
-              handleEditTodo(e);
-            }}
-          >
-            <TextField
-              dark={dark}
-              className={classes.root}
-              select
-              label="Select a category"
-              id="standard-select"
-              value={category}
-              onChange={handleCategoryInput}
-              SelectProps={{
-                MenuProps: {
-                  anchorOrigin: {
-                    vertical: "bottom",
-                    horizontal: "center",
-                  },
-                  // getContentAnchorEl: null,
-                  MenuListProps: {
-                    style: {
-                      backgroundColor: dark ? "#333" : "#fefefe",
-                      textTransform: "capitalize",
-                    },
+        <form
+          className={classes.group}
+          noValidate
+          autoComplete="off"
+          onSubmit={(e) => {
+            handleAddTodo(e);
+            handleEditTodo(e);
+          }}
+        >
+          <TextField
+            dark={dark}
+            className={classes.root}
+            select
+            label="Select a category"
+            id="standard-select"
+            value={category}
+            onChange={handleCategoryInput}
+            SelectProps={{
+              MenuProps: {
+                anchorOrigin: {
+                  vertical: "bottom",
+                  horizontal: "center",
+                },
+                MenuListProps: {
+                  style: {
+                    backgroundColor: dark ? "#333" : "#fefefe",
+                    textTransform: "capitalize",
                   },
                 },
-              }}
-            >
-              {selectOptions.map((option, i) => (
-                <MenuItem
-                  dark={dark}
-                  style={{ color: dark ? "#fefefe" : "#2196f3" }}
-                  key={i}
-                  value={option.value}
-                  className={classes.item}
-                >
-                  {option.value}
-                </MenuItem>
-              ))}
-            </TextField>
-            <TextField
-              className={classes.root}
-              id="outlined-basic"
-              label="Your thing to do"
-              value={newTodo}
-              onChange={handleTodoInput}
-            />
-            <ThemeProvider theme={calendarTheme}>
-              <DatePicker
-                onChange={handleWhenInput}
-                onOpen={() => setIsPickerOpen(true)}
-                open={isPickerOpen}
-                onClose={() => setIsPickerOpen(false)}
-                PopoverProps={{
-                  PaperProps: {
-                    style: {
-                      backgroundColor: dark ? "#444" : "#fefefe",
-                    },
-                  },
-                }}
-                KeyboardButtonProps={{
-                  "aria-label": "change date",
-                }}
+              },
+            }}
+          >
+            {selectOptions.map((option, i) => (
+              <MenuItem
                 dark={dark}
-                className={classes.picker}
-                margin="normal"
-                id="date-picker-dialog"
-                value={selectedDate}
-                placeholder="When"
-                InputProps={{ readOnly: true }}
-                variant="standard"
-                renderInput={(params) => (
-                  <TextField {...params} label="When?" format="dd/MM/yyyy" />
-                )}
-              />
-            </ThemeProvider>
-            <SubmitBtn dark={dark} type="submit" onClick={handleToggleDrawer}>
-              {id !== undefined ? "edit" : "add your thing"}
-            </SubmitBtn>
-          </form>
-        </LocalizationProvider>
+                style={{ color: dark ? "#fefefe" : "#2196f3" }}
+                key={i}
+                value={option.value}
+                className={classes.item}
+              >
+                {option.value}
+              </MenuItem>
+            ))}
+          </TextField>
+          <TextField
+            className={classes.root}
+            id="outlined-basic"
+            label="Your thing to do"
+            value={newTodo}
+            onChange={handleTodoInput}
+          />
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            {/* <ThemeProvider theme={calendarTheme}> */}
+            <DatePicker
+              dark={dark}
+              onChange={handleWhenInput}
+              open={isPickerOpen}
+              onClose={() => setIsPickerOpen(false)}
+              OpenPickerButtonProps={{
+                style: {
+                  color: "#fefefe",
+                },
+              }}
+              PaperProps={{
+                style: {
+                  backgroundColor: dark ? "#333" : "deepskyblue",
+                  color: dark ? "#fefefe" : "black",
+                },
+              }}
+              showToolbar={true}
+              toolbarTitle={""}
+              // margin="normal"
+              id="date-picker-dialog"
+              value={selectedDate}
+              placeholder="When"
+              InputProps={{ readOnly: true }}
+              ToolbarComponent={() => (
+                <MyToolbar
+                  sx={{
+                    backgroundColor: "red",
+                  }}
+                />
+              )}
+              renderDay={renderWeekPickerDay}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  className={classes.inputPicker}
+                  label="When?"
+                  format="dd/MM/yyyy"
+                  onClick={() => setIsPickerOpen(true)}
+                />
+              )}
+            />
+            {/* </ThemeProvider> */}
+          </LocalizationProvider>
+
+          <SubmitBtn dark={dark} type="submit" onClick={handleToggleDrawer}>
+            {id !== undefined ? "edit" : "add your thing"}
+          </SubmitBtn>
+        </form>
       </FormWrapper>
       <ModalContainer
         style={{

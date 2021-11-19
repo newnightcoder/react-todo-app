@@ -1,7 +1,6 @@
-import { createTheme } from "@mui/material";
+import { createTheme } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
 import styled from "styled-components";
-
 const DrawerContainer = styled.div`
   height: 100%;
   width: inherit;
@@ -181,7 +180,7 @@ const useStyles = makeStyles({
     },
   },
 
-  picker: {
+  inputPicker: {
     "& .MuiSvgIcon-root": {
       fill: "white",
     },
@@ -207,22 +206,31 @@ const useStyles = makeStyles({
   },
 });
 
-const menuProps = {
-  MenuProps: {
-    anchorOrigin: {
-      vertical: "bottom",
-      horizontal: "left",
-    },
-    getContentAnchorEl: null,
-    MenuListProps: {
-      style: {
-        backgroundColor: "#fefefe",
-      },
-    },
-  },
-};
-
 const calendarTheme = createTheme({
+  // components: {
+  //   datePicker: {
+  //     color: "#452325",
+  //     textColor: "#475",
+  //     calendarTextColor: "#455",
+  //     selectColor: "#313",
+  //     selectTextColor: "#325",
+  //     calendarYearBackgroundColor: "#4325",
+  //     headerColor: "#452325" || "#452325",
+  //   },
+  // },
+  // styleOverrides: {
+  //   MuiPickersToolbar: {
+  //     toolbar: {
+  //       backgroundColor: "#8bc34a",
+  //     },
+  //   },
+  //   MuiPickersCalendarHeader: {
+  //     switchHeader: {
+  //       backgroundColor: "white",
+  //       color: "#1b5e20",
+  //     },
+  //   },
+  // },
   palette: {
     primary: {
       contrastText: "#fff",
@@ -248,6 +256,5 @@ export {
   SpanError,
   CloseModalBtn,
   calendarTheme,
-  menuProps,
   useStyles,
 };
