@@ -44,15 +44,15 @@ const Header = styled.div`
   color: ${({ dark }) => (dark ? "#fefefe" : "#555")};
   font-size: 0.85rem;
   font-weight: 500;
-  padding: 0 25px;
+  padding: 0 17.5px 0 25px;
   transition-property: color, background-color;
   transition-duration: 500ms;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   @media screen and (min-width: 768px) {
     width: 400px;
   }
-  @media screen and (max-width: 358px) {
-    padding: 0 12.5px 0 20px;
+  @media screen and (max-width: 360px) {
+    padding: 0 7.5px 0 12.5px;
   }
 `;
 
@@ -69,7 +69,7 @@ const WelcomeMessage = styled.div`
   width: inherit;
   height: inherit;
   font-style: italic;
-  color: rgba(175, 175, 175, 0.99);
+  color: rgba(155, 155, 155, 0.99);
   background-color: ${({ dark }) => (dark ? "#333" : "#fefefe")};
   position: relative;
   transition-property: color, background-color;
@@ -109,7 +109,7 @@ const StatusMessage = styled.div`
   width: max-content;
   height: max-content;
   font-style: italic;
-  color: rgba(175, 175, 175, 0.99);
+  color: rgba(155, 155, 155, 0.99);
   position: relative;
   position: absolute;
   left: 48%;
@@ -127,6 +127,9 @@ const StatusMessage = styled.div`
     position: absolute;
     bottom: -18%;
     background-color: rgba(200, 200, 200, 0.75);
+  }
+  @media screen and (max-width: 358px) {
+    font-size: 0.8rem;
   }
 `;
 

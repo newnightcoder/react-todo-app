@@ -32,6 +32,9 @@ const AppHeader = styled.div`
   @media (min-width: 768px) {
     width: 400px;
   }
+  @media (max-width: 358px) {
+    padding-left: 12.5px;
+  }
 `;
 
 const TitleWrapper = styled.div`
@@ -58,6 +61,7 @@ const Title = styled.h1`
   color: white;
   font-size: 3rem;
   font-weight: 400;
+  text-shadow: 0 0 2px white;
 `;
 
 const Subtitle = styled.p`
@@ -65,6 +69,7 @@ const Subtitle = styled.p`
   font-size: 1rem;
   font-weight: 500;
   padding: 0.75vh 5px;
+  text-shadow: 0 0 1px white;
 `;
 
 const HamburgerContainer = styled.div`
@@ -91,7 +96,7 @@ const BottomRowContainer = styled.div`
   position: absolute;
   left: 0;
   bottom: 15px;
-  padding: 0 25px;
+  padding: 0 17.5px 0 25px;
   @media screen and (max-width: 358px) {
     padding: 0 12.5px 0 20px;
   }
