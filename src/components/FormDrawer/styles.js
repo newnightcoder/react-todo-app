@@ -1,4 +1,3 @@
-import { createTheme } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
 import styled from "styled-components";
 const DrawerContainer = styled.div`
@@ -9,7 +8,7 @@ const DrawerContainer = styled.div`
   grid-template-rows: 5vh 1fr 5vh;
   grid-gap: 20px;
   transition: background-color 500ms;
-  background-color: ${({ dark }) => (dark ? "#111" : "#46529d")};
+  background-color: ${({ dark }) => (dark ? "#333" : "#46529d")};
   color: white;
   position: absolute;
   top: 0;
@@ -105,9 +104,9 @@ const Modal = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #efefef;
+  background-color: ${({ dark }) => (dark ? "#111" : "#fefefe")};
   border-radius: 3px;
-  color: #333;
+  color: ${({ dark }) => (dark ? "#fefefe" : "#111")};
   white-space: pre;
 `;
 
@@ -124,13 +123,13 @@ const CloseModalBtn = styled.button`
   border: none;
   padding: 7px;
   background-color: deepskyblue;
-  color: white;
+  color: ${({ dark }) => (dark ? "#111" : "#fefefe")};
   font-weight: 600;
   border-radius: 3px;
   transform: translateY(100%);
   &:hover {
     cursor: pointer;
-    color: black;
+    color: ${({ dark }) => (dark ? "#fefefe" : "#111")};
   }
 `;
 
@@ -206,43 +205,6 @@ const useStyles = makeStyles({
   },
 });
 
-const calendarTheme = createTheme({
-  // components: {
-  //   datePicker: {
-  //     color: "#452325",
-  //     textColor: "#475",
-  //     calendarTextColor: "#455",
-  //     selectColor: "#313",
-  //     selectTextColor: "#325",
-  //     calendarYearBackgroundColor: "#4325",
-  //     headerColor: "#452325" || "#452325",
-  //   },
-  // },
-  // styleOverrides: {
-  //   MuiPickersToolbar: {
-  //     toolbar: {
-  //       backgroundColor: "#8bc34a",
-  //     },
-  //   },
-  //   MuiPickersCalendarHeader: {
-  //     switchHeader: {
-  //       backgroundColor: "white",
-  //       color: "#1b5e20",
-  //     },
-  //   },
-  // },
-  palette: {
-    primary: {
-      contrastText: "#fff",
-      main: "#00bbff",
-    },
-    secondary: {
-      contrastText: "#000",
-      main: "#00ff",
-    },
-  },
-});
-
 export {
   DrawerContainer,
   Header,
@@ -255,6 +217,5 @@ export {
   Modal,
   SpanError,
   CloseModalBtn,
-  calendarTheme,
   useStyles,
 };

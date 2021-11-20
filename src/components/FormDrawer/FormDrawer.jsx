@@ -1,11 +1,12 @@
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
-import DatePicker from "@mui/lab/DatePicker";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import MobileDatePicker from "@mui/lab/MobileDatePicker";
 import PickersDay, { pickersDayClasses } from "@mui/lab/PickersDay";
-import { MenuItem, TextField, Toolbar } from "@mui/material";
+import { MenuItem, TextField, Toolbar, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { useTheme } from "@mui/styles";
 import "date-fns";
+import format from "date-fns/format";
 import isPast from "date-fns/isPast";
 import React, { useEffect, useState } from "react";
 import { ChevronLeft } from "react-bootstrap-icons";
@@ -25,16 +26,12 @@ import {
   useStyles,
 } from "./styles";
 
-// today's date for datepicker default value
+// today's date for Mobiledatepicker default value
 const curr = new Date();
 curr.setDate(curr.getDate());
 const today = curr.toISOString().substr(0, 10);
 
-const MyToolbar = styled(Toolbar)({
-  // "& .MuiPrivatePickersToolbar-root": {
-  //   backgroundColor: "yellow",
-  // },
-});
+const MyToolbar = styled(Toolbar)({});
 
 const FormDrawer = ({
   isOpen,
@@ -208,9 +205,13 @@ const FormDrawer = ({
       <PickersDay
         {...pickersDayProps}
         sx={{
+          [`&&.${pickersDayClasses.root}`]: {
+            backgroundColor: dark ? "#333" : "#fefefe",
+            color: dark ? "#fefefe" : "black",
+          },
           [`&&.${pickersDayClasses.selected}`]: {
-            backgroundColor: dark ? "white" : "green",
-            color: dark ? "black" : "white",
+            backgroundColor: "deepskyblue",
+            color: dark ? "black" : "#fefefe",
           },
         }}
       />
@@ -259,6 +260,7 @@ const FormDrawer = ({
             dark={dark}
             className={classes.root}
             select
+            variant="standard"
             label="Select a category"
             id="standard-select"
             value={category}
@@ -271,7 +273,7 @@ const FormDrawer = ({
                 },
                 MenuListProps: {
                   style: {
-                    backgroundColor: dark ? "#333" : "#fefefe",
+                    backgroundColor: dark ? "#222" : "#fefefe",
                     textTransform: "capitalize",
                   },
                 },
@@ -291,48 +293,66 @@ const FormDrawer = ({
             ))}
           </TextField>
           <TextField
+            variant="standard"
+            id="standard-basic"
             className={classes.root}
-            id="outlined-basic"
             label="Your thing to do"
             value={newTodo}
             onChange={handleTodoInput}
           />
           <LocalizationProvider dateAdapter={AdapterDateFns}>
-            {/* <ThemeProvider theme={calendarTheme}> */}
-            <DatePicker
+            <MobileDatePicker
               dark={dark}
+              id="date-picker-dialog"
+              value={selectedDate}
+              placeholder="When"
+              InputProps={{ readOnly: true }}
               onChange={handleWhenInput}
               open={isPickerOpen}
               onClose={() => setIsPickerOpen(false)}
+              componentsProps={{
+                CalendarPickerProps: {
+                  SvgIcon: {
+                    fill: "white",
+                  },
+                },
+              }}
               OpenPickerButtonProps={{
                 style: {
                   color: "#fefefe",
                 },
               }}
-              PaperProps={{
-                style: {
-                  backgroundColor: dark ? "#333" : "deepskyblue",
-                  color: dark ? "#fefefe" : "black",
+              DialogProps={{
+                PaperProps: {
+                  style: {
+                    backgroundColor: dark ? "#333" : "#fefefe",
+                    color: dark ? "#fefefe" : "black",
+                  },
                 },
               }}
               showToolbar={true}
-              toolbarTitle={""}
-              // margin="normal"
-              id="date-picker-dialog"
-              value={selectedDate}
-              placeholder="When"
-              InputProps={{ readOnly: true }}
-              ToolbarComponent={() => (
+              ToolbarComponent={(props) => (
                 <MyToolbar
                   sx={{
-                    backgroundColor: "red",
+                    backgroundColor: "deepskyblue",
+                    borderTopLeftRadius: "3px",
+                    borderTopRightRadius: "3px",
                   }}
-                />
+                >
+                  <Typography
+                    variant="h6"
+                    sx={{ color: "#fefefe", fontWeight: "600" }}
+                    component="div"
+                  >
+                    {format(new Date(selectedDate), "eeee LLL do, yyyy")}
+                  </Typography>
+                </MyToolbar>
               )}
               renderDay={renderWeekPickerDay}
               renderInput={(params) => (
                 <TextField
                   {...params}
+                  variant="standard"
                   className={classes.inputPicker}
                   label="When?"
                   format="dd/MM/yyyy"
@@ -340,9 +360,7 @@ const FormDrawer = ({
                 />
               )}
             />
-            {/* </ThemeProvider> */}
           </LocalizationProvider>
-
           <SubmitBtn dark={dark} type="submit" onClick={handleToggleDrawer}>
             {id !== undefined ? "edit" : "add your thing"}
           </SubmitBtn>
@@ -355,9 +373,11 @@ const FormDrawer = ({
           zIndex: error.length !== 0 ? 200 : -10,
         }}
       >
-        <Modal style={{ opacity: error ? 1 : 0 }}>
+        <Modal dark={dark} style={{ opacity: error ? 1 : 0 }}>
           <SpanError>{error}</SpanError>
-          <CloseModalBtn onClick={() => setError("")}>OK</CloseModalBtn>
+          <CloseModalBtn dark={dark} onClick={() => setError("")}>
+            OK
+          </CloseModalBtn>
         </Modal>
       </ModalContainer>
     </DrawerContainer>
