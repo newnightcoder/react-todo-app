@@ -2,6 +2,8 @@
   "projects": {
     "default": "things-5628d",
     "new version": "things-7544b",
-    "Things new version": "things-7544b"
-  }
+    "Things new version": "things-7544b",
+    "things": "things-7544b"
+  },
+  "targets": {}
 }

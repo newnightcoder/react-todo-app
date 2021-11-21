@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import img from "../../img/giphy.gif";
+import img from "../../img/header.webp";
 
 const AppHeader = styled.div`
   grid-row: 1;
