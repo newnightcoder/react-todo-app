@@ -235,7 +235,7 @@ const FormDrawer = ({
           }}
         >
           <TextField
-            dark={dark}
+            $dark
             className={classes.root}
             select
             variant="standard"
@@ -260,7 +260,7 @@ const FormDrawer = ({
           >
             {selectOptions.map((option, i) => (
               <MenuItem
-                dark={dark}
+                $dark
                 style={{ color: dark ? "#fefefe" : "#2196f3" }}
                 key={i}
                 value={option.value}
@@ -280,7 +280,6 @@ const FormDrawer = ({
           />
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <MobileDatePicker
-              dark={dark}
               id="date-picker-dialog"
               value={selectedDate}
               placeholder="When"
@@ -339,7 +338,7 @@ const FormDrawer = ({
               )}
             />
           </LocalizationProvider>
-          <SubmitBtn dark={dark} type="submit" onClick={handleToggleDrawer}>
+          <SubmitBtn $dark type="submit" onClick={handleToggleDrawer}>
             {id !== undefined ? "edit" : "add your thing"}
           </SubmitBtn>
         </form>

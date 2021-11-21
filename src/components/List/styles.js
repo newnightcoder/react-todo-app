@@ -56,6 +56,21 @@ const Header = styled.div`
   }
 `;
 
+const SpanInbox = styled.span`
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 1rem;
+  visibility: hidden;
+  opacity: 0;
+  animation: appear 500ms forwards 3500ms;
+  @keyframes appear {
+    100% {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+`;
+
 const MessageContainer = styled.div`
   ${flexCenter};
   width: 100%;
@@ -130,21 +145,6 @@ const StatusMessage = styled.div`
   }
   @media screen and (max-width: 358px) {
     font-size: 0.8rem;
-  }
-`;
-
-const SpanInbox = styled.span`
-  display: inline-block;
-  text-transform: uppercase;
-  font-size: 0.75rem;
-  visibility: hidden;
-  opacity: 0;
-  animation: appear 500ms forwards 3500ms;
-  @keyframes appear {
-    100% {
-      visibility: visible;
-      opacity: 1;
-    }
   }
 `;
 
