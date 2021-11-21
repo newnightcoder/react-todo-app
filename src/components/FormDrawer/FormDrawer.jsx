@@ -4,7 +4,6 @@ import MobileDatePicker from "@mui/lab/MobileDatePicker";
 import PickersDay, { pickersDayClasses } from "@mui/lab/PickersDay";
 import { MenuItem, TextField, Toolbar, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import { useTheme } from "@mui/styles";
 import "date-fns";
 import format from "date-fns/format";
 import isPast from "date-fns/isPast";
@@ -46,14 +45,11 @@ const FormDrawer = ({
   const [icon, setIcon] = useState("");
   const [newTodo, setNewTodo] = useState("");
   const [selectedDate, setSelectedDate] = useState(today);
-  const [isSubmitBtn, setIsSubmitBtn] = useState(false);
   const [id, setId] = useState(undefined);
   const [error, setError] = useState("");
   const [isPickerOpen, setIsPickerOpen] = useState(false);
 
   useEffect(() => {
-    console.log("error useEffect", error);
-
     if (todoEdit !== null) {
       setIcon(todoEdit.icon);
       setCategory(todoEdit.category);
@@ -124,13 +120,6 @@ const FormDrawer = ({
     }
   };
 
-  const handleCloseBtn = () => {
-    setIsSubmitBtn(true);
-    setTimeout(() => {
-      setIsSubmitBtn(false);
-    }, 300);
-  };
-
   const resetForm = () => {
     setNewTodo("");
     setId(undefined);
@@ -168,7 +157,6 @@ const FormDrawer = ({
       done: false,
     };
     addItem(todo);
-    // handleCloseBtn();
     setTimeout(() => {
       resetForm();
     }, 400);
@@ -218,20 +206,10 @@ const FormDrawer = ({
     );
   };
 
-  const classes = useStyles(dark);
-  const theme = useTheme();
+  const classes = useStyles();
+
   return (
-    <DrawerContainer
-      dark={dark}
-      style={{
-        transformOrigin: isSubmitBtn ? "center" : "right",
-        transform: isOpen
-          ? "translateX(0)"
-          : isSubmitBtn
-          ? "scale(0)"
-          : "translateX(100%)",
-      }}
-    >
+    <DrawerContainer dark={dark} isOpen={isOpen}>
       <Header>
         <Btn
           onClick={() => {

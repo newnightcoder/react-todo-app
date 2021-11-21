@@ -5,7 +5,6 @@ import { Footer, FormDrawer, Header, List } from "./components/index";
 const App = () => {
   const [todos, setTodos] = useState([]);
   const [isTodo, setIsTodo] = useState(null);
-  const [isMenuOpen, setIsMenuOpen] = useState(null);
   const [todoEdit, setTodoEdit] = useState(null);
   const [todosToDisplay, setTodosToDisplay] = useState("all");
   const [statusMessage, setStatusMessage] = useState("all");
@@ -128,7 +127,6 @@ const App = () => {
           checkItem={checkItem}
           deleteItem={deleteItem}
           isTodo={isTodo}
-          isMenuOpen={isMenuOpen}
           openTodoMenu={openTodoMenu}
           closeTodoMenu={closeTodoMenu}
         />

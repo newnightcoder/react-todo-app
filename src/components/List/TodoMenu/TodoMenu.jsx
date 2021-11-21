@@ -8,9 +8,7 @@ const TodoMenu = ({
   checkItem,
   deleteItem,
   selectEditTodo,
-  open,
   close,
-  isOpen,
   isTodo,
   dark,
 }) => {

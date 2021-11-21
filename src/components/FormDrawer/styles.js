@@ -1,5 +1,6 @@
 import { makeStyles } from "@mui/styles";
 import styled from "styled-components";
+
 const DrawerContainer = styled.div`
   height: 100%;
   width: inherit;
@@ -14,6 +15,7 @@ const DrawerContainer = styled.div`
   top: 0;
   right: 0;
   z-index: 100;
+  transform: ${({ isOpen }) => (isOpen ? "translateX(0)" : "translateX(100%)")};
   transition: transform 150ms ease-out;
 `;
 

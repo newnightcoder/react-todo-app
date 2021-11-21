@@ -39,7 +39,6 @@ const List = ({
   openTodoMenu,
   closeTodoMenu,
   isTodo,
-  isMenuOpen,
 }) => {
   const [isFilter, setIsFilter] = useState(false);
   const [active, setActive] = useState("");
@@ -52,7 +51,6 @@ const List = ({
   };
 
   useEffect(() => {
-    console.log(todosToDisplay);
     const filterTodos = () => {
       const todosCopy = [...todos];
       switch (todosToDisplay) {
@@ -138,7 +136,7 @@ const List = ({
       }
     };
     displayMessage();
-  }, [todos, rows, statusMessage]);
+  }, [todos, rows, headerMessage, statusMessage]);
 
   // const transition = useTransition(filteredTodos, (todo) => todo.id, {
   //   from: { opacity: 0, transform: "scale(0)" },
@@ -295,9 +293,7 @@ const List = ({
               selectEditTodo={selectEditTodo}
               checkItem={checkItem}
               deleteItem={deleteItem}
-              open={openTodoMenu}
               close={closeTodoMenu}
-              isOpen={isMenuOpen}
               isTodo={isTodo}
             />
           </StyledTodo>

@@ -5,13 +5,13 @@ import { DateTime, Span, Time, Today } from "./styles";
 const DateAndTime = () => {
   const [clock, setClock] = useState(new Date().toJSON());
 
-  useEffect(() => {
-    setInterval(() => updateTime(), 1000);
-  }, []);
-
   const updateTime = () => {
     setClock(new Date().toJSON());
   };
+
+  useEffect(() => {
+    setInterval(() => updateTime(), 1000);
+  }, []);
 
   return (
     <DateTime>
