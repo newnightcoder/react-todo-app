@@ -1,10 +1,11 @@
 import styled from "styled-components";
-import img from "../../img/header.webp";
+import img from "../../img/header.gif";
 
 const AppHeader = styled.div`
   grid-row: 1;
   height: 25vh;
   min-height: 200px;
+  max-height: 300px;
   width: 100%;
   padding-left: 25px;
   display: flex;
@@ -15,8 +16,11 @@ const AppHeader = styled.div`
   white-space: nowrap;
   overflow: hidden !important;
   z-index: 50;
-  background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),
-    url(${img}) no-repeat center/cover;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)),
+    url(${img});
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   &::after {
     content: "";
     width: 100%;
@@ -40,7 +44,7 @@ const AppHeader = styled.div`
 const TitleWrapper = styled.div`
   height: 15vh;
   width: 50vw;
-  padding-top: 7.5px;
+  padding-top: 15px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -67,7 +71,7 @@ const Title = styled.h1`
 const Subtitle = styled.p`
   color: white;
   font-size: 1rem;
-  font-weight: 500;
+  // font-weight: 00;
   padding: 0.75vh 5px;
   text-shadow: 0 0 1px white;
 `;
@@ -75,7 +79,7 @@ const Subtitle = styled.p`
 const HamburgerContainer = styled.div`
   width: 50px;
   height: 40px;
-  padding: 0;
+  padding-top: 10px;
   display: flex;
   background-color: transparent;
   outline: none;

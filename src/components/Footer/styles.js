@@ -24,7 +24,7 @@ const CounterWrapper = styled.div`
   font-size: 0.85rem;
   font-weight: 500;
   white-space: nowrap;
-  padding-left: 18px;
+  padding-left: 25px;
 `;
 
 const Counter = styled.div`
@@ -40,6 +40,18 @@ const Counter = styled.div`
   position: relative;
 `;
 
+const ProgressBar = styled.div`
+  height: inherit;
+  width: 100%;
+  background-color: rgb(253, 253, 253);
+  transform-origin: right;
+  transition: transform 300ms;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+`;
+
 const CounterText = styled.div`
   width: 50%;
   color: ${({ dark }) => (dark ? "#fefefe" : "#555")};
@@ -51,18 +63,6 @@ const Number = styled.span`
   display: inline-block;
   width: 25px;
   text-align: right;
-`;
-
-const ProgressBar = styled.div`
-  height: 100%;
-  width: 100%;
-  background-color: rgb(253, 253, 253);
-  transform-origin: right;
-  transition: transform 300ms;
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 10;
 `;
 
 const PlusBtn = styled.button`

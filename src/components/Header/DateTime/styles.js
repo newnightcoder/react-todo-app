@@ -4,7 +4,7 @@ const DateTime = styled.div`
   width: max-content;
   height: 20px;
   font-size: 0.75rem;
-  font-weight: 600;
+  font-weight: 500;
   color: white;
   display: flex;
   justify-content: center;

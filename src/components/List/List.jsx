@@ -219,7 +219,7 @@ const List = ({
         </FilterBtnWrapper>
       </Header>
       <TodoList dark={dark}>
-        {todos.length === 0 && (
+        {todos.length === 0 ? (
           <EmptyListMessage>
             <span style={{ paddingBottom: "1.5rem" }}>
               YOUR LIST IS EMPTY...
@@ -251,53 +251,54 @@ const List = ({
               </p>
             </div>
           </EmptyListMessage>
-        )}
-        {transition.map(({ item, props: { y, ...rest }, key }, index) => (
-          <StyledTodo
-            dark={dark}
-            key={item.id}
-            style={{
-              ...rest,
-              // transform: y.interpolate((y) => `translate3d(0,${y}px,0)`),
-              textDecoration: item.done
-                ? "line-through"
-                : "line-through transparent",
-              color: item.done ? "rgb(200,200,200)" : null,
-              backgroundColor: item.done ? "" : null,
-            }}
-          >
-            <IconCatContainer dark={dark}>
-              {imgHandler(item.icon, item.done, dark)}
-            </IconCatContainer>
-            <TaskContainer dark={dark}>{item.task}</TaskContainer>
-            <TimeContainer>
-              {formatTime(
-                item.selectedDate.split("-").map((number) => +number)[0],
-                item.selectedDate.split("-").map((number) => +number)[1],
-                item.selectedDate.split("-").map((number) => +number)[2]
-              )}
-            </TimeContainer>
-            <IconButton size="small" onClick={() => openTodoMenu(item.id)}>
-              <ThreeDotsVertical
-                style={{
-                  cursor: "pointer",
-                  color: dark ? "white" : "black",
-                  transition: "color 500ms",
-                }}
-              />
-            </IconButton>
+        ) : (
+          transition.map(({ item, props: { y, ...rest }, key }, index) => (
+            <StyledTodo
+              // dark={dark}
+              key={item.id}
+              style={{
+                ...rest,
+                // transform: y.interpolate((y) => `translate3d(0,${y}px,0)`),
+                textDecoration: item.done
+                  ? "line-through"
+                  : "line-through transparent",
+                color: item.done ? "rgb(200,200,200)" : null,
+                backgroundColor: item.done ? "" : null,
+              }}
+            >
+              <IconCatContainer dark={dark}>
+                {imgHandler(item.icon, item.done, dark)}
+              </IconCatContainer>
+              <TaskContainer dark={dark}>{item.task}</TaskContainer>
+              <TimeContainer>
+                {formatTime(
+                  item?.selectedDate?.split("-").map((number) => +number)[0],
+                  item?.selectedDate?.split("-").map((number) => +number)[1],
+                  item?.selectedDate?.split("-").map((number) => +number)[2]
+                )}
+              </TimeContainer>
+              <IconButton size="small" onClick={() => openTodoMenu(item.id)}>
+                <ThreeDotsVertical
+                  style={{
+                    cursor: "pointer",
+                    color: dark ? "white" : "black",
+                    transition: "color 500ms",
+                  }}
+                />
+              </IconButton>
 
-            <TodoMenu
-              dark={dark}
-              item={item}
-              selectEditTodo={selectEditTodo}
-              checkItem={checkItem}
-              deleteItem={deleteItem}
-              close={closeTodoMenu}
-              isTodo={isTodo}
-            />
-          </StyledTodo>
-        ))}
+              <TodoMenu
+                dark={dark}
+                item={item}
+                selectEditTodo={selectEditTodo}
+                checkItem={checkItem}
+                deleteItem={deleteItem}
+                close={closeTodoMenu}
+                isTodo={isTodo}
+              />
+            </StyledTodo>
+          ))
+        )}
       </TodoList>
     </ListContainer>
   );

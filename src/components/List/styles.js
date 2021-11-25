@@ -62,7 +62,7 @@ const SpanInbox = styled.span`
   font-size: 1rem;
   visibility: hidden;
   opacity: 0;
-  animation: appear 500ms forwards 3500ms;
+  animation: appear 500ms forwards 2500ms;
   @keyframes appear {
     100% {
       visibility: visible;
@@ -84,7 +84,6 @@ const WelcomeMessage = styled.div`
   width: inherit;
   height: inherit;
   font-style: italic;
-  color: rgba(155, 155, 155, 0.99);
   background-color: ${({ dark }) => (dark ? "#333" : "#fefefe")};
   position: relative;
   transition-property: color, background-color;
@@ -95,7 +94,15 @@ const WelcomeMessage = styled.div`
   position: absolute;
   left: 0;
   z-index: 100;
-  animation: fadeIn 1250ms forwards, disappear 500ms forwards 3500ms;
+  animation: fadeIn 1250ms forwards, disappear 500ms forwards 2500ms;
+  &::after {
+    content: "";
+    height: 1px;
+    width: 40%;
+    position: absolute;
+    bottom: 12px;
+    background-color: rgba(200, 200, 200, 0.75);
+  }
   @keyframes fadeIn {
     to {
       opacity: 1;
@@ -109,14 +116,6 @@ const WelcomeMessage = styled.div`
       visibility: hidden;
     }
   }
-  &::after {
-    content: "";
-    height: 1px;
-    width: 40%;
-    position: absolute;
-    bottom: 12px;
-    background-color: rgba(200, 200, 200, 0.75);
-  }
 `;
 
 const StatusMessage = styled.div`
@@ -124,7 +123,6 @@ const StatusMessage = styled.div`
   width: max-content;
   height: max-content;
   font-style: italic;
-  color: rgba(155, 155, 155, 0.99);
   position: relative;
   position: absolute;
   left: 48%;
@@ -134,7 +132,7 @@ const StatusMessage = styled.div`
   visibility: hidden;
   white-space: pre;
   text-align: center;
-  animation: appear 1000ms forwards 6000ms;
+  animation: appear 1000ms forwards 3500ms;
   &::after {
     content: "";
     height: 1px;
@@ -144,7 +142,10 @@ const StatusMessage = styled.div`
     background-color: rgba(200, 200, 200, 0.75);
   }
   @media screen and (max-width: 358px) {
-    font-size: 0.8rem;
+    font-size: 0.725rem;
+  }
+  @media screen and (max-width: 290px) {
+    font-size: 0.6rem;
   }
 `;
 
@@ -176,7 +177,7 @@ const FilterBtn = styled.button`
   text-transform: uppercase;
   visibility: hidden;
   opacity: 0;
-  animation: appear 500ms forwards 3500ms;
+  animation: appear 500ms forwards 2500ms;
   &:hover {
     font-weight: 600;
   }
@@ -267,7 +268,17 @@ const EmptyListMessage = styled.div`
   flex-direction: column;
   justify-content: center;
   padding: 0 20px;
-  color: rgba(175, 175, 175, 0.99);
+  color: ${({ dark }) => (dark ? "#fff" : "#999")};
+  transition: color 500ms;
+  opacity: 0;
+  transform: translateY(20%);
+  animation: fadeup 500ms forwards 3000ms;
+  @keyframes fadeup {
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 `;
 
 const SpanPlusBtn = styled.span`
