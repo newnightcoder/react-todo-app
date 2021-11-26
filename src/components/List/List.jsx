@@ -220,7 +220,7 @@ const List = ({
       </Header>
       <TodoList dark={dark}>
         {todos.length === 0 ? (
-          <EmptyListMessage>
+          <EmptyListMessage dark={dark}>
             <span style={{ paddingBottom: "1.5rem" }}>
               YOUR LIST IS EMPTY...
             </span>

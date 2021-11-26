@@ -269,7 +269,7 @@ const EmptyListMessage = styled.div`
   flex-direction: column;
   justify-content: center;
   padding: 0 20px;
-  color: ${({ dark }) => (dark ? "#fff" : "#999")};
+  color: ${({ dark }) => (dark ? "rgb(200,200,200)" : "#999")};
   transition: color 500ms;
   opacity: 0;
   transform: translateY(20%);
