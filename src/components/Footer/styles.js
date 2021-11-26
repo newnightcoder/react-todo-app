@@ -44,8 +44,8 @@ const ProgressBar = styled.div`
   height: inherit;
   width: 100%;
   background-color: rgb(253, 253, 253);
-  transform-origin: right;
   transition: transform 300ms;
+  transform-origin: 100%;
   position: absolute;
   top: 0;
   left: 0;

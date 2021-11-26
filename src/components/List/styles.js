@@ -81,7 +81,7 @@ const MessageContainer = styled.div`
 
 const WelcomeMessage = styled.div`
   ${flexCenter};
-  width: inherit;
+  width: 100%;
   height: inherit;
   font-style: italic;
   background-color: ${({ dark }) => (dark ? "#333" : "#fefefe")};
@@ -101,6 +101,8 @@ const WelcomeMessage = styled.div`
     width: 40%;
     position: absolute;
     bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
     background-color: rgba(200, 200, 200, 0.75);
   }
   @keyframes fadeIn {
@@ -161,7 +163,6 @@ const FilterBtnWrapper = styled.div`
 
 const FilterBtn = styled.button`
   height: 25px;
-  // width: 55px;
   padding: 0 7px;
   ${flexCenter};
   outline: none;

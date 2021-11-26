@@ -254,16 +254,13 @@ const List = ({
         ) : (
           transition.map(({ item, props: { y, ...rest }, key }, index) => (
             <StyledTodo
-              // dark={dark}
+              dark={dark}
               key={item.id}
               style={{
                 ...rest,
                 // transform: y.interpolate((y) => `translate3d(0,${y}px,0)`),
-                textDecoration: item.done
-                  ? "line-through"
-                  : "line-through transparent",
-                color: item.done ? "rgb(200,200,200)" : null,
-                backgroundColor: item.done ? "" : null,
+                textDecoration: item.done ? "line-through" : "none",
+                color: item.done && "lightgray",
               }}
             >
               <IconCatContainer dark={dark}>

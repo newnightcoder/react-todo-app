@@ -22,8 +22,8 @@ const Footer = ({ todos, toggleFormDrawer, dark }) => {
             style={{
               transform:
                 todos.length !== 0
-                  ? `scaleX(${100 - (todosDone / todos.length) * 100}%)`
-                  : "scaleX(1)",
+                  ? `scale(${1 - todosDone / todos.length}, 1)`
+                  : "scale(0, 1)",
             }}
           />
         </Counter>
