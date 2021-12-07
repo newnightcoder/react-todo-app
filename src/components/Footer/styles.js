@@ -66,8 +66,8 @@ const Number = styled.span`
 `;
 
 const PlusBtn = styled.button`
-  width: 55px;
-  height: 55px;
+  width: 70px;
+  height: 70px;
   outline: 0;
   display: flex;
   align-items: center;
@@ -79,7 +79,7 @@ const PlusBtn = styled.button`
   background-color: deepskyblue;
   transition: color 500ms;
   color: ${({ dark }) => (dark ? "#333" : "rgb(253, 253, 253)")};
-  font-size: 2.5rem;
+  font-size: 3.5rem;
   border-radius: 50%;
   border-width: 0px !important;
   transform: translateY(-50%);
