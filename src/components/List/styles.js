@@ -21,7 +21,7 @@ const ListContainer = styled.section`
   &::-webkit-scrollbar {
     width: 5px;
     transition: background-color 500ms;
-    background-color: ${({ dark }) => (dark ? "#333" : "#fefefe")};
+    background-color: ${({ dark }) => (dark ? "dimgray" : "#fefefe")};
   }
   &::-webkit-scrollbar-thumb {
     width: 0.5vw;
