@@ -23,7 +23,7 @@ const Footer = ({ todos, toggleFormDrawer, dark }) => {
               transform:
                 todos.length !== 0
                   ? `scale(${1 - todosDone / todos.length}, 1)`
-                  : "scale(0, 1)",
+                  : "scale(1, 1)",
             }}
           />
         </Counter>
