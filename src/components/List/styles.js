@@ -19,7 +19,7 @@ const ListContainer = styled.section`
     dark ? "yellow rgba(100, 100, 100, 0.2)" : "deepskyblue #fefefe"};
   scrollbar-width: thin;
   &::-webkit-scrollbar {
-    width: 0.15vw;
+    width: 5px;
     transition: background-color 500ms;
     background-color: ${({ dark }) =>
       dark ? "rgba(100, 100, 100, 0.2)" : "#fefefe"};
