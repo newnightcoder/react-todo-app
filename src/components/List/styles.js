@@ -10,16 +10,19 @@ const ListContainer = styled.section`
   grid-row: 2;
   margin: 0;
   overflow-x: hidden;
-  transition: background-color 500ms;
+  transition-properties: background-color, scrollbar-color;
+  transition-duration: 500ms;
   background-color: ${({ dark }) => (dark ? "dimgray" : "#fefefe")};
   position: relative;
   overflow-y: scroll;
-  scrollbar-width: thick;
+  scrollbar-color: ${({ dark }) =>
+    dark ? "yellow rgba(100, 100, 100, 0.2)" : "deepskyblue #fefefe"};
+  scrollbar-width: thin;
   &::-webkit-scrollbar {
     width: 0.15vw;
     transition: background-color 500ms;
     background-color: ${({ dark }) =>
-      dark ? "rgba(100, 100, 100, 0.2)" : "white"};
+      dark ? "rgba(100, 100, 100, 0.2)" : "#fefefe"};
   }
   &::-webkit-scrollbar-thumb {
     width: 0.5vw;
