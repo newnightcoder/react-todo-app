@@ -21,13 +21,12 @@ const ListContainer = styled.section`
   &::-webkit-scrollbar {
     width: 5px;
     transition: background-color 500ms;
-    background-color: ${({ dark }) =>
-      dark ? "rgba(100, 100, 100, 0.2)" : "#fefefe"};
+    background-color: ${({ dark }) => (dark ? "#333" : "#fefefe")};
   }
   &::-webkit-scrollbar-thumb {
     width: 0.5vw;
     transition: background-color 500ms;
-    background-color: ${({ dark }) => (dark ? "yellow" : "deepskyblue")};
+    background-color: ${({ dark }) => (dark ? "#fefefe" : "deepskyblue")};
   }
   @media (min-width: 768px) {
     width: 400px;
