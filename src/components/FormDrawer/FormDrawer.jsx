@@ -48,6 +48,9 @@ const FormDrawer = ({
   const [id, setId] = useState(undefined);
   const [error, setError] = useState("");
   const [isPickerOpen, setIsPickerOpen] = useState(false);
+  const year = selectedDate.split("-").map((number) => +number)[0];
+  const month = selectedDate.split("-").map((number) => +number)[1] - 1;
+  const day = selectedDate.split("-").map((number) => +number)[2] + 1;
 
   useEffect(() => {
     if (todoEdit !== null) {
@@ -138,13 +141,9 @@ const FormDrawer = ({
       const errorMsg = "Your thing is empty! \n Please type a thing to do.";
       return setError(errorMsg);
     }
-    const year = selectedDate.split("-").map((number) => +number)[0];
-    const month = selectedDate.split("-").map((number) => +number)[1] - 1;
-    const day = selectedDate.split("-").map((number) => +number)[2] + 1;
-
     if (isPast(new Date(year, month, day))) {
       const errorMsg =
-        "The date you selected is in the past!\n We can't go back in time unfortunately!\nPlease choose a date starting from today.";
+        "The date you selected is in the past!\n Unfortunately we can't go back in time...\n Please choose a date starting from today.";
       return setError(errorMsg);
     }
     const todo = {
@@ -185,6 +184,7 @@ const FormDrawer = ({
 
   const handleToggleDrawer = () => {
     if (newTodo.length === 0) return;
+    if (isPast(new Date(year, month, day))) return;
     toggleFormDrawer();
   };
 
@@ -284,6 +284,7 @@ const FormDrawer = ({
               value={selectedDate}
               placeholder="When"
               InputProps={{ readOnly: true }}
+              inputFormat="dd/MM/yyyy"
               onChange={handleWhenInput}
               open={isPickerOpen}
               onClose={() => setIsPickerOpen(false)}
@@ -332,7 +333,6 @@ const FormDrawer = ({
                   variant="standard"
                   className={classes.inputPicker}
                   label="When?"
-                  format="dd/MM/yyyy"
                   onClick={() => setIsPickerOpen(true)}
                 />
               )}

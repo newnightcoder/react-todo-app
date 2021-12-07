@@ -101,7 +101,7 @@ const ModalContainer = styled.div`
 
 const Modal = styled.div`
   height: 50%;
-  width: 75%;
+  width: 90%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -109,14 +109,16 @@ const Modal = styled.div`
   background-color: ${({ dark }) => (dark ? "#111" : "#fefefe")};
   border-radius: 3px;
   color: ${({ dark }) => (dark ? "#fefefe" : "#111")};
-  white-space: pre;
+  // white-space: pre;
 `;
 
 const SpanError = styled.span`
-  display: inline-block;
+  display: block;
   text-align: center;
   line-height: 1.33rem;
   font-weight: 600;
+  white-space: normal;
+  padding: 0 30px;
 `;
 
 const CloseModalBtn = styled.button`
