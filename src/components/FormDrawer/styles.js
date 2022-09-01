@@ -109,16 +109,24 @@ const Modal = styled.div`
   background-color: ${({ dark }) => (dark ? "#111" : "#fefefe")};
   border-radius: 3px;
   color: ${({ dark }) => (dark ? "#fefefe" : "#111")};
-  // white-space: pre;
+  transform-origin: center;
+  transition-property: opacity, transform;
+  transition-duration: 125ms;
+  transition-delay: 150ms;
 `;
 
+const SpanErrorContainer = styled.div`
+  width: 90%;
+  display: flex;
+  justify-content: center;
+`;
 const SpanError = styled.span`
   display: block;
+  width: 90%;
   text-align: center;
   line-height: 1.33rem;
   font-weight: 600;
-  white-space: normal;
-  padding: 0 30px;
+  white-space: pre-line;
 `;
 
 const CloseModalBtn = styled.button`
@@ -219,6 +227,7 @@ export {
   SubmitBtn,
   ModalContainer,
   Modal,
+  SpanErrorContainer,
   SpanError,
   CloseModalBtn,
   useStyles,

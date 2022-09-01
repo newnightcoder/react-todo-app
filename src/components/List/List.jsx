@@ -1,5 +1,5 @@
 import { IconButton } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Filter, ThreeDotsVertical } from "react-bootstrap-icons";
 import { useTransition } from "react-spring";
 import { compareTime, formatTime } from "./formatTime";
@@ -252,12 +252,13 @@ const List = ({
             </div>
           </EmptyListMessage>
         ) : (
-          transition.map(({ item, props: { y, ...rest }, key }, index) => (
+          transition.map(({ item }) => (
+            // props: { y, ...rest }, key
             <StyledTodo
-              dark={dark}
+              dark={dark ? 1 : 0}
               key={item.id}
               style={{
-                ...rest,
+                // ...rest,
                 // transform: y.interpolate((y) => `translate3d(0,${y}px,0)`),
                 textDecoration: item.done ? "line-through" : "none",
                 color: item.done && "lightgray",

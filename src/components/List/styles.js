@@ -301,7 +301,6 @@ const SpanPlusBtn = styled.span`
 const StyledTodo = styled(animated.li)`
   margin-block-start: 0;
   margin-block-end: 0;
-  // height: 100px;
   width: 90%;
   display: flex;
   align-items: center;

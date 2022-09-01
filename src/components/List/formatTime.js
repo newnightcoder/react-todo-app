@@ -33,21 +33,6 @@ export const formatTime = (selectedYear, selectedMonth, selectedDay) => {
 };
 
 export const compareTime = (array) => {
-  // make array of 3-digits arrays
-  // const datesArray = [];
-  // array.map((todo) =>
-  //   datesArray.push(
-  //     new Date(
-  //       todo.selectedDate.split("-")[0],
-  //       todo.selectedDate.split("-")[1],
-  //       todo.selectedDate.split("-")[2]
-  //     )
-  //   )
-  // );
-
-  // datesArray.sort(compareAsc);
-  // console.log("sorted dates", datesArray);
-
   const sortedArray = array.sort((a, b) => {
     if (
       compareAsc(

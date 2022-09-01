@@ -7,7 +7,7 @@ import { styled } from "@mui/material/styles";
 import "date-fns";
 import format from "date-fns/format";
 import isPast from "date-fns/isPast";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { ChevronLeft } from "react-bootstrap-icons";
 import { imgHandler } from "./imgHandler";
 import {
@@ -20,6 +20,7 @@ import {
   Modal,
   ModalContainer,
   SpanError,
+  SpanErrorContainer,
   SubmitBtn,
   Title,
   useStyles,
@@ -45,32 +46,23 @@ const FormDrawer = ({
   const [icon, setIcon] = useState("");
   const [newTodo, setNewTodo] = useState("");
   const [selectedDate, setSelectedDate] = useState(today);
-  const [id, setId] = useState(undefined);
-  const [error, setError] = useState("");
+  const [id, setId] = useState(null);
+  const [error, setError] = useState(null);
   const [isPickerOpen, setIsPickerOpen] = useState(false);
   const year = selectedDate.split("-").map((number) => +number)[0];
   const month = selectedDate.split("-").map((number) => +number)[1] - 1;
   const day = selectedDate.split("-").map((number) => +number)[2] + 1;
 
   useEffect(() => {
-    if (todoEdit !== null) {
+    if (todoEdit) {
       setIcon(todoEdit.icon);
       setCategory(todoEdit.category);
       setCategoryNumber(todoEdit.categoryNumber);
       setNewTodo(todoEdit.task);
       setSelectedDate(todoEdit.selectedDate);
       setId(todoEdit.id);
-    } else {
-      setTimeout(() => {
-        setIcon("");
-        setCategory("");
-        setCategoryNumber(1);
-        setNewTodo("");
-        setSelectedDate(today);
-        setId(undefined);
-      }, 1000);
     }
-  }, [todoEdit, error]);
+  }, [todoEdit]);
 
   const selectOptions = [
     { value: "Personal" },
@@ -124,28 +116,35 @@ const FormDrawer = ({
   };
 
   const resetForm = () => {
-    setNewTodo("");
-    setId(undefined);
-    setSelectedDate(today);
+    setId(null);
     setCategory("");
+    setCategoryNumber(1);
+    setNewTodo("");
+    setSelectedDate(today);
     setTimeout(() => {
       setIcon("");
     }, 400);
   };
 
-  const handleAddTodo = (e) => {
-    e.preventDefault();
-    if (id !== undefined) return;
-    if (todoEdit !== null) return;
+  const check = () => {
     if (newTodo.trim().length === 0) {
       const errorMsg = "Your thing is empty! \n Please type a thing to do.";
-      return setError(errorMsg);
+      setError(errorMsg);
+      return false;
     }
     if (isPast(new Date(year, month, day))) {
       const errorMsg =
-        "The date you selected is in the past!\n Unfortunately we can't go back in time...\n Please choose a date starting from today.";
-      return setError(errorMsg);
+        "This date is past!\n Please select a date\n starting from today.";
+      setError(errorMsg);
+      return false;
     }
+    return true;
+  };
+
+  const handleAddTodo = (e) => {
+    e.preventDefault();
+    if (id) return;
+    if (!check()) return;
     const todo = {
       icon,
       category,
@@ -156,19 +155,13 @@ const FormDrawer = ({
       done: false,
     };
     addItem(todo);
-    setTimeout(() => {
-      resetForm();
-    }, 400);
+    handleToggleDrawer();
   };
 
   const handleEditTodo = (e) => {
     e.preventDefault();
-    if (id === undefined) return;
-    if (newTodo.trim().length === 0) {
-      const errorMsg = "Your thing is empty! \n Please type a thing to do.";
-      setError(errorMsg);
-      return;
-    }
+    if (!id) return;
+    if (!check()) return;
     const todo = {
       icon,
       category,
@@ -179,13 +172,13 @@ const FormDrawer = ({
       done: false,
     };
     editItem(id, todo);
-    resetForm();
+    handleToggleDrawer();
   };
 
   const handleToggleDrawer = () => {
-    if (newTodo.length === 0) return;
-    if (isPast(new Date(year, month, day))) return;
+    if (error) return;
     toggleFormDrawer();
+    resetForm();
   };
 
   const renderWeekPickerDay = (date, selectedDates, pickersDayProps) => {
@@ -219,9 +212,7 @@ const FormDrawer = ({
         >
           <ChevronLeft color="#00bbff" size={24} />
         </Btn>
-        <Title>
-          {id === undefined ? "Add a new thing" : "Edit your thing"}
-        </Title>
+        <Title>{id ? "Edit your thing" : "Add a new thing"}</Title>
       </Header>
       <FormWrapper dark={dark}>
         <IconContainer>{imgHandler(icon)}</IconContainer>
@@ -230,8 +221,7 @@ const FormDrawer = ({
           noValidate
           autoComplete="off"
           onSubmit={(e) => {
-            handleAddTodo(e);
-            handleEditTodo(e);
+            todoEdit ? handleEditTodo(e) : handleAddTodo(e);
           }}
         >
           <TextField
@@ -338,21 +328,28 @@ const FormDrawer = ({
               )}
             />
           </LocalizationProvider>
-          <SubmitBtn $dark type="submit" onClick={handleToggleDrawer}>
-            {id !== undefined ? "edit" : "add your thing"}
+          <SubmitBtn $dark type="submit">
+            {id ? "edit" : "add your thing"}
           </SubmitBtn>
         </form>
       </FormWrapper>
       <ModalContainer
         style={{
-          opacity: error.length !== 0 ? 1 : 0,
-          transform: error.length !== 0 ? "scale(1)" : "scale(0)",
-          zIndex: error.length !== 0 ? 200 : -10,
+          opacity: error ? 1 : 0,
+          zIndex: error ? 200 : -10,
         }}
       >
-        <Modal dark={dark} style={{ opacity: error ? 1 : 0 }}>
-          <SpanError>{error}</SpanError>
-          <CloseModalBtn dark={dark} onClick={() => setError("")}>
+        <Modal
+          dark={dark}
+          style={{
+            opacity: error ? 1 : 0,
+            transform: error ? "scale(1)" : "scale(0)",
+          }}
+        >
+          <SpanErrorContainer>
+            <SpanError>{error}</SpanError>
+          </SpanErrorContainer>
+          <CloseModalBtn dark={dark} onClick={() => setError(null)}>
             OK
           </CloseModalBtn>
         </Modal>
