@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { AppWrapper, Container } from "./AppStyles";
 import { Footer, FormDrawer, Header, List } from "./components/index";
 
@@ -85,7 +85,6 @@ const App = () => {
   const deleteItem = (id) => {
     const todosCopy = [...todos];
     const index = todosCopy.findIndex((todo) => todo.id === id);
-    console.log(id);
     todosCopy.splice(index, 1);
     setTodos(todosCopy);
   };

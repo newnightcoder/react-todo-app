@@ -252,13 +252,12 @@ const List = ({
             </div>
           </EmptyListMessage>
         ) : (
-          transition.map(({ item }) => (
-            // props: { y, ...rest }, key
+          transition.map(({ item, props: { y, ...rest }, key }) => (
             <StyledTodo
               dark={dark ? 1 : 0}
               key={item.id}
               style={{
-                // ...rest,
+                ...rest,
                 // transform: y.interpolate((y) => `translate3d(0,${y}px,0)`),
                 textDecoration: item.done ? "line-through" : "none",
                 color: item.done && "lightgray",
