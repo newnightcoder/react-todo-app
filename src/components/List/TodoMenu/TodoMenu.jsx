@@ -1,6 +1,5 @@
 import { CheckCircleOutline, Close, Create, Delete } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
-import React from "react";
 import { MenuItem, MenuItemName, TodoMenuWrapper, useStyles } from "./styles";
 
 const TodoMenu = ({
@@ -27,7 +26,7 @@ const TodoMenu = ({
       }}
     >
       <MenuItem>
-        <MenuItemName>mark as done</MenuItemName>
+        <MenuItemName>{item?.done ? "unmark" : "mark as done"}</MenuItemName>
         <IconButton
           className={classes.root}
           size="medium"
@@ -35,7 +34,7 @@ const TodoMenu = ({
         >
           <CheckCircleOutline
             variant="outlined"
-            style={{ color: item?.done ? "gray" : "white" }}
+            style={{ color: item?.done ? "lightgray" : "white" }}
           />
         </IconButton>
       </MenuItem>
