@@ -12,7 +12,6 @@ node_modules/
 /build
 
 # misc
-img/
 src/components/old component-trash
 TODO
 .prettierrc
